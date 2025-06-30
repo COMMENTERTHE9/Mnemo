@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # ScyllaDB Cluster
+  scylla-node1:
+    image: scylladb/scylla:5.2
+    command: --seeds=scylla-node1 --smp 4 --memory 4G
+    volumes:
+      - scylla-data-1:/var/lib/scylla
+    networks:
+      - video-memory-net
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  scylla-node2:
+    image: scylladb/scylla:5.2
+    command: --seeds=scylla-node1 --smp 4 --memory 4G
+    volumes:
+      - scylla-data-2:/var/lib/scylla
+    networks:
+      - video-memory-net
+    depends_on:
+      - scylla-node1
+
+  # Orchestrator
+  orchestrator:
+    build:
+      context: .
+      dockerfile: ./orchestrator/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SCYLLA_NODES=scylla-node1:9042,scylla-node2:9042
+      - ORCHESTRATOR_PORT=8080
+    depends_on:
+      - scylla-node1
+      - scylla-node2
+    networks:
+      - video-memory-net
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+
+  # Frame Processing Workers
+  frame-processor:
+    build:
+      context: .
+      dockerfile: ./frame-processing/Dockerfile
+    environment:
+      - ORCHESTRATOR_URL=orchestrator:8080
+      - RUST_LOG=info
+    networks:
+      - video-memory-net
+    deploy:
+      replicas: 10  # Scale based on workload
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+
+  # AI Inference
+  ai-inference:
+    build:
+      context: .
+      dockerfile: ./ai-inference/Dockerfile
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+    environment:
+      - AI_DEVICE=cpu
+      - MODEL_PATH=/models/exported
+    volumes:
+      - ./models/exported:/models/exported:ro
+    networks:
+      - video-memory-net
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - video-memory-net
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - grafana-data:/var/lib/grafana
+    networks:
+      - video-memory-net
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+    networks:
+      - video-memory-net
+
+networks:
+  video-memory-net:
+    driver: bridge
+
+volumes:
+  scylla-data-1:
+  scylla-data-2:
+  prometheus-data:
+  grafana-data:

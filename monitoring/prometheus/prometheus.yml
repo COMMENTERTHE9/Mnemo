@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'orchestrator'
+    static_configs:
+      - targets: ['orchestrator:8080']
+    metrics_path: '/metrics'
+
+  - job_name: 'frame-processors'
+    dns_sd_configs:
+      - names:
+          - 'frame-processor'
+        type: 'A'
+        port: 9090
+
+  - job_name: 'ai-inference'
+    static_configs:
+      - targets: ['ai-inference:9090']
+
+  - job_name: 'scylladb'
+    static_configs:
+      - targets: ['scylla-node1:9180', 'scylla-node2:9180']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
