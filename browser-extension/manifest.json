@@ -2,25 +2,21 @@
   "manifest_version": 3,
   "name": "Mnemo Cookie Sync",
   "version": "1.0",
-  "description": "Automatically sync YouTube cookies to Mnemo server",
+  "description": "Automatically sync YouTube cookies to your Mnemo server",
   "permissions": [
     "cookies",
     "storage"
   ],
   "host_permissions": [
     "https://*.youtube.com/*",
-    "http://localhost/*",
-    "http://167.99.1.8/*"
+    "http://*/*",
+    "https://*/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
-    }
-  }
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html"
 }

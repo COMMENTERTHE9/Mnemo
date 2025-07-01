@@ -40,11 +40,27 @@ func main() {
         w.Write([]byte("OK"))
     })
     
-    // API endpoints
-    http.HandleFunc("/api/v1/video/process", handler.ProcessVideo)
-    http.HandleFunc("/api/v1/memory/", handler.QueryMemory)
-    http.HandleFunc("/api/v1/video/status", handler.GetVideoStatus)
-    http.HandleFunc("/api/v1/auth/cookies", handler.UpdateCookies)
+    // CORS middleware wrapper
+    withCORS := func(h http.HandlerFunc) http.HandlerFunc {
+        return func(w http.ResponseWriter, r *http.Request) {
+            w.Header().Set("Access-Control-Allow-Origin", "*")
+            w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+            w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+            
+            if r.Method == "OPTIONS" {
+                w.WriteHeader(http.StatusOK)
+                return
+            }
+            
+            h(w, r)
+        }
+    }
+    
+    // API endpoints with CORS
+    http.HandleFunc("/api/v1/video/process", withCORS(handler.ProcessVideo))
+    http.HandleFunc("/api/v1/memory/", withCORS(handler.QueryMemory))
+    http.HandleFunc("/api/v1/video/status", withCORS(handler.GetVideoStatus))
+    http.HandleFunc("/api/v1/auth/cookies", withCORS(handler.UpdateCookies))
     
     // Start HTTP server
     go func() {

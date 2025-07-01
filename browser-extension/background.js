@@ -1,6 +1,13 @@
 // Mnemo Cookie Sync - Background Service Worker
 
-const MNEMO_SERVER = 'http://167.99.1.8/api/v1/auth/cookies';
+let MNEMO_SERVER = 'http://167.99.1.8/api/v1/auth/cookies';
+
+// Load server URL from settings (override default if set)
+chrome.storage.sync.get(['serverUrl'], (result) => {
+  if (result.serverUrl) {
+    MNEMO_SERVER = result.serverUrl;
+  }
+});
 
 // Function to get YouTube cookies and format them
 async function getYouTubeCookies() {
@@ -28,6 +35,11 @@ async function getYouTubeCookies() {
 
 // Function to send cookies to Mnemo server
 async function syncCookies() {
+  if (!MNEMO_SERVER) {
+    console.error('No server URL configured. Please set it in extension options.');
+    return false;
+  }
+  
   try {
     const cookieText = await getYouTubeCookies();
     
@@ -78,5 +90,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ success });
     });
     return true; // Will respond asynchronously
+  }
+  
+  if (request.action === 'settingsUpdated') {
+    // Reload server URL from settings
+    chrome.storage.sync.get(['serverUrl'], (result) => {
+      if (result.serverUrl) {
+        MNEMO_SERVER = result.serverUrl;
+      }
+    });
   }
 });
