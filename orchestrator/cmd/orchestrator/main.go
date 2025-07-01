@@ -44,6 +44,7 @@ func main() {
     http.HandleFunc("/api/v1/video/process", handler.ProcessVideo)
     http.HandleFunc("/api/v1/memory/", handler.QueryMemory)
     http.HandleFunc("/api/v1/video/status", handler.GetVideoStatus)
+    http.HandleFunc("/api/v1/auth/cookies", handler.UpdateCookies)
     
     // Start HTTP server
     go func() {

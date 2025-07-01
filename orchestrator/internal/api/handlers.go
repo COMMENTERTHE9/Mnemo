@@ -7,6 +7,7 @@ import (
     "time"
     "log"
     "database/sql"
+    "os"
 )
 
 type ProcessVideoRequest struct {
@@ -193,6 +194,42 @@ func (h *Handler) GetVideoStatus(w http.ResponseWriter, r *http.Request) {
     resp := map[string]string{
         "video_id": videoID,
         "status":   status,
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(resp)
+}
+
+// UpdateCookies handles cookie updates from browser extension
+func (h *Handler) UpdateCookies(w http.ResponseWriter, r *http.Request) {
+    if r.Method != http.MethodPost {
+        http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+        return
+    }
+
+    // Read cookie data
+    var cookieData struct {
+        Cookies string `json:"cookies"`
+    }
+    
+    if err := json.NewDecoder(r.Body).Decode(&cookieData); err != nil {
+        http.Error(w, "Invalid request body", http.StatusBadRequest)
+        return
+    }
+
+    // Write cookies to file
+    cookiesPath := "/data/youtube_cookies.txt"
+    if err := os.WriteFile(cookiesPath, []byte(cookieData.Cookies), 0600); err != nil {
+        log.Printf("Failed to write cookies: %v", err)
+        http.Error(w, "Failed to save cookies", http.StatusInternalServerError)
+        return
+    }
+
+    log.Printf("Updated YouTube cookies")
+    
+    resp := map[string]string{
+        "status": "success",
+        "message": "Cookies updated successfully",
     }
 
     w.Header().Set("Content-Type", "application/json")
