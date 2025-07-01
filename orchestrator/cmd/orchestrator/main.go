@@ -9,6 +9,7 @@ import (
     "syscall"
 
     "github.com/video-memory/orchestrator/internal/database"
+    "github.com/video-memory/orchestrator/internal/api"
     "google.golang.org/grpc"
 )
 
@@ -30,16 +31,25 @@ func main() {
     
     log.Println("Database connection established")
 
-    // Create health check endpoint
+    // Create API handler
+    handler := api.NewHandler(db)
+
+    // Setup HTTP routes
     http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusOK)
         w.Write([]byte("OK"))
     })
     
-    // Start HTTP server for health checks
+    // API endpoints
+    http.HandleFunc("/api/v1/video/process", handler.ProcessVideo)
+    http.HandleFunc("/api/v1/memory/", handler.QueryMemory)
+    http.HandleFunc("/api/v1/video/status", handler.GetVideoStatus)
+    
+    // Start HTTP server
     go func() {
+        log.Printf("Starting HTTP server on :8080")
         if err := http.ListenAndServe(":8080", nil); err != nil {
-            log.Printf("Health check server error: %v", err)
+            log.Printf("HTTP server error: %v", err)
         }
     }()
 

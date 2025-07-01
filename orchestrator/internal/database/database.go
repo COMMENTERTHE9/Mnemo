@@ -241,7 +241,7 @@ func (db *SQLiteDB) Close() error {
 }
 
 // NewDB creates a database connection based on environment configuration
-func NewDB() (DB, error) {
+func NewDB() (*sql.DB, error) {
 	dbType := os.Getenv("DATABASE_TYPE")
 	if dbType == "" {
 		dbType = "sqlite"
@@ -250,7 +250,11 @@ func NewDB() (DB, error) {
 	switch dbType {
 	case "sqlite":
 		dbPath := os.Getenv("DATABASE_PATH")
-		return NewSQLiteDB(dbPath)
+		sqliteDB, err := NewSQLiteDB(dbPath)
+		if err != nil {
+			return nil, err
+		}
+		return sqliteDB.conn, nil
 	case "scylla":
 		// TODO: Implement ScyllaDB connection for production
 		return nil, fmt.Errorf("ScyllaDB support not yet implemented")
