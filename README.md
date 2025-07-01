@@ -2,7 +2,7 @@
 
 ## Overview
 
-A revolutionary bio-inspired video processing system that mimics human visual perception and memory formation. This system processes video content through a hierarchical "gapper" network that creates abstract memories, reducing hours of footage to meaningful memories while maintaining reconstructive capabilities.
+A bio-inspired video processing system that mimics human visual perception and memory formation. This system processes video content through a hierarchical "gapper" network that creates abstract memories, reducing hours of footage to meaningful memories while maintaining reconstructive capabilities.
 
 ## Quick Start
 
