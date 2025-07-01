@@ -144,6 +144,147 @@ class VideoProcessor:
         logger.info(f"Extracted {saved_count} frames from {frame_count} total frames")
         return saved_count
     
+    def extract_audio(self, video_path, video_id):
+        """Extract audio from video and save as WAV file"""
+        audio_dir = self.work_dir / video_id / "audio"
+        audio_dir.mkdir(parents=True, exist_ok=True)
+        
+        audio_path = audio_dir / "full_audio.wav"
+        
+        logger.info(f"Extracting audio from video")
+        
+        # Use ffmpeg to extract audio
+        cmd = [
+            "ffmpeg",
+            "-i", str(video_path),
+            "-acodec", "pcm_s16le",
+            "-ar", "16000",  # 16kHz sample rate for speech processing
+            "-ac", "1",      # Mono audio
+            "-y",            # Overwrite output
+            str(audio_path)
+        ]
+        
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            logger.info(f"Audio extracted successfully: {audio_path}")
+            
+            # Get audio duration and properties
+            audio_info = self.analyze_audio_properties(audio_path)
+            return audio_path, audio_info
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed to extract audio: {e.stderr}")
+            return None, None
+    
+    def analyze_audio_properties(self, audio_path):
+        """Analyze basic audio properties"""
+        import wave
+        
+        try:
+            with wave.open(str(audio_path), 'rb') as wav:
+                frames = wav.getnframes()
+                rate = wav.getframerate()
+                duration = frames / float(rate)
+                
+                info = {
+                    'duration': duration,
+                    'sample_rate': rate,
+                    'channels': wav.getnchannels(),
+                    'frames': frames
+                }
+                
+                logger.info(f"Audio properties: {info}")
+                return info
+        except Exception as e:
+            logger.error(f"Failed to analyze audio: {e}")
+            return None
+    
+    def extract_audio_segments(self, audio_path, video_id, segment_duration=1.0):
+        """Extract audio segments matching video frame extraction"""
+        segments_dir = self.work_dir / video_id / "audio" / "segments"
+        segments_dir.mkdir(parents=True, exist_ok=True)
+        
+        logger.info(f"Extracting audio segments at {segment_duration}s intervals")
+        
+        # Get audio duration
+        probe_cmd = [
+            "ffprobe", "-v", "error",
+            "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1",
+            str(audio_path)
+        ]
+        
+        try:
+            duration_result = subprocess.run(probe_cmd, capture_output=True, text=True, check=True)
+            total_duration = float(duration_result.stdout.strip())
+            
+            segment_count = 0
+            timestamp = 0
+            
+            while timestamp < total_duration:
+                segment_path = segments_dir / f"audio_segment_{int(timestamp):06d}.wav"
+                
+                # Extract segment using ffmpeg
+                cmd = [
+                    "ffmpeg",
+                    "-i", str(audio_path),
+                    "-ss", str(timestamp),
+                    "-t", str(segment_duration),
+                    "-acodec", "copy",
+                    "-y",
+                    str(segment_path)
+                ]
+                
+                subprocess.run(cmd, capture_output=True, check=True)
+                
+                # Store audio segment data
+                self.store_audio_segment_data(video_id, segment_count, timestamp, segment_duration)
+                
+                segment_count += 1
+                timestamp += segment_duration
+                
+                if segment_count % 10 == 0:
+                    logger.info(f"Processed {segment_count} audio segments...")
+            
+            logger.info(f"Extracted {segment_count} audio segments")
+            return segment_count
+            
+        except Exception as e:
+            logger.error(f"Failed to extract audio segments: {e}")
+            return 0
+    
+    def store_audio_segment_data(self, video_id, segment_number, timestamp, duration):
+        """Store audio segment data in database"""
+        conn = self.connect_db()
+        cursor = conn.cursor()
+        
+        # Create audio gapper report
+        gapper_id = f"audio_gapper_{segment_number}"
+        features = {
+            "segment_duration": duration,
+            "has_audio": True,
+            "timestamp": timestamp
+        }
+        
+        cursor.execute("""
+            INSERT INTO gapper_reports 
+            (video_id, gapper_type, timestamp, gapper_id, start_frame, 
+             end_frame, summary, importance, features)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            video_id, 
+            "audio", 
+            int(timestamp * 1000),
+            gapper_id,
+            int(timestamp * 30),  # Approximate frame number
+            int((timestamp + duration) * 30),
+            f"Audio segment at {timestamp:.2f}s",
+            0.5,  # Default importance, will be updated with speech detection
+            json.dumps(features)
+        ))
+        
+        conn.commit()
+        conn.close()
+    
     def store_frame_data(self, video_id, frame_number, timestamp, importance):
         """Store frame data as a gapper report"""
         conn = self.connect_db()
@@ -176,7 +317,7 @@ class VideoProcessor:
         conn.commit()
         conn.close()
     
-    def create_video_summary(self, video_id, metadata, frame_count):
+    def create_video_summary(self, video_id, metadata, frame_count, audio_segments=0):
         """Create a simple video summary"""
         conn = self.connect_db()
         cursor = conn.cursor()
@@ -196,7 +337,7 @@ class VideoProcessor:
             None,
             0.0,
             metadata['duration'],
-            f"Video with {frame_count} extracted frames, {metadata['duration']:.1f} seconds long",
+            f"Video with {frame_count} extracted frames, {audio_segments} audio segments, {metadata['duration']:.1f} seconds long",
             1.0,
             json.dumps(["full_video", "processed"])
         ))
@@ -267,8 +408,19 @@ class VideoProcessor:
             # Extract frames (1 frame per second)
             frame_count = self.extract_frames(video_path, video_id, sample_rate=1.0)
             
-            # Create summary
-            self.create_video_summary(video_id, metadata, frame_count)
+            # Extract audio
+            audio_path, audio_info = self.extract_audio(video_path, video_id)
+            
+            if audio_path and audio_info:
+                # Extract audio segments synchronized with frames
+                audio_segments = self.extract_audio_segments(audio_path, video_id, segment_duration=1.0)
+                logger.info(f"Extracted {audio_segments} audio segments")
+            else:
+                logger.warning("No audio track found in video")
+                audio_segments = 0
+            
+            # Create summary including audio info
+            self.create_video_summary(video_id, metadata, frame_count, audio_segments)
             
             # Mark task as completed
             self.complete_task(task_id)
