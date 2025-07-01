@@ -76,8 +76,16 @@ class VideoProcessor:
             "-f", "best[ext=mp4]/best",
             "-o", str(output_path),
             "--no-playlist",
-            video_url
         ]
+        
+        # Check for cookies file
+        cookies_path = Path("/data/youtube_cookies.txt")
+        if cookies_path.exists():
+            logger.info("Using YouTube cookies for authentication")
+            cmd.extend(["--cookies", str(cookies_path)])
+        
+        # Add video URL last
+        cmd.append(video_url)
         
         try:
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
@@ -85,6 +93,9 @@ class VideoProcessor:
             return output_path
         except subprocess.CalledProcessError as e:
             logger.error(f"Failed to download video: {e.stderr}")
+            # If it's a sign-in error, provide helpful message
+            if "Sign in to confirm" in e.stderr:
+                logger.error("YouTube requires authentication. Please add cookies file at /data/youtube_cookies.txt")
             raise
     
     def extract_video_metadata(self, video_path):

@@ -161,3 +161,8 @@ monitoring/jaeger/data/
 # Local development
 .local/
 *.local.*
+
+# Extracted content (test outputs)
+extracted_frames/
+extracted_audio/
+sample_frame.jpg
