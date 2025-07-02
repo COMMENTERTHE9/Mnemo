@@ -436,8 +436,9 @@ class VideoProcessor:
             # Mark task as completed
             self.complete_task(task_id)
             
-            # Cleanup
+            # Cleanup - only remove the video file, keep frames for motion extraction
             os.remove(video_path)
+            logger.info(f"Keeping frames for motion extraction: {self.work_dir / video_id}")
             
             logger.info(f"Successfully processed video {video_id}")
             return True
