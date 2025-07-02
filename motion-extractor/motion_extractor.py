@@ -389,6 +389,50 @@ class MotionExtractor:
             
             if success:
                 logger.info(f"Successfully extracted motion for video {video_id}")
+                # Mark this video as having motion processed
+                conn = self.connect_db()
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO gapper_reports 
+                    (video_id, gapper_type, timestamp, gapper_id, start_frame, 
+                     end_frame, summary, importance, features)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    video_id,
+                    "motion_complete",
+                    int(time.time() * 1000),
+                    "motion_processing_complete",
+                    0,
+                    0,
+                    "Motion extraction completed",
+                    0.0,
+                    "{}"
+                ))
+                conn.commit()
+                conn.close()
+            else:
+                # Skip this video by marking it
+                logger.warning(f"Skipping video {video_id} - frames not available")
+                conn = self.connect_db()
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO gapper_reports 
+                    (video_id, gapper_type, timestamp, gapper_id, start_frame, 
+                     end_frame, summary, importance, features)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    video_id,
+                    "motion",
+                    0,
+                    "motion_skipped",
+                    0,
+                    0,
+                    "Skipped - frames not available",
+                    0.0,
+                    "{}"
+                ))
+                conn.commit()
+                conn.close()
             
             return True
             
