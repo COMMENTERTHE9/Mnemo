@@ -5,8 +5,7 @@ echo "Deploying Mnemo services..."
 
 # Stop existing containers
 echo "Stopping old containers..."
-docker stop mnemo_orchestrator mnemo_video_worker 2>/dev/null
-docker rm mnemo_orchestrator mnemo_video_worker 2>/dev/null
+docker-compose -f docker-compose.server.yml down
 
 # Pull latest code
 echo "Pulling latest code..."
@@ -18,6 +17,9 @@ docker build -t mnemo_orchestrator:latest -f orchestrator/Dockerfile .
 
 echo "Building video worker..."
 docker build -t mnemo_video_worker:latest -f worker/Dockerfile .
+
+echo "Building motion extractor..."
+docker build -t mnemo_motion_extractor:latest -f motion-extractor/Dockerfile .
 
 # Start services using the server config
 echo "Starting services..."

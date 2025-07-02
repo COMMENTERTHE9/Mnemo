@@ -32,3 +32,20 @@ services:
         limits:
           memory: 800M
           cpus: '0.5'
+          
+  motion-extractor:
+    image: mnemo_motion_extractor:latest
+    environment:
+      - DATABASE_PATH=/data/video_memory.db
+      - LOG_LEVEL=info
+    volumes:
+      - ~/Mnemo/data:/data
+      - /tmp/mnemo_work:/tmp/mnemo_work  # Access to extracted frames
+    restart: unless-stopped
+    depends_on:
+      - video-worker
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
