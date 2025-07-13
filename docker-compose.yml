@@ -4,7 +4,7 @@ services:
   # ScyllaDB Cluster
   scylla-node1:
     image: scylladb/scylla:5.2
-    command: --seeds=scylla-node1 --smp 4 --memory 4G
+    command: --seeds=scylla-node1 --smp 2 --memory 1G
     volumes:
       - scylla-data-1:/var/lib/scylla
     networks:
@@ -17,7 +17,7 @@ services:
 
   scylla-node2:
     image: scylladb/scylla:5.2
-    command: --seeds=scylla-node1 --smp 4 --memory 4G
+    command: --seeds=scylla-node1 --smp 2 --memory 1G
     volumes:
       - scylla-data-2:/var/lib/scylla
     networks:
@@ -43,8 +43,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4'
-          memory: 8G
+          cpus: '2'
+          memory: 1G
 
   # Frame Processing Workers
   frame-processor:
@@ -57,11 +57,11 @@ services:
     networks:
       - video-memory-net
     deploy:
-      replicas: 10  # Scale based on workload
+      replicas: 2  # Scale based on workload
       resources:
         limits:
-          cpus: '2'
-          memory: 4G
+          cpus: '1'
+          memory: 512M
 
   # AI Inference
   ai-inference:
@@ -71,8 +71,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 4G
+          cpus: '1'
+          memory: 512M
     environment:
       - AI_DEVICE=cpu
       - MODEL_PATH=/models/exported
@@ -80,6 +80,48 @@ services:
       - ./models/exported:/models/exported:ro
     networks:
       - video-memory-net
+
+  # Video Worker
+  video-worker:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile
+    environment:
+      - DATABASE_PATH=/data/video_memory.db
+      - LOG_LEVEL=info
+      - ORCHESTRATOR_URL=orchestrator:8080
+    volumes:
+      - ./data:/data
+    networks:
+      - video-memory-net
+    depends_on:
+      - orchestrator
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+
+  # Motion Extractor
+  motion-extractor:
+    build:
+      context: .
+      dockerfile: ./motion-extractor/Dockerfile
+    environment:
+      - DATABASE_PATH=/data/video_memory.db
+      - LOG_LEVEL=info
+    volumes:
+      - ./data:/data
+      - ./extracted_frames:/tmp/extracted_frames
+    networks:
+      - video-memory-net
+    depends_on:
+      - video-worker
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
 
   # Monitoring
   prometheus:

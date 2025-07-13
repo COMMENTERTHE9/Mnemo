@@ -16,6 +16,11 @@ services:
     volumes:
       - ~/Mnemo/data:/data  # Mount data directory
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 400M
+          cpus: '0.5'
     
   video-worker:
     image: mnemo_video_worker:latest
@@ -30,7 +35,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 800M
+          memory: 600M
           cpus: '0.5'
           
   motion-extractor:
@@ -47,5 +52,5 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1G
+          memory: 700M
           cpus: '0.5'
