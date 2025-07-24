@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir \
 WORKDIR /app
 
 # Copy worker script
-COPY worker/video_processor.py .
+COPY video_processor.py .
 
 # Create data directory
 RUN mkdir -p /data /tmp/mnemo_work

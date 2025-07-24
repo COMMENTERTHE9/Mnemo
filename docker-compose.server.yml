@@ -1,7 +1,14 @@
 version: '3.8'
 
-# Override configuration for DigitalOcean server deployment
-# This ensures all services use the same database path
+# Optimized configuration for DigitalOcean 2GB server deployment
+# Compatible with both Docker and Podman
+# Total memory usage: ~1.4GB (leaves 600MB for OS)
+#
+# Usage with Podman:
+#   podman-compose -f docker-compose.server.yml --env-file .env.server up -d
+#
+# Usage with Docker:
+#   docker-compose -f docker-compose.server.yml --env-file .env.server up -d
 
 services:
   orchestrator:
@@ -19,8 +26,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 400M
+          memory: 300M
           cpus: '0.5'
+        reservations:
+          memory: 200M
     
   video-worker:
     image: mnemo_video_worker:latest
@@ -35,8 +44,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 600M
+          memory: 500M
           cpus: '0.5'
+        reservations:
+          memory: 300M
           
   motion-extractor:
     image: mnemo_motion_extractor:latest
@@ -45,12 +56,13 @@ services:
       - LOG_LEVEL=info
     volumes:
       - ~/Mnemo/data:/data
-      - /tmp/mnemo_work:/tmp/mnemo_work  # Access to extracted frames
     restart: unless-stopped
     depends_on:
       - video-worker
     deploy:
       resources:
         limits:
-          memory: 700M
+          memory: 600M
           cpus: '0.5'
+        reservations:
+          memory: 400M

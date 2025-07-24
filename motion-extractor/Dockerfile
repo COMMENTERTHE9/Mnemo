@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir \
 WORKDIR /app
 
 # Copy motion extractor script
-COPY motion-extractor/motion_extractor.py .
+COPY motion_extractor.py .
 
 # Create data directories
 RUN mkdir -p /data /tmp/mnemo_work

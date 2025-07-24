@@ -2,9 +2,10 @@
 
 ## 🚀 Immediate Tasks (This Week)
 
-### 1. Deploy Video Worker on DigitalOcean
-- [ ] Create memory-optimized docker-compose for 2GB RAM server
-- [ ] Build video-worker container on server
+### 1. Deploy Video Worker on DigitalOcean  
+- [x] Create memory-optimized docker-compose for 2GB RAM server
+- [x] Optimize for Podman deployment (better resource efficiency)
+- [ ] Deploy using new podman-compose setup: `./scripts/deploy-server-podman.sh`
 - [ ] Process the queued video (video_1751340188716362897)
 - [ ] Monitor resource usage and adjust limits
 

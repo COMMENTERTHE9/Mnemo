@@ -6,14 +6,14 @@ WORKDIR /app
 RUN apk add --no-cache git gcc musl-dev sqlite-dev
 
 # Copy go mod files
-COPY orchestrator/go.mod ./
-COPY orchestrator/go.sum* ./
+COPY go.mod ./
+COPY go.sum* ./
 
 # Download dependencies first
 RUN go mod download
 
 # Copy source code
-COPY orchestrator/ ./
+COPY . ./
 
 # Build the application
 RUN go mod download && CGO_ENABLED=1 GOOS=linux go build -a -ldflags '-linkmode external -extldflags "-static"' -o orchestrator ./cmd/orchestrator
