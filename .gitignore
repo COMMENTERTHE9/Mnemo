@@ -166,3 +166,17 @@ monitoring/jaeger/data/
 extracted_frames/
 extracted_audio/
 sample_frame.jpg
+
+# Python rebuild
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+/data/
+*.db
+*.db-journal
+.env
+dist/
+build/
+*.egg-info/
