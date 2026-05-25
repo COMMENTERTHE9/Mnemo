@@ -1,10 +1,6 @@
 import shutil
-from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
-
-import cv2
-import numpy as np
 
 from mnemo.db import init_for_settings, enqueue_video
 from mnemo.pipeline.motion import MotionExtractor

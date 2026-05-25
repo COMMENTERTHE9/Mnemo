@@ -2,8 +2,6 @@ import shutil
 from pathlib import Path
 from types import SimpleNamespace
 
-import cv2
-import numpy as np
 import pytest
 
 from mnemo.db import init_for_settings, enqueue_video

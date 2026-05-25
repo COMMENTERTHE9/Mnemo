@@ -6,7 +6,6 @@ import logging
 import shutil
 import sqlite3
 from dataclasses import dataclass
-from pathlib import Path
 
 from mnemo.config import Settings
 from mnemo.db import now_ms
@@ -35,11 +34,14 @@ def _set_status(conn: sqlite3.Connection, video_id: str,
                 gapper_status: str | None = None) -> None:
     sets, params = [], []
     if status is not None:
-        sets.append("status = ?"); params.append(status)
+        sets.append("status = ?")
+        params.append(status)
     if motion_status is not None:
-        sets.append("motion_status = ?"); params.append(motion_status)
+        sets.append("motion_status = ?")
+        params.append(motion_status)
     if gapper_status is not None:
-        sets.append("gapper_status = ?"); params.append(gapper_status)
+        sets.append("gapper_status = ?")
+        params.append(gapper_status)
     if not sets:
         return
     params.append(video_id)
