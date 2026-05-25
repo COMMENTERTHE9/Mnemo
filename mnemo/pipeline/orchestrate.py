@@ -63,7 +63,7 @@ def run_pipeline(
     conn: sqlite3.Connection,
     settings: Settings,
     motion_extractor: MotionExtractor | None = None,
-    downloader=download,  # injectable for tests
+    downloader=None,  # injectable for tests; resolved at call time
 ) -> PipelineResult:
     work_dir = settings.work_dir / video_id
     work_dir.mkdir(parents=True, exist_ok=True)
@@ -71,6 +71,9 @@ def run_pipeline(
     frames_dir = work_dir / "frames"
     audio_dir = work_dir / "audio"
     segments_dir = audio_dir / "segments"
+
+    if downloader is None:
+        downloader = download
 
     metadata: VideoMetadata | None = None
     frame_count = 0
