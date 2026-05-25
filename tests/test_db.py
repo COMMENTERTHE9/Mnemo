@@ -1,20 +1,8 @@
-import sqlite3
 from pathlib import Path
-import pytest
 
-from mnemo.config import Settings
 from mnemo.db import init_for_settings, enqueue_video, get_video_status
 from mnemo.models import GapperReport, MemoryNode
 from mnemo.db import insert_gapper_report, insert_memory_node, top_memory_nodes
-
-
-@pytest.fixture
-def settings(tmp_path: Path) -> Settings:
-    return Settings(
-        db_path=tmp_path / "test.db",
-        work_dir=tmp_path / "work",
-        cookies_path=tmp_path / "cookies.txt",
-    )
 
 
 def test_schema_initializes(settings):

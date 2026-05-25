@@ -96,7 +96,6 @@ desktop.ini
 
 # Docker
 docker-compose.override.yml
-.dockerignore
 
 # Database
 *.db
