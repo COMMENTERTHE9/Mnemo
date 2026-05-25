@@ -60,11 +60,15 @@ def enqueue_video(conn: sqlite3.Connection, video_url: str) -> str:
     return video_id
 
 
-def get_video_status(conn: sqlite3.Connection, video_id: str) -> str | None:
+def get_video_status(conn: sqlite3.Connection, video_id: str) -> dict | None:
     row = conn.execute(
-        "SELECT status FROM video_metadata WHERE video_id = ?", (video_id,)
+        "SELECT status, motion_status, gapper_status FROM video_metadata "
+        "WHERE video_id = ?",
+        (video_id,),
     ).fetchone()
-    return row["status"] if row else None
+    if row is None:
+        return None
+    return dict(row)
 
 
 def insert_gapper_report(conn: sqlite3.Connection, report: GapperReport) -> None:

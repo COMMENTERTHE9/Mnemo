@@ -57,7 +57,11 @@ def test_video_status_returns_pending_after_enqueue(client):
     vid = r1.json()["video_id"]
     r2 = client.get("/api/v1/video/status", params={"video_id": vid})
     assert r2.status_code == 200
-    assert r2.json() == {"video_id": vid, "status": "pending"}
+    body = r2.json()
+    assert body["video_id"] == vid
+    assert body["status"] == "pending"
+    assert body["motion_status"] == "pending"
+    assert body["gapper_status"] == "pending"
 
 
 def test_memory_query_empty_by_default(client):

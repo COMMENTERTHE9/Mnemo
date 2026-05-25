@@ -29,4 +29,4 @@ async def video_status(
     status = get_video_status(conn, video_id)
     if status is None:
         raise HTTPException(status_code=404, detail="Video not found")
-    return VideoStatusResponse(video_id=video_id, status=status)
+    return VideoStatusResponse(video_id=video_id, **status)

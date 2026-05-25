@@ -16,7 +16,7 @@ def test_enqueue_creates_metadata_and_queue_row(settings):
     conn = init_for_settings(settings)
     vid = enqueue_video(conn, "https://youtube.com/watch?v=test")
     assert vid.startswith("video_")
-    assert get_video_status(conn, vid) == "pending"
+    assert get_video_status(conn, vid)["status"] == "pending"
     q = conn.execute("SELECT task_type, status FROM processing_queue").fetchone()
     assert q["task_type"] == "download" and q["status"] == "pending"
 

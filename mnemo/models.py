@@ -49,6 +49,8 @@ class ProcessVideoResponse(BaseModel):
 class VideoStatusResponse(BaseModel):
     video_id: str
     status: str
+    motion_status: str = "pending"
+    gapper_status: str = "pending"
 
 
 class QueryMemoryRequest(BaseModel):
