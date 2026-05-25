@@ -1,0 +1,42 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: mnemo:0.2.0
+    container_name: mnemo-api
+    command: ["mnemo", "api"]
+    environment:
+      MNEMO_DB_PATH: /data/mnemo.db
+      MNEMO_WORK_DIR: /data/work
+      MNEMO_COOKIES_PATH: /data/youtube_cookies.txt
+      MNEMO_API_HOST: 0.0.0.0
+      MNEMO_API_PORT: "8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - mnemo-data:/data
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+
+  worker:
+    image: mnemo:0.2.0
+    container_name: mnemo-worker
+    command: ["mnemo", "worker"]
+    environment:
+      MNEMO_DB_PATH: /data/mnemo.db
+      MNEMO_WORK_DIR: /data/work
+      MNEMO_COOKIES_PATH: /data/youtube_cookies.txt
+      MNEMO_WORKER_ID: hermes-worker-1
+    volumes:
+      - mnemo-data:/data
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    mem_limit: 800m
+    cpus: 1.0
+
+volumes:
+  mnemo-data:
