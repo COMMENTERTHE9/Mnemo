@@ -1,6 +1,3 @@
-from pathlib import Path
-import pytest
-
 from mnemo.db import init_for_settings, enqueue_video
 from mnemo.pipeline.frames import read_metadata, extract_frames
 

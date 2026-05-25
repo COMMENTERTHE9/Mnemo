@@ -1,12 +1,11 @@
 from pathlib import Path
 from unittest.mock import patch, MagicMock
-import subprocess
 import wave
 import pytest
 
 from mnemo.db import init_for_settings, enqueue_video
 from mnemo.pipeline.audio import (
-    extract_audio, segment_audio, AudioError, AudioInfo, AudioSegment,
+    extract_audio, segment_audio, AudioError, AudioInfo,
 )
 
 

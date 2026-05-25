@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from mnemo.db import init_for_settings, enqueue_video, get_video_status
 from mnemo.models import GapperReport, MemoryNode
 from mnemo.db import insert_gapper_report, insert_memory_node, top_memory_nodes
