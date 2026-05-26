@@ -26,7 +26,7 @@ ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
-RUN useradd -m -u 1000 mnemo && mkdir -p /data && chown -R mnemo:mnemo /data /app
+RUN useradd -m -u 1000 mnemo && mkdir -p /data && chown -R mnemo:mnemo /data /app /opt/venv
 USER mnemo
 
 EXPOSE 8080
