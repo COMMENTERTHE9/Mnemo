@@ -11,7 +11,7 @@ from typing import Iterator
 from mnemo.config import Settings
 from mnemo.models import GapperReport, MemoryNode
 
-SCHEMA_PATH = Path(__file__).resolve().parent.parent / "database" / "schema.sql"
+SCHEMA_PATH = Path(__file__).resolve().parent / "schema.sql"
 
 
 def now_ms() -> int:

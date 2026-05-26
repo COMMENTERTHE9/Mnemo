@@ -10,7 +10,6 @@ COPY --from=ghcr.io/astral-sh/uv:0.5.4 /uv /usr/local/bin/uv
 WORKDIR /build
 COPY pyproject.toml uv.lock* ./
 COPY mnemo /build/mnemo
-COPY database /build/database
 RUN uv venv /opt/venv && \
     VIRTUAL_ENV=/opt/venv uv pip install --no-cache .
 
@@ -22,7 +21,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /opt/venv /opt/venv
-COPY --from=builder /build/database /app/database
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
