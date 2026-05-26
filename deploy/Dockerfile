@@ -9,12 +9,10 @@ COPY --from=ghcr.io/astral-sh/uv:0.5.4 /uv /usr/local/bin/uv
 
 WORKDIR /build
 COPY pyproject.toml uv.lock* ./
-RUN uv venv /opt/venv && \
-    VIRTUAL_ENV=/opt/venv uv pip install --no-cache .
-
 COPY mnemo /build/mnemo
 COPY database /build/database
-RUN VIRTUAL_ENV=/opt/venv uv pip install --no-cache --no-deps .
+RUN uv venv /opt/venv && \
+    VIRTUAL_ENV=/opt/venv uv pip install --no-cache .
 
 
 FROM python:3.11-slim AS runtime
