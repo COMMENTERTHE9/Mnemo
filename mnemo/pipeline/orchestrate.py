@@ -9,6 +9,7 @@ from dataclasses import dataclass
 
 from mnemo.config import Settings
 from mnemo.db import now_ms
+from mnemo.memory.builder import build_memory_tree
 from mnemo.pipeline.audio import extract_audio, segment_audio, AudioError
 from mnemo.pipeline.download import download, DownloadError
 from mnemo.pipeline.frames import extract_frames, read_metadata, VideoMetadata
@@ -126,7 +127,22 @@ def run_pipeline(
         else:
             _set_status(conn, video_id, motion_status="skipped")
 
-        # 6. Cleanup source MP4 (keep frames + audio)
+        # 6. Memory tree
+        _set_status(conn, video_id, gapper_status="processing")
+        try:
+            node_count = build_memory_tree(conn, video_id, metadata.duration_seconds)
+            if node_count > 0:
+                _set_status(conn, video_id, gapper_status="completed")
+                log.info("orchestrate: built %d memory nodes for %s",
+                         node_count, video_id)
+            else:
+                _set_status(conn, video_id, gapper_status="skipped")
+        except Exception as exc:
+            log.warning("orchestrate: memory tree build failed for %s: %s",
+                        video_id, exc)
+            _set_status(conn, video_id, gapper_status="failed")
+
+        # 7. Cleanup source MP4 (keep frames + audio)
         if video_path.exists():
             video_path.unlink()
 

@@ -114,7 +114,6 @@ def test_build_tree_actions_propagate(settings):
     _seed_per_second_frame_data(conn, vid, seconds=19)
     build_memory_tree(conn, vid, 19.0)
     # The meta node should have 'walking' in its narrative_tags JSON
-    import json
     row = conn.execute(
         "SELECT narrative_tags FROM memory_nodes WHERE node_level=4 AND video_id=?",
         (vid,),

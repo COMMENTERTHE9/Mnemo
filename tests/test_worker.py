@@ -108,3 +108,9 @@ def test_run_one_iteration_processes_synthetic(settings, synthetic_video):
         (video_id,),
     )}
     assert "frame" in types and "motion" in types
+
+    # Sprint 2: memory_nodes populated
+    mn = conn.execute(
+        "SELECT COUNT(*) AS n FROM memory_nodes WHERE video_id=?", (video_id,),
+    ).fetchone()
+    assert mn["n"] >= 4  # at least segment + scene + chapter + meta

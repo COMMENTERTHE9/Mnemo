@@ -63,6 +63,21 @@ def test_pipeline_happy_path(settings, synthetic_video, fake_motion):
     assert not (settings.work_dir / video_id / "source.mp4").exists()
     assert (settings.work_dir / video_id / "frames").exists()
 
+    # Sprint 2: memory tree was built
+    rows = conn.execute(
+        "SELECT node_level, COUNT(*) AS n FROM memory_nodes "
+        "WHERE video_id=? GROUP BY node_level",
+        (video_id,),
+    ).fetchall()
+    by_level = {r["node_level"]: r["n"] for r in rows}
+    assert by_level.get(4, 0) == 1   # exactly one meta node
+    assert by_level.get(3, 0) >= 1   # at least one chapter
+    g = conn.execute(
+        "SELECT gapper_status FROM video_metadata WHERE video_id=?",
+        (video_id,),
+    ).fetchone()
+    assert g["gapper_status"] == "completed"
+
 
 def test_pipeline_download_failure_marks_failed_and_cleans(settings, fake_motion):
     from mnemo.pipeline.download import DownloadError

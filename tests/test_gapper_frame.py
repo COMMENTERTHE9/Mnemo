@@ -1,5 +1,3 @@
-import json
-import pytest
 
 from mnemo.db import init_for_settings, enqueue_video, insert_gapper_report
 from mnemo.gappers.frame import load_unified_frames

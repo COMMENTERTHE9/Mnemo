@@ -1,4 +1,3 @@
-import pytest
 from mnemo.gappers.base import UnifiedFrame, GapperLevel
 from mnemo.gappers.segment import build_segment_nodes
 
