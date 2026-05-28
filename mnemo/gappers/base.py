@@ -8,17 +8,9 @@ Segment and above are persisted as memory_nodes rows with parent_id.
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
-from enum import IntEnum
 from typing import Any
 
-
-class GapperLevel(IntEnum):
-    FRAME = 0
-    SEGMENT = 1
-    SCENE = 2
-    CHAPTER = 3
-    META = 4
-
+from mnemo.models import GapperLevel
 
 # Window sizes in seconds. Fixed for Sprint 2; smart boundary detection later.
 SEGMENT_SECONDS = 5.0
