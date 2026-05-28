@@ -99,6 +99,14 @@ def test_pipeline_download_failure_marks_failed_and_cleans(settings, fake_motion
     ).fetchone()
     assert row["status"] == "failed"
 
+    # Sprint 2.5: sub-statuses must not be orphaned on failure
+    row = conn.execute(
+        "SELECT motion_status, gapper_status FROM video_metadata WHERE video_id=?",
+        (video_id,),
+    ).fetchone()
+    assert row["motion_status"] == "failed"
+    assert row["gapper_status"] == "failed"
+
     # work_dir cleaned up on failure
     assert not (settings.work_dir / video_id).exists()
 

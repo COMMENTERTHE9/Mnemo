@@ -11,7 +11,7 @@ from mnemo.config import Settings
 from mnemo.db import now_ms
 from mnemo.memory.builder import build_memory_tree
 from mnemo.pipeline.audio import extract_audio, segment_audio, AudioError
-from mnemo.pipeline.download import download, DownloadError
+from mnemo.pipeline.download import download
 from mnemo.pipeline.frames import extract_frames, read_metadata, VideoMetadata
 from mnemo.pipeline.motion import extract_motion, MotionExtractor
 
@@ -153,10 +153,18 @@ def run_pipeline(
             audio_segment_count=audio_count, motion_frame_count=motion_count,
         )
 
-    except (DownloadError, Exception) as exc:
+    except Exception as exc:
         err = f"{type(exc).__name__}: {exc}"
         log.error("orchestrate: pipeline failed for %s: %s", video_id, err)
-        _set_status(conn, video_id, status="failed")
+        conn.execute(
+            "UPDATE video_metadata SET status='failed', "
+            "motion_status = CASE WHEN motion_status IN ('pending','processing') "
+            "THEN 'failed' ELSE motion_status END, "
+            "gapper_status = CASE WHEN gapper_status IN ('pending','processing') "
+            "THEN 'failed' ELSE gapper_status END "
+            "WHERE video_id = ?",
+            (video_id,),
+        )
         # Clean up the whole work_dir on failure
         if work_dir.exists():
             shutil.rmtree(work_dir, ignore_errors=True)
