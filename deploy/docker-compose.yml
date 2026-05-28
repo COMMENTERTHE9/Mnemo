@@ -29,6 +29,8 @@ services:
       MNEMO_WORK_DIR: /data/work
       MNEMO_COOKIES_PATH: /data/youtube_cookies.txt
       MNEMO_WORKER_ID: hermes-worker-1
+    healthcheck:
+      disable: true
     volumes:
       - mnemo-data:/data
     depends_on:
