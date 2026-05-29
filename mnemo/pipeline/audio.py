@@ -9,6 +9,7 @@ Replaces worker/video_processor.py:158-264. Differences:
 """
 from __future__ import annotations
 import logging
+import shutil
 import sqlite3
 import subprocess
 import wave
@@ -21,6 +22,19 @@ from mnemo.db import insert_gapper_report, transaction
 from mnemo.models import GapperReport
 
 log = logging.getLogger(__name__)
+
+
+def _resolve_ffmpeg(preferred: str = "ffmpeg") -> str:
+    """Return a usable ffmpeg path: the preferred/system binary if on
+    PATH, otherwise the ffmpeg bundled with imageio-ffmpeg."""
+    found = shutil.which(preferred)
+    if found:
+        return found
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return preferred  # surfaces as AudioError if truly missing
 
 
 def _segment_loudness(wav_path: Path) -> tuple[float, float]:
@@ -80,6 +94,7 @@ def extract_audio(
     Returns None if the source has no audio track. Raises AudioError on
     hard failures (binary missing, write error).
     """
+    ffmpeg_bin = _resolve_ffmpeg(ffmpeg_bin)
     audio_dir.mkdir(parents=True, exist_ok=True)
     audio_path = audio_dir / "full_audio.wav"
     cmd = [
@@ -126,6 +141,7 @@ def segment_audio(
     ffmpeg_bin: str = "ffmpeg",
 ) -> list[AudioSegment]:
     """Slice `audio` into fixed-length chunks, write a gapper_report per segment."""
+    ffmpeg_bin = _resolve_ffmpeg(ffmpeg_bin)
     segments_dir.mkdir(parents=True, exist_ok=True)
     segments: list[AudioSegment] = []
     reports: list[GapperReport] = []

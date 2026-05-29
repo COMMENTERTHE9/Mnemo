@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 import wave
@@ -7,7 +8,7 @@ import pytest
 from mnemo.db import init_for_settings, enqueue_video
 from mnemo.pipeline.audio import (
     extract_audio, segment_audio, AudioError, AudioInfo,
-    _segment_loudness, _loudness_to_importance,
+    _segment_loudness, _loudness_to_importance, _resolve_ffmpeg,
 )
 
 
@@ -125,3 +126,11 @@ def test_segment_loudness_orders_silence_quiet_loud(tmp_path):
 def test_segment_loudness_missing_file_is_safe(tmp_path):
     rms, dbfs = _segment_loudness(tmp_path / "nope.wav")
     assert rms == 0.0 and dbfs == -80.0
+
+
+def test_resolve_ffmpeg_returns_usable_executable():
+    # imageio-ffmpeg is a project dependency, so even without system ffmpeg
+    # the resolver must hand back a real, executable binary path.
+    path = _resolve_ffmpeg()
+    assert os.path.exists(path), f"ffmpeg path does not exist: {path}"
+    assert os.access(path, os.X_OK), f"ffmpeg not executable: {path}"
