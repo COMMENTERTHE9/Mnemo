@@ -114,6 +114,7 @@ def calculate_motion_features(
     prev_pose = previous.get("pose", {})
     velocities: dict[str, float] = {}
     total = 0.0
+    count = 0
     for joint, c in curr_pose.items():
         p = prev_pose.get(joint)
         if not p:
@@ -123,10 +124,16 @@ def calculate_motion_features(
         ))
         velocities[joint] = d
         total += d
+        count += 1
+    # Mean per-joint displacement, not the raw sum. The sum scaled with how
+    # many landmarks were visible and pinned importance at the 0.9 cap; the
+    # mean stays in a sane per-joint range that varies across segments.
+    mean_movement = (total / count) if count else 0.0
     return {
         "motion_detected": True,
         "joint_velocities": velocities,
-        "total_movement": total,
+        "total_movement": mean_movement,   # now mean per-joint (was raw sum)
+        "raw_total_movement": total,        # retained for debugging
         "action_hints": detect_actions(current, velocities),
     }
 
@@ -134,16 +141,29 @@ def calculate_motion_features(
 def detect_actions(pose: dict[str, Any], velocities: dict[str, float]) -> list[str]:
     actions: list[str] = []
     p = pose.get("pose", {})
+    # Arm-raised stays body-relative positional (wrist above shoulder).
     if "left_wrist" in p and "left_shoulder" in p:
         if p["left_wrist"]["y"] < p["left_shoulder"]["y"]:
             actions.append("left_arm_raised")
     if "right_wrist" in p and "right_shoulder" in p:
         if p["right_wrist"]["y"] < p["right_shoulder"]["y"]:
             actions.append("right_arm_raised")
-    if velocities.get("left_ankle", 0) > 0.1 or velocities.get("right_ankle", 0) > 0.1:
-        actions.append("possible_jump")
-    if velocities.get("left_knee", 0) > 0.05 and velocities.get("right_knee", 0) > 0.05:
-        actions.append("walking_or_running")
+    # Velocity actions judged RELATIVE to the frame's own motion.
+    # Uniform camera shake/pan moves every joint by a similar amount, so
+    # no joint is an outlier and these stay quiet. A real action drives
+    # specific joints well above the body's average displacement.
+    moving = [v for v in velocities.values() if v > 0.0]
+    if moving:
+        mean_v = sum(moving) / len(moving)
+        if mean_v > 0.02:  # absolute floor: ignore near-static jitter
+            la = velocities.get("left_ankle", 0.0)
+            ra = velocities.get("right_ankle", 0.0)
+            lk = velocities.get("left_knee", 0.0)
+            rk = velocities.get("right_knee", 0.0)
+            if la > mean_v * 1.8 or ra > mean_v * 1.8:
+                actions.append("possible_jump")
+            if lk > mean_v * 1.4 and rk > mean_v * 1.4:
+                actions.append("walking_or_running")
     return actions
 
 
@@ -245,9 +265,9 @@ def extract_motion(
                 summary = f"Action: {', '.join(hints)}"
 
         importance = 0.3
-        total = features.get("total_movement", 0)
-        if total > 0.1:
-            importance = min(0.9, 0.3 + total)
+        mean_mv = features.get("total_movement", 0)  # now mean per-joint
+        if mean_mv > 0.02:
+            importance = min(0.9, 0.3 + mean_mv)
 
         motion_reports.append(GapperReport(
             video_id=video_id,
