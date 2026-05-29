@@ -138,31 +138,42 @@ def calculate_motion_features(
     }
 
 
-def detect_actions(pose: dict[str, Any], velocities: dict[str, float]) -> list[str]:
+def detect_actions(pose: dict[str, Any], velocities: dict[str, float],
+                   min_visibility: float = 0.5) -> list[str]:
     actions: list[str] = []
     p = pose.get("pose", {})
-    # Arm-raised stays body-relative positional (wrist above shoulder).
-    if "left_wrist" in p and "left_shoulder" in p:
+
+    def vis(joint: str) -> float:
+        j = p.get(joint)
+        return float(j.get("visibility", 0.0)) if j else 0.0
+
+    # Arm-raised: body-relative positional, trusted only when both
+    # landmarks are well-tracked.
+    if vis("left_wrist") > min_visibility and vis("left_shoulder") > min_visibility:
         if p["left_wrist"]["y"] < p["left_shoulder"]["y"]:
             actions.append("left_arm_raised")
-    if "right_wrist" in p and "right_shoulder" in p:
+    if vis("right_wrist") > min_visibility and vis("right_shoulder") > min_visibility:
         if p["right_wrist"]["y"] < p["right_shoulder"]["y"]:
             actions.append("right_arm_raised")
-    # Velocity actions judged RELATIVE to the frame's own motion.
-    # Uniform camera shake/pan moves every joint by a similar amount, so
-    # no joint is an outlier and these stay quiet. A real action drives
-    # specific joints well above the body's average displacement.
-    moving = [v for v in velocities.values() if v > 0.0]
+
+    # Velocity actions: average over WELL-TRACKED joints only, and fire
+    # only when the action's own joints are well-tracked. Low-visibility
+    # jitter (e.g. ankles out of frame) is excluded from both the body
+    # average and the gate, so it can't masquerade as a jump/walk.
+    confident = {j: v for j, v in velocities.items() if vis(j) > min_visibility}
+    moving = [v for v in confident.values() if v > 0.0]
     if moving:
         mean_v = sum(moving) / len(moving)
-        if mean_v > 0.02:  # absolute floor: ignore near-static jitter
-            la = velocities.get("left_ankle", 0.0)
-            ra = velocities.get("right_ankle", 0.0)
-            lk = velocities.get("left_knee", 0.0)
-            rk = velocities.get("right_knee", 0.0)
-            if la > mean_v * 1.8 or ra > mean_v * 1.8:
+        if mean_v > 0.02:
+            la = confident.get("left_ankle", 0.0)
+            ra = confident.get("right_ankle", 0.0)
+            if (vis("left_ankle") > min_visibility or vis("right_ankle") > min_visibility) \
+               and (la > mean_v * 1.8 or ra > mean_v * 1.8):
                 actions.append("possible_jump")
-            if lk > mean_v * 1.4 and rk > mean_v * 1.4:
+            lk = confident.get("left_knee", 0.0)
+            rk = confident.get("right_knee", 0.0)
+            if vis("left_knee") > min_visibility and vis("right_knee") > min_visibility \
+               and lk > mean_v * 1.4 and rk > mean_v * 1.4:
                 actions.append("walking_or_running")
     return actions
 

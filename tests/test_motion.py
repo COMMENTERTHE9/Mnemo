@@ -71,10 +71,79 @@ def test_calculate_motion_features_with_movement():
     assert f["total_movement"] > 0
 
 
+def _joint(y, vis, x=0.5, z=0.0):
+    """A pose-landmark dict matching extract_holistic's real structure
+    (keys: x, y, z, visibility)."""
+    return {"x": x, "y": y, "z": z, "visibility": vis}
+
+
 def test_detect_actions_arm_raised():
-    pose = {"pose": {"left_wrist": {"y": 0.2}, "left_shoulder": {"y": 0.5}}}
+    # Well-tracked wrist above shoulder -> arm raised fires.
+    pose = {"pose": {"left_wrist": _joint(0.2, 0.9), "left_shoulder": _joint(0.5, 0.9)}}
     actions = detect_actions(pose, {})
     assert "left_arm_raised" in actions
+
+
+def test_detect_actions_low_vis_ankle_does_not_jump():
+    """Regression (the zoo bug): an out-of-frame left ankle has LOW visibility
+    but a LARGE jittery velocity; all real, well-tracked joints move little.
+    The noisy ankle must NOT be allowed to fire possible_jump."""
+    pose = {"pose": {
+        "left_ankle": _joint(0.9, 0.2),   # out of frame, untrusted
+        "nose": _joint(0.3, 0.95),
+        "left_hip": _joint(0.6, 0.9),
+        "right_hip": _joint(0.6, 0.9),
+        "left_shoulder": _joint(0.4, 0.9),
+        "right_shoulder": _joint(0.4, 0.9),
+    }}
+    velocities = {
+        "left_ankle": 0.5,   # large but untrusted
+        "nose": 0.05, "left_hip": 0.05, "right_hip": 0.05,
+        "left_shoulder": 0.05, "right_shoulder": 0.05,
+    }
+    actions = detect_actions(pose, velocities)
+    assert "possible_jump" not in actions
+
+
+def test_detect_actions_confident_ankle_jumps():
+    """True positive: both ankles are well-tracked and move far above the
+    body's average displacement -> possible_jump fires."""
+    pose = {"pose": {
+        "left_ankle": _joint(0.9, 0.9),
+        "right_ankle": _joint(0.9, 0.9),
+        "nose": _joint(0.3, 0.95),
+        "left_hip": _joint(0.6, 0.9),
+        "right_hip": _joint(0.6, 0.9),
+        "left_shoulder": _joint(0.4, 0.9),
+    }}
+    velocities = {
+        "left_ankle": 0.4, "right_ankle": 0.4,
+        "nose": 0.05, "left_hip": 0.05, "right_hip": 0.05, "left_shoulder": 0.05,
+    }
+    actions = detect_actions(pose, velocities)
+    assert "possible_jump" in actions
+
+
+def test_detect_actions_uniform_motion_no_action():
+    """Camera pan: every joint well-tracked and moving by the SAME amount.
+    No joint is an outlier, so no velocity action fires."""
+    joints = ["left_ankle", "right_ankle", "left_knee", "right_knee",
+              "nose", "left_hip", "right_hip"]
+    pose = {"pose": {j: _joint(0.5, 0.9) for j in joints}}
+    velocities = {j: 0.15 for j in joints}
+    actions = detect_actions(pose, velocities)
+    assert "possible_jump" not in actions
+    assert "walking_or_running" not in actions
+
+
+def test_detect_actions_arm_raised_requires_visibility():
+    """Same wrist-above-shoulder geometry: fires when well-tracked, stays
+    silent when the wrist is low-visibility."""
+    high = {"pose": {"left_wrist": _joint(0.2, 0.9), "left_shoulder": _joint(0.5, 0.9)}}
+    assert "left_arm_raised" in detect_actions(high, {})
+
+    low = {"pose": {"left_wrist": _joint(0.2, 0.2), "left_shoulder": _joint(0.5, 0.9)}}
+    assert "left_arm_raised" not in detect_actions(low, {})
 
 
 def test_find_motion_segments_groups_continuous_motion():
