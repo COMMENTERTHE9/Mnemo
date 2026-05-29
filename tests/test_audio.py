@@ -1,11 +1,13 @@
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 import wave
+import numpy as np
 import pytest
 
 from mnemo.db import init_for_settings, enqueue_video
 from mnemo.pipeline.audio import (
     extract_audio, segment_audio, AudioError, AudioInfo,
+    _segment_loudness, _loudness_to_importance,
 )
 
 
@@ -86,3 +88,40 @@ def test_segment_audio_writes_reports(settings, tmp_path):
         (video_id,),
     ).fetchone()
     assert rows["n"] == 3
+
+
+def _write_wav(path, amplitude, seconds=1.0, rate=16000):
+    n = int(rate * seconds)
+    samples = np.full(n, amplitude, dtype=np.int16)
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(rate)
+        w.writeframes(samples.tobytes())
+
+
+def test_loudness_to_importance_endpoints():
+    assert _loudness_to_importance(-80.0) == 0.0
+    assert _loudness_to_importance(-60.0) == 0.0
+    assert _loudness_to_importance(0.0) == 1.0
+    assert 0.4 < _loudness_to_importance(-30.0) < 0.6
+
+
+def test_segment_loudness_orders_silence_quiet_loud(tmp_path):
+    silent = tmp_path / "silent.wav"
+    _write_wav(silent, 0)
+    quiet = tmp_path / "quiet.wav"
+    _write_wav(quiet, 1000)
+    loud = tmp_path / "loud.wav"
+    _write_wav(loud, 20000)
+    _, db_s = _segment_loudness(silent)
+    _, db_q = _segment_loudness(quiet)
+    _, db_l = _segment_loudness(loud)
+    assert db_s == -80.0
+    assert db_l > db_q > db_s
+    assert _loudness_to_importance(db_l) > _loudness_to_importance(db_q)
+
+
+def test_segment_loudness_missing_file_is_safe(tmp_path):
+    rms, dbfs = _segment_loudness(tmp_path / "nope.wav")
+    assert rms == 0.0 and dbfs == -80.0

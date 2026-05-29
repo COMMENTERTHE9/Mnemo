@@ -15,10 +15,39 @@ import wave
 from dataclasses import dataclass
 from pathlib import Path
 
+import numpy as np
+
 from mnemo.db import insert_gapper_report, transaction
 from mnemo.models import GapperReport
 
 log = logging.getLogger(__name__)
+
+
+def _segment_loudness(wav_path: Path) -> tuple[float, float]:
+    """RMS and dBFS for a 16kHz mono pcm_s16le WAV.
+
+    Returns (rms, dbfs): rms normalized to [0,1]; dbfs = 20*log10(rms)
+    floored at -80.0. Silence or unreadable -> (0.0, -80.0).
+    """
+    try:
+        with wave.open(str(wav_path), "rb") as w:
+            raw = w.readframes(w.getnframes())
+    except (wave.Error, OSError):
+        return 0.0, -80.0
+    if not raw:
+        return 0.0, -80.0
+    samples = np.frombuffer(raw, dtype=np.int16).astype(np.float64) / 32768.0
+    if samples.size == 0:
+        return 0.0, -80.0
+    rms = float(np.sqrt(np.mean(samples ** 2)))
+    if rms <= 0.0:
+        return 0.0, -80.0
+    return rms, max(-80.0, 20.0 * float(np.log10(rms)))
+
+
+def _loudness_to_importance(dbfs: float) -> float:
+    """Map dBFS to [0,1]: -60 dBFS (near silence) -> 0, 0 dBFS -> 1."""
+    return min(1.0, max(0.0, (dbfs + 60.0) / 60.0))
 
 
 class AudioError(RuntimeError):
@@ -124,6 +153,8 @@ def segment_audio(
             duration_seconds=segment_seconds,
             path=seg_path,
         ))
+        rms, dbfs = _segment_loudness(seg_path)
+        audio_importance = _loudness_to_importance(dbfs)
         reports.append(GapperReport(
             video_id=video_id,
             gapper_type="audio",
@@ -131,12 +162,14 @@ def segment_audio(
             gapper_id=f"audio_gapper_{segment_number}",
             start_frame=0,  # frame-correlation happens in Sprint 2
             end_frame=0,
-            summary=f"Audio segment at {timestamp:.2f}s",
-            importance=0.5,  # placeholder until Sprint 2 audio energy
+            summary=f"Audio segment at {timestamp:.2f}s ({dbfs:.0f} dBFS)",
+            importance=audio_importance,
             features={
                 "segment_duration": segment_seconds,
                 "has_audio": True,
                 "timestamp": timestamp,
+                "rms": round(rms, 6),
+                "dbfs": round(dbfs, 2),
             },
         ))
         timestamp += segment_seconds
