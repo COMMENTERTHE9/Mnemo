@@ -40,5 +40,18 @@ def initdb() -> None:
     typer.echo(f"Schema initialized at {settings.db_path}")
 
 
+@app.command()
+def export(video_id: str) -> None:
+    """Export a video's full memory tree + raw signals to data/corpus/<video_id>.json."""
+    from mnemo.corpus.export import write_export
+    settings = get_settings()
+    conn = init_for_settings(settings)
+    try:
+        out_path = write_export(conn, video_id)
+    finally:
+        conn.close()
+    typer.echo(f"Exported {video_id} to {out_path}")
+
+
 if __name__ == "__main__":
     app()
