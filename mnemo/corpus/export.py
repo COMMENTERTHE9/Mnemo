@@ -24,12 +24,32 @@ def _parse_json(blob: str | None, fallback: Any) -> Any:
         return fallback
 
 
-def export_tree(conn: sqlite3.Connection, video_id: str) -> dict[str, Any]:
+def _lite_motion_features(features: dict[str, Any]) -> dict[str, Any]:
+    """Strip the heavy per-landmark fields from a motion signal's features,
+    keeping only the scalar motion summary. Returns a shallow-trimmed copy."""
+    trimmed = {k: v for k, v in features.items() if k != "pose_data"}
+    mf = trimmed.get("motion_features")
+    if isinstance(mf, dict):
+        trimmed["motion_features"] = {
+            k: v for k, v in mf.items() if k != "joint_velocities"
+        }
+    return trimmed
+
+
+def export_tree(
+    conn: sqlite3.Connection, video_id: str, *, lite: bool = False,
+) -> dict[str, Any]:
     """Build a self-contained dict for `video_id`: full tree + raw signals.
 
     Numeric values are passed through untouched. `narrative_tags` (tree) and
     `features` (signals) are parsed from their stored JSON text into real
     Python structures so the export round-trips as native JSON, not strings.
+
+    When `lite=True`, motion signals drop the heavy fields — `pose_data`
+    (33 raw landmarks) and `motion_features.joint_velocities` (per-joint
+    dict) — keeping only the scalar motion summary (motion_detected,
+    total_movement, raw_total_movement, action_hints) and has_pose. Frame
+    and audio signals are unaffected; the full tree is always retained.
     """
     meta = conn.execute(
         "SELECT duration_seconds FROM video_metadata WHERE video_id = ?",
@@ -62,6 +82,9 @@ def export_tree(conn: sqlite3.Connection, video_id: str) -> dict[str, Any]:
         "WHERE video_id = ? ORDER BY timestamp ASC",
         (video_id,),
     ):
+        features = _parse_json(row["features"], {})
+        if lite and row["gapper_type"] == "motion" and isinstance(features, dict):
+            features = _lite_motion_features(features)
         signals.append({
             "gapper_type": row["gapper_type"],
             "timestamp": row["timestamp"],
@@ -70,7 +93,7 @@ def export_tree(conn: sqlite3.Connection, video_id: str) -> dict[str, Any]:
             "end_frame": row["end_frame"],
             "importance": row["importance"],
             "summary": row["summary"],
-            "features": _parse_json(row["features"], {}),
+            "features": features,
         })
 
     return {
@@ -84,12 +107,14 @@ def export_tree(conn: sqlite3.Connection, video_id: str) -> dict[str, Any]:
 def write_export(
     conn: sqlite3.Connection, video_id: str,
     out_dir: Path = Path("data/corpus"),
+    *, lite: bool = False,
 ) -> Path:
     """Export `video_id` and write it pretty-printed UTF-8 JSON to
-    out_dir/<video_id>.json. Returns the written path."""
+    out_dir/<video_id>.json. Returns the written path. `lite` drops the
+    heavy per-landmark motion fields (see export_tree)."""
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"{video_id}.json"
-    payload = export_tree(conn, video_id)
+    payload = export_tree(conn, video_id, lite=lite)
     out_path.write_text(
         json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8",
     )

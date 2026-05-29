@@ -41,13 +41,16 @@ def initdb() -> None:
 
 
 @app.command()
-def export(video_id: str) -> None:
-    """Export a video's full memory tree + raw signals to data/corpus/<video_id>.json."""
+def export(video_id: str, lite: bool = False) -> None:
+    """Export a video's full memory tree + raw signals to data/corpus/<video_id>.json.
+
+    --lite drops the heavy per-landmark motion fields (pose_data,
+    joint_velocities), keeping the scalar motion summary."""
     from mnemo.corpus.export import write_export
     settings = get_settings()
     conn = init_for_settings(settings)
     try:
-        out_path = write_export(conn, video_id)
+        out_path = write_export(conn, video_id, lite=lite)
     finally:
         conn.close()
     typer.echo(f"Exported {video_id} to {out_path}")
