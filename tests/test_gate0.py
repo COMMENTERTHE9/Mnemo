@@ -145,6 +145,23 @@ def test_control_b_query_z_masked():
     assert ex1.tokens[i2, Z_COL] == 7.0
 
 
+def test_audio_examples_carry_correct_rel():
+    ft = featurize_tree(_known_tree())  # meta -> scene -> {seg1, seg2}
+    examples = build_examples_for_tree(ft, np.zeros(N_BASE), np.ones(N_BASE))
+    expected = relation_matrix(ft.parent_idx)
+    assert examples  # segments are queries
+    for e in examples:
+        assert e.rel is not None
+        assert np.array_equal(e.rel, expected)
+    # spot-check the actual relations against the tree
+    i1 = ft.node_ids.index("seg1")
+    i2 = ft.node_ids.index("seg2")
+    sc = ft.node_ids.index("scene")
+    assert expected[i1, i2] == REL_SIBLING       # seg1 & seg2 share scene
+    assert expected[i1, sc] == REL_PARENT         # scene is seg1's parent
+    assert expected[sc, i1] == REL_CHILD          # seg1 is scene's child
+
+
 def test_relation_matrix():
     # tree: root(0) -> {A(1), B(2)};  A -> {A1(3), A2(4)}
     #   parent_idx: root=-1, A=0, B=0, A1=1, A2=1

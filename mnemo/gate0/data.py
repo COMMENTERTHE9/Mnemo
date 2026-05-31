@@ -11,6 +11,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from mnemo.model.featurize import load_corpus, FeaturizedTree, FEATURE_NAMES
+from mnemo.gate0.structure import relation_matrix
 
 IS_SEGMENT_IDX = FEATURE_NAMES.index("is_segment")
 AUDIO_AVG_IDX = FEATURE_NAMES.index("audio_dbfs_avg")
@@ -73,6 +74,7 @@ def build_examples_for_tree(ft: FeaturizedTree, mean: np.ndarray,
                             std: np.ndarray) -> list[Example]:
     x_std = (ft.X - mean) / std
     n = len(ft.node_ids)
+    rel = relation_matrix(ft.parent_idx)  # tree structure; reused across queries
     examples: list[Example] = []
     for i in range(n):
         if ft.X[i, IS_SEGMENT_IDX] != 1.0:
@@ -99,15 +101,18 @@ def build_examples_for_tree(ft: FeaturizedTree, mean: np.ndarray,
             query_row=tokens[i].copy(),
             mean_pool=tokens.mean(axis=0).astype(np.float32),
             max_pool=tokens.max(axis=0).astype(np.float32),
+            rel=rel,
         ))
     return examples
 
 
-def build_dataset(corpus_dir: str = "corpus", split_seed: int = SPLIT_SEED):
+def build_dataset(corpus_dir: str = "corpus", split_seed: int = SPLIT_SEED,
+                  n_train: int = 6, n_val: int = 2, n_test: int = 2):
     """Load corpus, split by video, standardize on train, build examples."""
     trees = load_corpus(corpus_dir)
     ids = [t.video_id for t in trees]
-    train_ids, val_ids, test_ids = split_videos(ids, seed=split_seed)
+    train_ids, val_ids, test_ids = split_videos(
+        ids, seed=split_seed, n_train=n_train, n_val=n_val, n_test=n_test)
     mean, std = fit_standardizer(trees, train_ids)
     by_id = {t.video_id: t for t in trees}
 
