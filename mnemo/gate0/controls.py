@@ -19,6 +19,7 @@ from mnemo.model.featurize import load_corpus, FEATURE_NAMES, FeaturizedTree
 from mnemo.gate0.data import (
     split_videos, fit_standardizer, Example, SPLIT_SEED, N_BASE,
 )
+from mnemo.gate0.structure import relation_matrix
 
 SPAN_REL_IDX = FEATURE_NAMES.index("span_rel")
 Z_COL = N_BASE              # z is appended right after the 19 base features
@@ -26,7 +27,8 @@ Z_RESAMPLES = 64
 
 
 def _example(video_id: str, tokens: np.ndarray, qi: int,
-             mask_flag: np.ndarray, is_q: np.ndarray, label: float) -> Example:
+             mask_flag: np.ndarray, is_q: np.ndarray, label: float,
+             rel: np.ndarray | None = None) -> Example:
     tokens = tokens.astype(np.float32)
     return Example(
         video_id=video_id, tokens=tokens, query_idx=qi,
@@ -34,6 +36,7 @@ def _example(video_id: str, tokens: np.ndarray, qi: int,
         label=float(label), query_row=tokens[qi].copy(),
         mean_pool=tokens.mean(axis=0).astype(np.float32),
         max_pool=tokens.max(axis=0).astype(np.float32),
+        rel=rel,
     )
 
 
@@ -43,6 +46,7 @@ def control_a_examples(ft: FeaturizedTree, mean: np.ndarray,
     """One example per node (any level), input unmasked, label = span_rel."""
     x_std = (ft.X - mean) / std
     n = len(ft.node_ids)
+    rel = relation_matrix(ft.parent_idx)
     out: list[Example] = []
     for i in range(n):
         is_q = np.zeros(n)
@@ -50,7 +54,7 @@ def control_a_examples(ft: FeaturizedTree, mean: np.ndarray,
         zero = np.zeros(n)
         tokens = np.concatenate([x_std, is_q[:, None], zero[:, None]], axis=1)
         out.append(_example(ft.video_id, tokens, i, zero, is_q,
-                            float(ft.X[i, SPAN_REL_IDX])))
+                            float(ft.X[i, SPAN_REL_IDX]), rel=rel))
     return out
 
 
@@ -70,6 +74,7 @@ def control_b_examples(ft: FeaturizedTree, mean: np.ndarray, std: np.ndarray,
     label = mean of siblings' z (query excluded)."""
     x_std = (ft.X - mean) / std
     n = len(ft.node_ids)
+    rel = relation_matrix(ft.parent_idx)
     out: list[Example] = []
     for i in range(n):
         sib = siblings_of(ft.parent_idx, i)
@@ -82,7 +87,7 @@ def control_b_examples(ft: FeaturizedTree, mean: np.ndarray, std: np.ndarray,
         tokens = np.concatenate(
             [x_std, z_masked[:, None], is_q[:, None], is_q[:, None]], axis=1)
         out.append(_example(ft.video_id, tokens, i, is_q, is_q,
-                            float(np.mean(z[sib]))))
+                            float(np.mean(z[sib])), rel=rel))
     return out
 
 

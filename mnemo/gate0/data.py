@@ -33,6 +33,9 @@ class Example:
     query_row: np.ndarray     # [21]
     mean_pool: np.ndarray     # [21]
     max_pool: np.ndarray      # [21]
+    # Optional [n_nodes, n_nodes] relation matrix (parent/child/sibling/...).
+    # None for tasks/rungs that don't use the structural attention bias.
+    rel: np.ndarray | None = None
 
 
 def split_videos(video_ids: list[str], seed: int = SPLIT_SEED,

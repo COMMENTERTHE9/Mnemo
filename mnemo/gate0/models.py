@@ -7,6 +7,13 @@ import torch.nn as nn
 
 from mnemo.gate0.data import INPUT_DIM
 
+# PyTorch's eval-mode MultiheadAttention "fast path" mishandles our 3D float
+# relational attention bias and returns NaN (training-mode slow path is fine).
+# Disable it process-wide for this experiment module. The unbiased path is
+# numerically unchanged (only slower); the biased path becomes correct.
+if hasattr(torch.backends, "mha"):
+    torch.backends.mha.set_fastpath_enabled(False)
+
 
 class MeanPredictor:
     """Rung 1: predict the train-set mean label. No training, no torch."""
@@ -52,11 +59,18 @@ class PooledMLP(nn.Module):
 class TinyTransformer(nn.Module):
     """Rung 4: node tokens -> linear proj to d_model, 2-layer full self-
     attention, read out the is_query token. Topology-aware via the positional
-    features in the tokens (level one-hot, start/end/span_rel, n_children)."""
+    features in the tokens (level one-hot, start/end/span_rel, n_children) and,
+    when a relation matrix is supplied, an explicit per-head per-relation
+    additive attention bias (parent/child/sibling/self/other) shared across
+    layers. The bias is the ONLY architectural change vs. the baseline; with
+    rel=None the module behaves exactly as before."""
+
+    N_RELATIONS = 5
 
     def __init__(self, in_dim: int = INPUT_DIM, d_model: int = 48,
                  nhead: int = 4, layers: int = 2, ff: int = 64) -> None:
         super().__init__()
+        self.nhead = nhead
         self.proj = nn.Linear(in_dim, d_model)
         enc_layer = nn.TransformerEncoderLayer(
             d_model=d_model, nhead=nhead, dim_feedforward=ff,
@@ -64,12 +78,33 @@ class TinyTransformer(nn.Module):
         )
         self.encoder = nn.TransformerEncoder(enc_layer, num_layers=layers)
         self.readout = nn.Linear(d_model, 1)
+        # Learned bias B[head, relation]; added to attention logits each layer.
+        self.rel_bias = nn.Parameter(torch.zeros(nhead, self.N_RELATIONS))
 
     def forward(self, tokens: torch.Tensor, query_idx: torch.Tensor,
-                pad_mask: torch.Tensor | None = None) -> torch.Tensor:
-        # tokens [B, N, 21]; pad_mask [B, N] True == padding
+                pad_mask: torch.Tensor | None = None,
+                rel: torch.Tensor | None = None) -> torch.Tensor:
+        # tokens [B, N, in_dim]; pad_mask [B, N] True == padding;
+        # rel [B, N, N] long relation ids, or None (no structural bias).
         h = self.proj(tokens)
-        h = self.encoder(h, src_key_padding_mask=pad_mask)
+        if rel is None:
+            h = self.encoder(h, src_key_padding_mask=pad_mask)
+        else:
+            # bias[b, head, i, j] = rel_bias[head, rel[b, i, j]]
+            bias = self.rel_bias[:, rel]                  # [head, B, N, N]
+            bias = bias.permute(1, 0, 2, 3).contiguous()  # [B, head, N, N]
+            b, hh, n, _ = bias.shape
+            if pad_mask is not None:
+                # Fold key-padding into the float mask and drop
+                # src_key_padding_mask: mixing a 3D float attn_mask with a
+                # separate key_padding_mask, and using -inf, drives the encoder's
+                # eval-mode fast path to NaN. A large finite negative is softmax-
+                # equivalent and fast-path safe.
+                neg = torch.zeros(b, 1, 1, n, device=h.device)
+                neg = neg.masked_fill(pad_mask[:, None, None, :], -1e9)
+                bias = bias + neg                          # broadcast over heads/queries
+            attn_mask = bias.view(b * hh, n, n)            # [B*head, N, N]
+            h = self.encoder(h, mask=attn_mask, src_key_padding_mask=None)
         q = h[torch.arange(h.size(0)), query_idx]  # gather query token
         return self.readout(q).squeeze(-1)
 

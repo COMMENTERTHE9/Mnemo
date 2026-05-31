@@ -8,6 +8,9 @@ from mnemo.gate0.data import (
 from mnemo.gate0.controls import (
     control_a_examples, control_b_examples, siblings_of, SPAN_REL_IDX, Z_COL,
 )
+from mnemo.gate0.structure import (
+    relation_matrix, REL_SELF, REL_PARENT, REL_CHILD, REL_SIBLING, REL_OTHER,
+)
 
 
 def test_split_disjoint():
@@ -140,3 +143,27 @@ def test_control_b_query_z_masked():
     assert ex1.tokens[i1, Z_COL] == 0.0
     # ...while the visible sibling keeps its z
     assert ex1.tokens[i2, Z_COL] == 7.0
+
+
+def test_relation_matrix():
+    # tree: root(0) -> {A(1), B(2)};  A -> {A1(3), A2(4)}
+    #   parent_idx: root=-1, A=0, B=0, A1=1, A2=1
+    parent_idx = [-1, 0, 0, 1, 1]
+    rel = relation_matrix(parent_idx)
+    assert rel.shape == (5, 5)
+    # self
+    assert rel[0, 0] == REL_SELF
+    assert rel[3, 3] == REL_SELF
+    # parent: A's parent is root -> rel[A, root] = parent
+    assert rel[1, 0] == REL_PARENT
+    assert rel[3, 1] == REL_PARENT          # A1's parent is A
+    # child: root's child is A -> rel[root, A] = child
+    assert rel[0, 1] == REL_CHILD
+    assert rel[1, 3] == REL_CHILD           # A's child is A1
+    # sibling: A & B share root; A1 & A2 share A
+    assert rel[1, 2] == REL_SIBLING
+    assert rel[3, 4] == REL_SIBLING
+    # other: A1 vs B (different parents, not parent/child)
+    assert rel[3, 2] == REL_OTHER
+    # other: root vs A1 (A1's parent is A, not root)
+    assert rel[0, 3] == REL_OTHER

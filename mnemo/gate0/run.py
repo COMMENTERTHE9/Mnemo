@@ -46,13 +46,27 @@ def _pad_tokens(examples: list[Example]):
     return toks, qidx, pad_mask
 
 
+def _pad_rel(examples: list[Example], n_max: int) -> torch.Tensor | None:
+    """Padded [N, n_max, n_max] relation ids; None if examples carry no rel.
+    Padded positions get REL_OTHER (key padding handles them via pad_mask)."""
+    if examples[0].rel is None:
+        return None
+    from mnemo.gate0.structure import REL_OTHER
+    rel = torch.full((len(examples), n_max, n_max), REL_OTHER, dtype=torch.long)
+    for i, e in enumerate(examples):
+        n = e.rel.shape[0]
+        rel[i, :n, :n] = torch.tensor(e.rel, dtype=torch.long)
+    return rel
+
+
 def _forward(model, kind: str, packs) -> torch.Tensor:
     if kind == "linear":
         return model(packs["query_row"])
     if kind == "pooled":
         return model(packs["query_row"], packs["mean_pool"], packs["max_pool"])
     if kind == "transformer":
-        return model(packs["tokens"], packs["query_idx"], packs["pad_mask"])
+        return model(packs["tokens"], packs["query_idx"], packs["pad_mask"],
+                     packs.get("rel"))
     raise ValueError(kind)
 
 
@@ -63,11 +77,12 @@ def _build_packs(examples: list[Example]) -> dict:
         "mean_pool": _stack(examples, "mean_pool"),
         "max_pool": _stack(examples, "max_pool"),
         "tokens": toks, "query_idx": qidx, "pad_mask": pad_mask,
+        "rel": _pad_rel(examples, toks.shape[1]),
     }
 
 
 def _index_packs(packs: dict, idx: torch.Tensor) -> dict:
-    return {k: v[idx] for k, v in packs.items()}
+    return {k: (None if v is None else v[idx]) for k, v in packs.items()}
 
 
 def _eval_mae(model, kind, packs, true_labels, lmean, lstd) -> tuple[np.ndarray, float]:
