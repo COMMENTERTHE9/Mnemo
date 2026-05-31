@@ -1,0 +1,95 @@
+import numpy as np
+
+from mnemo.model.featurize import featurize_tree
+from mnemo.gate0.data import (
+    split_videos, build_examples_for_tree, ancestors_of,
+    IS_SEGMENT_IDX, AUDIO_AVG_IDX, AUDIO_PEAK_IDX, N_BASE,
+)
+
+
+def test_split_disjoint():
+    ids = [f"v{i}" for i in range(10)]
+    train, val, test = split_videos(ids, seed=0)
+    assert len(train) == 6 and len(val) == 2 and len(test) == 2
+    s_tr, s_va, s_te = set(train), set(val), set(test)
+    assert not (s_tr & s_va)
+    assert not (s_tr & s_te)
+    assert not (s_va & s_te)
+    # Covers exactly the input ids, no dupes.
+    assert s_tr | s_va | s_te == set(ids)
+
+
+def _known_tree():
+    """meta(L4) -> scene(L2) -> {seg1(L1,0-5), seg2(L1,5-10)}, with audio so
+    audio_dbfs_avg is non-zero on every node."""
+    signals = []
+    for t in range(10):
+        signals.append({"gapper_type": "audio", "timestamp": t * 1000,
+                        "importance": 0.5, "features": {"dbfs": -20.0 - t, "rms": 0.1}})
+        signals.append({"gapper_type": "frame", "timestamp": t * 1000,
+                        "importance": 0.5, "features": {"blur_variance": 150.0}})
+    return {
+        "video_id": "known",
+        "duration_seconds": 10.0,
+        "tree": [
+            {"node_id": "meta", "node_level": 4, "parent_id": None,
+             "start_time": 0.0, "end_time": 10.0, "importance": 0.5,
+             "summary": "", "narrative_tags": []},
+            {"node_id": "scene", "node_level": 2, "parent_id": "meta",
+             "start_time": 0.0, "end_time": 10.0, "importance": 0.5,
+             "summary": "", "narrative_tags": []},
+            {"node_id": "seg1", "node_level": 1, "parent_id": "scene",
+             "start_time": 0.0, "end_time": 5.0, "importance": 0.5,
+             "summary": "", "narrative_tags": []},
+            {"node_id": "seg2", "node_level": 1, "parent_id": "scene",
+             "start_time": 5.0, "end_time": 10.0, "importance": 0.5,
+             "summary": "", "narrative_tags": []},
+        ],
+        "signals": signals,
+    }
+
+
+def test_mask_blanks_ancestor_path():
+    ft = featurize_tree(_known_tree())
+    # node order: meta(4), scene(2), seg1(1,start0), seg2(1,start5)
+    assert ft.node_ids == ["meta", "scene", "seg1", "seg2"]
+    seg1_idx = ft.node_ids.index("seg1")
+    # identity standardizer so we can read raw audio values back
+    mean = np.zeros(N_BASE)
+    std = np.ones(N_BASE)
+    examples = build_examples_for_tree(ft, mean, std)
+    ex = next(e for e in examples if e.query_idx == seg1_idx)
+
+    # ancestor chain seg1 -> scene -> meta
+    assert ancestors_of(ft, seg1_idx) == [ft.node_ids.index("scene"),
+                                          ft.node_ids.index("meta")]
+
+    # audio_hidden == 1 exactly on {seg1, scene, meta}, 0 on seg2
+    expected_hidden = np.zeros(4)
+    for nid in ("seg1", "scene", "meta"):
+        expected_hidden[ft.node_ids.index(nid)] = 1.0
+    assert np.array_equal(ex.audio_hidden, expected_hidden)
+
+    # audio columns zeroed exactly where hidden...
+    for j in range(4):
+        if expected_hidden[j] == 1.0:
+            assert ex.tokens[j, AUDIO_AVG_IDX] == 0.0
+            assert ex.tokens[j, AUDIO_PEAK_IDX] == 0.0
+    # ...and NOT zeroed on the visible sibling (seg2 has real audio)
+    seg2_idx = ft.node_ids.index("seg2")
+    assert ex.tokens[seg2_idx, AUDIO_AVG_IDX] != 0.0
+
+    # is_query one-hot on seg1 only
+    expected_q = np.zeros(4)
+    expected_q[seg1_idx] = 1.0
+    assert np.array_equal(ex.is_query, expected_q)
+
+
+def test_query_nodes_are_segments():
+    ft = featurize_tree(_known_tree())
+    mean = np.zeros(N_BASE)
+    std = np.ones(N_BASE)
+    examples = build_examples_for_tree(ft, mean, std)
+    assert examples  # non-empty
+    for e in examples:
+        assert ft.X[e.query_idx, IS_SEGMENT_IDX] == 1.0

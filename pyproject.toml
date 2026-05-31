@@ -16,6 +16,9 @@ dependencies = [
     "imageio-ffmpeg>=0.5",
 ]
 
+[project.optional-dependencies]
+gate0 = ["torch"]
+
 [project.scripts]
 mnemo = "mnemo.cli:app"
 
