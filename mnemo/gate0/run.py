@@ -12,7 +12,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from mnemo.gate0.data import build_dataset, Example
+from mnemo.gate0.data import build_dataset, Example, INPUT_DIM
 from mnemo.gate0.models import (
     MeanPredictor, Linear, PooledMLP, TinyTransformer, count_params,
 )
@@ -66,6 +66,10 @@ def _build_packs(examples: list[Example]) -> dict:
     }
 
 
+def _index_packs(packs: dict, idx: torch.Tensor) -> dict:
+    return {k: v[idx] for k, v in packs.items()}
+
+
 def _eval_mae(model, kind, packs, true_labels, lmean, lstd) -> tuple[np.ndarray, float]:
     model.eval()
     with torch.no_grad():
@@ -81,15 +85,22 @@ def _r2(pred: np.ndarray, true: np.ndarray) -> float:
     return 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
 
-def _make_model(kind: str):
-    return {"linear": Linear, "pooled": PooledMLP, "transformer": TinyTransformer}[kind]()
+def _make_model(kind: str, in_dim: int = INPUT_DIM):
+    cls = {"linear": Linear, "pooled": PooledMLP, "transformer": TinyTransformer}[kind]
+    return cls(in_dim)
 
 
-def train_rung(kind: str, data: dict, seed: int):
-    """Train one torch rung; early-stop on val MAE (dBFS). Returns
-    (test_pred, test_mae, params)."""
+def train_rung(kind: str, data: dict, seed: int,
+               in_dim: int = INPUT_DIM, batch_size: int | None = None):
+    """Train one torch rung; early-stop on val MAE. Returns
+    (test_pred, test_mae, params).
+
+    in_dim lets controls feed a different token width (same model classes).
+    batch_size=None -> full-batch (audio run, unchanged); an int -> mini-batch
+    SGD over the train set (needed for the large K-resampled control sets).
+    """
     torch.manual_seed(seed)
-    model = _make_model(kind)
+    model = _make_model(kind, in_dim)
     params = count_params(model)
 
     train_y = _labels(data["train"])
@@ -108,13 +119,24 @@ def train_rung(kind: str, data: dict, seed: int):
     best_val = float("inf")
     best_state = copy.deepcopy(model.state_dict())
     bad = 0
+    n_train = y_train.shape[0]
     for _ in range(EPOCHS):
         model.train()
-        opt.zero_grad()
-        pred = _forward(model, kind, train_packs)
-        loss = loss_fn(pred, y_train)
-        loss.backward()
-        opt.step()
+        if batch_size is None:
+            opt.zero_grad()
+            pred = _forward(model, kind, train_packs)
+            loss = loss_fn(pred, y_train)
+            loss.backward()
+            opt.step()
+        else:
+            perm = torch.randperm(n_train)
+            for s in range(0, n_train, batch_size):
+                bidx = perm[s:s + batch_size]
+                opt.zero_grad()
+                pred = _forward(model, kind, _index_packs(train_packs, bidx))
+                loss = loss_fn(pred, y_train[bidx])
+                loss.backward()
+                opt.step()
 
         _, val_mae = _eval_mae(model, kind, val_packs, val_y, lmean, lstd)
         if val_mae < best_val - 1e-6:

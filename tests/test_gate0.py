@@ -5,6 +5,9 @@ from mnemo.gate0.data import (
     split_videos, build_examples_for_tree, ancestors_of,
     IS_SEGMENT_IDX, AUDIO_AVG_IDX, AUDIO_PEAK_IDX, N_BASE,
 )
+from mnemo.gate0.controls import (
+    control_a_examples, control_b_examples, siblings_of, SPAN_REL_IDX, Z_COL,
+)
 
 
 def test_split_disjoint():
@@ -93,3 +96,47 @@ def test_query_nodes_are_segments():
     assert examples  # non-empty
     for e in examples:
         assert ft.X[e.query_idx, IS_SEGMENT_IDX] == 1.0
+
+
+# ── Positive controls ───────────────────────────────────────────────────────
+def test_control_a_label_is_span_rel():
+    ft = featurize_tree(_known_tree())
+    mean = np.zeros(N_BASE)
+    std = np.ones(N_BASE)  # identity standardizer
+    examples = control_a_examples(ft, mean, std)
+    assert len(examples) == len(ft.node_ids)  # one per node, any level
+    for e in examples:
+        # label is the node's true span_rel
+        assert abs(e.label - ft.X[e.query_idx, SPAN_REL_IDX]) < 1e-9
+        # input is UNMASKED: the node's own span_rel sits in its token row
+        assert abs(e.tokens[e.query_idx, SPAN_REL_IDX] - e.label) < 1e-9
+
+
+def test_control_b_label_is_sibling_mean():
+    ft = featurize_tree(_known_tree())  # meta -> scene -> {seg1, seg2}
+    i1 = ft.node_ids.index("seg1")
+    i2 = ft.node_ids.index("seg2")
+    assert siblings_of(ft.parent_idx, i1) == [i2]  # seg1 & seg2 are siblings
+
+    z = np.zeros(len(ft.node_ids))
+    z[i1] = 5.0
+    z[i2] = 7.0
+    examples = control_b_examples(ft, np.zeros(N_BASE), np.ones(N_BASE), z)
+    ex1 = next(e for e in examples if e.query_idx == i1)
+    # label = mean of siblings' z (just seg2 here) and EXCLUDES the query's own z
+    assert abs(ex1.label - 7.0) < 1e-9
+
+
+def test_control_b_query_z_masked():
+    ft = featurize_tree(_known_tree())
+    i1 = ft.node_ids.index("seg1")
+    i2 = ft.node_ids.index("seg2")
+    z = np.zeros(len(ft.node_ids))
+    z[i1] = 5.0
+    z[i2] = 7.0
+    examples = control_b_examples(ft, np.zeros(N_BASE), np.ones(N_BASE), z)
+    ex1 = next(e for e in examples if e.query_idx == i1)
+    # query's own z column is masked to 0...
+    assert ex1.tokens[i1, Z_COL] == 0.0
+    # ...while the visible sibling keeps its z
+    assert ex1.tokens[i2, Z_COL] == 7.0
