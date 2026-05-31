@@ -1,0 +1,5658 @@
+{
+  "video_id": "video_1780260416727255600",
+  "duration_seconds": 120.0,
+  "tree": [
+    {
+      "node_id": "video_1780260416727255600_meta",
+      "node_level": 4,
+      "parent_id": null,
+      "start_time": 0.0,
+      "end_time": 120.0,
+      "importance": 0.5190397424031074,
+      "summary": "Video: 120.0s, 1 chapter(s), avg importance 0.52",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_chapter_0000",
+      "node_level": 3,
+      "parent_id": "video_1780260416727255600_meta",
+      "start_time": 0.0,
+      "end_time": 120.0,
+      "importance": 0.5190397424031074,
+      "summary": "Chapter 0-120s: 4 scenes, avg importance 0.52",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_scene_0000",
+      "node_level": 2,
+      "parent_id": "video_1780260416727255600_chapter_0000",
+      "start_time": 0.0,
+      "end_time": 30.0,
+      "importance": 0.5002290737061119,
+      "summary": "0-30s scene: 6 segments, peak 0.59 at 0s",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_scene_0030",
+      "node_level": 2,
+      "parent_id": "video_1780260416727255600_chapter_0000",
+      "start_time": 30.0,
+      "end_time": 60.0,
+      "importance": 0.521966673155421,
+      "summary": "30-60s scene: 6 segments, peak 0.53 at 55s",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_scene_0060",
+      "node_level": 2,
+      "parent_id": "video_1780260416727255600_chapter_0000",
+      "start_time": 60.0,
+      "end_time": 90.0,
+      "importance": 0.5198723460998926,
+      "summary": "60-90s scene: 6 segments, peak 0.52 at 80s",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_scene_0090",
+      "node_level": 2,
+      "parent_id": "video_1780260416727255600_chapter_0000",
+      "start_time": 90.0,
+      "end_time": 120.0,
+      "importance": 0.5340908766510036,
+      "summary": "90-120s scene: 6 segments, peak 0.56 at 115s",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0000",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 0.0,
+      "end_time": 5.0,
+      "importance": 0.5866247274045195,
+      "summary": "0-5s: motion 0.23 | audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0005",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 5.0,
+      "end_time": 10.0,
+      "importance": 0.3701425157067755,
+      "summary": "5-10s: motion 0.10 | audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0010",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 10.0,
+      "end_time": 15.0,
+      "importance": 0.488256940113918,
+      "summary": "10-15s: motion 0.13 | audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0015",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 15.0,
+      "end_time": 20.0,
+      "importance": 0.5335162735000973,
+      "summary": "15-20s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0020",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 20.0,
+      "end_time": 25.0,
+      "importance": 0.5147964282369865,
+      "summary": "20-25s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0025",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 25.0,
+      "end_time": 30.0,
+      "importance": 0.5080375572743746,
+      "summary": "25-30s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0030",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0000",
+      "start_time": 30.0,
+      "end_time": 35.0,
+      "importance": 0.5188928863596554,
+      "summary": "30-35s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0035",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0030",
+      "start_time": 35.0,
+      "end_time": 40.0,
+      "importance": 0.5265790564012338,
+      "summary": "35-40s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0040",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0030",
+      "start_time": 40.0,
+      "end_time": 45.0,
+      "importance": 0.5253259159326835,
+      "summary": "40-45s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0045",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0030",
+      "start_time": 45.0,
+      "end_time": 50.0,
+      "importance": 0.5107142571797335,
+      "summary": "45-50s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0050",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0030",
+      "start_time": 50.0,
+      "end_time": 55.0,
+      "importance": 0.5218934810053377,
+      "summary": "50-55s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0055",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0030",
+      "start_time": 55.0,
+      "end_time": 60.0,
+      "importance": 0.5283944420538822,
+      "summary": "55-60s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0060",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0030",
+      "start_time": 60.0,
+      "end_time": 65.0,
+      "importance": 0.5176475672386344,
+      "summary": "60-65s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0065",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0060",
+      "start_time": 65.0,
+      "end_time": 70.0,
+      "importance": 0.5225124137644535,
+      "summary": "65-70s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0070",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0060",
+      "start_time": 70.0,
+      "end_time": 75.0,
+      "importance": 0.5174996817620033,
+      "summary": "70-75s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0075",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0060",
+      "start_time": 75.0,
+      "end_time": 80.0,
+      "importance": 0.5185493050078775,
+      "summary": "75-80s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0080",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0060",
+      "start_time": 80.0,
+      "end_time": 85.0,
+      "importance": 0.522911575663801,
+      "summary": "80-85s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0085",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0060",
+      "start_time": 85.0,
+      "end_time": 90.0,
+      "importance": 0.5201135331625866,
+      "summary": "85-90s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0090",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0060",
+      "start_time": 90.0,
+      "end_time": 95.0,
+      "importance": 0.5261007181868893,
+      "summary": "90-95s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0095",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0090",
+      "start_time": 95.0,
+      "end_time": 100.0,
+      "importance": 0.5274092998368898,
+      "summary": "95-100s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0100",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0090",
+      "start_time": 100.0,
+      "end_time": 105.0,
+      "importance": 0.5240744559752131,
+      "summary": "100-105s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0105",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0090",
+      "start_time": 105.0,
+      "end_time": 110.0,
+      "importance": 0.5251999381723461,
+      "summary": "105-110s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0110",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0090",
+      "start_time": 110.0,
+      "end_time": 115.0,
+      "importance": 0.5427309306832766,
+      "summary": "110-115s: audio",
+      "narrative_tags": []
+    },
+    {
+      "node_id": "video_1780260416727255600_segment_0115",
+      "node_level": 1,
+      "parent_id": "video_1780260416727255600_scene_0090",
+      "start_time": 115.0,
+      "end_time": 120.0,
+      "importance": 0.5590299170514068,
+      "summary": "115-120s: motion 0.09 | audio",
+      "narrative_tags": []
+    }
+  ],
+  "signals": [
+    {
+      "gapper_type": "audio",
+      "timestamp": 0,
+      "gapper_id": "audio_gapper_0",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.4362072587344574,
+      "summary": "Audio segment at 0.00s (-34 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 0.0,
+        "rms": 0.020353,
+        "dbfs": -33.83
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 0,
+      "gapper_id": "motion_0",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 0,
+      "gapper_id": "frame_gapper_0",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.11850354231740692,
+      "summary": "Frame at 0.00s",
+      "features": {
+        "blur_variance": 118.50354231740693,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 1000,
+      "gapper_id": "motion_25",
+      "start_frame": 25,
+      "end_frame": 25,
+      "importance": 0.8881637606513066,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.5881637606513067,
+          "raw_total_movement": 19.40940410149312,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "motion_segment",
+      "timestamp": 1000,
+      "gapper_id": "motion_seg_25",
+      "start_frame": 25,
+      "end_frame": 300,
+      "importance": 0.8,
+      "summary": "Motion segment: 12 frames",
+      "features": {
+        "actions": []
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 1000,
+      "gapper_id": "audio_gapper_1",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.4184664387500213,
+      "summary": "Audio segment at 1.00s (-35 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 1.0,
+        "rms": 0.018005,
+        "dbfs": -34.89
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 1000,
+      "gapper_id": "frame_gapper_25",
+      "start_frame": 25,
+      "end_frame": 25,
+      "importance": 0.19616519776287314,
+      "summary": "Frame at 1.00s",
+      "features": {
+        "blur_variance": 196.16519776287313,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 2000,
+      "gapper_id": "audio_gapper_2",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.39822577868077763,
+      "summary": "Audio segment at 2.00s (-36 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 2.0,
+        "rms": 0.015656,
+        "dbfs": -36.11
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 2000,
+      "gapper_id": "motion_50",
+      "start_frame": 50,
+      "end_frame": 50,
+      "importance": 0.3747971994704994,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.0747971994704994,
+          "raw_total_movement": 2.46830758252648,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 2000,
+      "gapper_id": "frame_gapper_50",
+      "start_frame": 50,
+      "end_frame": 50,
+      "importance": 0.19943428027191165,
+      "summary": "Frame at 2.00s",
+      "features": {
+        "blur_variance": 199.43428027191166,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 3000,
+      "gapper_id": "motion_75",
+      "start_frame": 75,
+      "end_frame": 75,
+      "importance": 0.4452851237492471,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.14528512374924715,
+          "raw_total_movement": 4.794409083725156,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 3000,
+      "gapper_id": "audio_gapper_3",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.36519223794870814,
+      "summary": "Audio segment at 3.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 3.0,
+        "rms": 0.012462,
+        "dbfs": -38.09
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 3000,
+      "gapper_id": "frame_gapper_75",
+      "start_frame": 75,
+      "end_frame": 75,
+      "importance": 0.32605337575585636,
+      "summary": "Frame at 3.00s",
+      "features": {
+        "blur_variance": 326.05337575585634,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 4000,
+      "gapper_id": "motion_100",
+      "start_frame": 100,
+      "end_frame": 100,
+      "importance": 0.6217459704769664,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.32174597047696646,
+          "raw_total_movement": 10.617617025739893,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 4000,
+      "gapper_id": "audio_gapper_4",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.41259970862044676,
+      "summary": "Audio segment at 4.00s (-35 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 4.0,
+        "rms": 0.01729,
+        "dbfs": -35.24
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 4000,
+      "gapper_id": "frame_gapper_100",
+      "start_frame": 100,
+      "end_frame": 100,
+      "importance": 0.2567521002856596,
+      "summary": "Frame at 4.00s",
+      "features": {
+        "blur_variance": 256.7521002856596,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 5000,
+      "gapper_id": "motion_125",
+      "start_frame": 125,
+      "end_frame": 125,
+      "importance": 0.4046619218963907,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.1046619218963907,
+          "raw_total_movement": 3.4538434225808934,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 5000,
+      "gapper_id": "audio_gapper_5",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.34693075588849154,
+      "summary": "Audio segment at 5.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 5.0,
+        "rms": 0.010985,
+        "dbfs": -39.18
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 5000,
+      "gapper_id": "frame_gapper_125",
+      "start_frame": 125,
+      "end_frame": 125,
+      "importance": 0.2861152869321281,
+      "summary": "Frame at 5.00s",
+      "features": {
+        "blur_variance": 286.11528693212813,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 6000,
+      "gapper_id": "motion_150",
+      "start_frame": 150,
+      "end_frame": 150,
+      "importance": 0.37392883162136076,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.07392883162136075,
+          "raw_total_movement": 2.439651443504905,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 6000,
+      "gapper_id": "frame_gapper_150",
+      "start_frame": 150,
+      "end_frame": 150,
+      "importance": 0.2821207905044367,
+      "summary": "Frame at 6.00s",
+      "features": {
+        "blur_variance": 282.12079050443674,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 6000,
+      "gapper_id": "audio_gapper_6",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.19822290600342143,
+      "summary": "Audio segment at 6.00s (-48 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 6.0,
+        "rms": 0.003932,
+        "dbfs": -48.11
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 7000,
+      "gapper_id": "motion_175",
+      "start_frame": 175,
+      "end_frame": 175,
+      "importance": 0.3825733044120719,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.08257330441207188,
+          "raw_total_movement": 2.724919045598372,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 7000,
+      "gapper_id": "frame_gapper_175",
+      "start_frame": 175,
+      "end_frame": 175,
+      "importance": 0.3595330989370652,
+      "summary": "Frame at 7.00s",
+      "features": {
+        "blur_variance": 359.5330989370652,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 7000,
+      "gapper_id": "audio_gapper_7",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.17024722348035237,
+      "summary": "Audio segment at 7.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 7.0,
+        "rms": 0.003241,
+        "dbfs": -49.79
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 8000,
+      "gapper_id": "frame_gapper_200",
+      "start_frame": 200,
+      "end_frame": 200,
+      "importance": 0.46493526665353657,
+      "summary": "Frame at 8.00s",
+      "features": {
+        "blur_variance": 464.9352666535366,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 8000,
+      "gapper_id": "motion_200",
+      "start_frame": 200,
+      "end_frame": 200,
+      "importance": 0.4039158442473954,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.10391584424739542,
+          "raw_total_movement": 3.4292228601640486,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 8000,
+      "gapper_id": "audio_gapper_8",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.14352006793508387,
+      "summary": "Audio segment at 8.00s (-51 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 8.0,
+        "rms": 0.002695,
+        "dbfs": -51.39
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 9000,
+      "gapper_id": "frame_gapper_225",
+      "start_frame": 225,
+      "end_frame": 225,
+      "importance": 0.42789218133612733,
+      "summary": "Frame at 9.00s",
+      "features": {
+        "blur_variance": 427.89218133612735,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 9000,
+      "gapper_id": "motion_225",
+      "start_frame": 225,
+      "end_frame": 225,
+      "importance": 0.4242213028465776,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.12422130284657762,
+          "raw_total_movement": 4.099302993937061,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 9000,
+      "gapper_id": "audio_gapper_9",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.11334205352527439,
+      "summary": "Audio segment at 9.00s (-53 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 9.0,
+        "rms": 0.002188,
+        "dbfs": -53.2
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 10000,
+      "gapper_id": "frame_gapper_250",
+      "start_frame": 250,
+      "end_frame": 250,
+      "importance": 0.555289421893009,
+      "summary": "Frame at 10.00s",
+      "features": {
+        "blur_variance": 555.289421893009,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 10000,
+      "gapper_id": "motion_250",
+      "start_frame": 250,
+      "end_frame": 250,
+      "importance": 0.5443572516763205,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.24435725167632052,
+          "raw_total_movement": 8.063789305318577,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 10000,
+      "gapper_id": "audio_gapper_10",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.09369528915247814,
+      "summary": "Audio segment at 10.00s (-54 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 10.0,
+        "rms": 0.00191,
+        "dbfs": -54.38
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 11000,
+      "gapper_id": "frame_gapper_275",
+      "start_frame": 275,
+      "end_frame": 275,
+      "importance": 0.4755028374204094,
+      "summary": "Frame at 11.00s",
+      "features": {
+        "blur_variance": 475.5028374204094,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 11000,
+      "gapper_id": "motion_275",
+      "start_frame": 275,
+      "end_frame": 275,
+      "importance": 0.44389240564243837,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.14389240564243838,
+          "raw_total_movement": 4.748449386200466,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 11000,
+      "gapper_id": "audio_gapper_11",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.08884116311562404,
+      "summary": "Audio segment at 11.00s (-55 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 11.0,
+        "rms": 0.001847,
+        "dbfs": -54.67
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 12000,
+      "gapper_id": "frame_gapper_300",
+      "start_frame": 300,
+      "end_frame": 300,
+      "importance": 0.5787399352909606,
+      "summary": "Frame at 12.00s",
+      "features": {
+        "blur_variance": 578.7399352909606,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 12000,
+      "gapper_id": "motion_300",
+      "start_frame": 300,
+      "end_frame": 300,
+      "importance": 0.5758347943990901,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.27583479439909014,
+          "raw_total_movement": 9.102548215169975,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 12000,
+      "gapper_id": "audio_gapper_12",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.08791364051088024,
+      "summary": "Audio segment at 12.00s (-55 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 12.0,
+        "rms": 0.001835,
+        "dbfs": -54.73
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 13000,
+      "gapper_id": "frame_gapper_325",
+      "start_frame": 325,
+      "end_frame": 325,
+      "importance": 1.0,
+      "summary": "Frame at 13.00s",
+      "features": {
+        "blur_variance": 1806.9937664339795,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 13000,
+      "gapper_id": "motion_325",
+      "start_frame": 325,
+      "end_frame": 325,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 13000,
+      "gapper_id": "audio_gapper_13",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.06985829466334449,
+      "summary": "Audio segment at 13.00s (-56 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 13.0,
+        "rms": 0.00162,
+        "dbfs": -55.81
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 14000,
+      "gapper_id": "frame_gapper_350",
+      "start_frame": 350,
+      "end_frame": 350,
+      "importance": 1.0,
+      "summary": "Frame at 14.00s",
+      "features": {
+        "blur_variance": 1783.1533501514389,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 14000,
+      "gapper_id": "motion_350",
+      "start_frame": 350,
+      "end_frame": 350,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 14000,
+      "gapper_id": "audio_gapper_14",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.19128470056959018,
+      "summary": "Audio segment at 14.00s (-49 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 14.0,
+        "rms": 0.003748,
+        "dbfs": -48.52
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 15000,
+      "gapper_id": "frame_gapper_375",
+      "start_frame": 375,
+      "end_frame": 375,
+      "importance": 1.0,
+      "summary": "Frame at 15.00s",
+      "features": {
+        "blur_variance": 1766.887873327467,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 15000,
+      "gapper_id": "audio_gapper_15",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.4175813675004868,
+      "summary": "Audio segment at 15.00s (-35 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 15.0,
+        "rms": 0.017896,
+        "dbfs": -34.95
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 15000,
+      "gapper_id": "motion_375",
+      "start_frame": 375,
+      "end_frame": 375,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 16000,
+      "gapper_id": "frame_gapper_400",
+      "start_frame": 400,
+      "end_frame": 400,
+      "importance": 1.0,
+      "summary": "Frame at 16.00s",
+      "features": {
+        "blur_variance": 1743.873656751543,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 16000,
+      "gapper_id": "motion_400",
+      "start_frame": 400,
+      "end_frame": 400,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 16000,
+      "gapper_id": "audio_gapper_16",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.26533019044527556,
+      "summary": "Audio segment at 16.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 16.0,
+        "rms": 0.006252,
+        "dbfs": -44.08
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 17000,
+      "gapper_id": "frame_gapper_425",
+      "start_frame": 425,
+      "end_frame": 425,
+      "importance": 1.0,
+      "summary": "Frame at 17.00s",
+      "features": {
+        "blur_variance": 1768.1694900146483,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 17000,
+      "gapper_id": "motion_425",
+      "start_frame": 425,
+      "end_frame": 425,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 17000,
+      "gapper_id": "audio_gapper_17",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2559941769371915,
+      "summary": "Audio segment at 17.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 17.0,
+        "rms": 0.005861,
+        "dbfs": -44.64
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 18000,
+      "gapper_id": "frame_gapper_450",
+      "start_frame": 450,
+      "end_frame": 450,
+      "importance": 1.0,
+      "summary": "Frame at 18.00s",
+      "features": {
+        "blur_variance": 1740.9456724488812,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 18000,
+      "gapper_id": "audio_gapper_18",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3249192281880711,
+      "summary": "Audio segment at 18.00s (-41 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 18.0,
+        "rms": 0.009435,
+        "dbfs": -40.5
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 18000,
+      "gapper_id": "motion_450",
+      "start_frame": 450,
+      "end_frame": 450,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 19000,
+      "gapper_id": "frame_gapper_475",
+      "start_frame": 475,
+      "end_frame": 475,
+      "importance": 1.0,
+      "summary": "Frame at 19.00s",
+      "features": {
+        "blur_variance": 1736.3840801620483,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 19000,
+      "gapper_id": "motion_475",
+      "start_frame": 475,
+      "end_frame": 475,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 19000,
+      "gapper_id": "audio_gapper_19",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2331926479504767,
+      "summary": "Audio segment at 19.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 19.0,
+        "rms": 0.005007,
+        "dbfs": -46.01
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 20000,
+      "gapper_id": "frame_gapper_500",
+      "start_frame": 500,
+      "end_frame": 500,
+      "importance": 1.0,
+      "summary": "Frame at 20.00s",
+      "features": {
+        "blur_variance": 1435.0049306006915,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 20000,
+      "gapper_id": "motion_500",
+      "start_frame": 500,
+      "end_frame": 500,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 20000,
+      "gapper_id": "audio_gapper_20",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.29193966222057915,
+      "summary": "Audio segment at 20.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 20.0,
+        "rms": 0.007513,
+        "dbfs": -42.48
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 21000,
+      "gapper_id": "frame_gapper_525",
+      "start_frame": 525,
+      "end_frame": 525,
+      "importance": 1.0,
+      "summary": "Frame at 21.00s",
+      "features": {
+        "blur_variance": 1418.2995682398475,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 21000,
+      "gapper_id": "motion_525",
+      "start_frame": 525,
+      "end_frame": 525,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 21000,
+      "gapper_id": "audio_gapper_21",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2991383188864065,
+      "summary": "Audio segment at 21.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 21.0,
+        "rms": 0.007896,
+        "dbfs": -42.05
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 22000,
+      "gapper_id": "frame_gapper_550",
+      "start_frame": 550,
+      "end_frame": 550,
+      "importance": 1.0,
+      "summary": "Frame at 22.00s",
+      "features": {
+        "blur_variance": 1342.758641877332,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 22000,
+      "gapper_id": "motion_550",
+      "start_frame": 550,
+      "end_frame": 550,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 22000,
+      "gapper_id": "audio_gapper_22",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.1939551218062758,
+      "summary": "Audio segment at 22.00s (-48 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 22.0,
+        "rms": 0.003818,
+        "dbfs": -48.36
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 23000,
+      "gapper_id": "frame_gapper_575",
+      "start_frame": 575,
+      "end_frame": 575,
+      "importance": 1.0,
+      "summary": "Frame at 23.00s",
+      "features": {
+        "blur_variance": 1588.4023230952323,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 23000,
+      "gapper_id": "motion_575",
+      "start_frame": 575,
+      "end_frame": 575,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 23000,
+      "gapper_id": "audio_gapper_23",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.22872714935789631,
+      "summary": "Audio segment at 23.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 23.0,
+        "rms": 0.004855,
+        "dbfs": -46.28
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 24000,
+      "gapper_id": "frame_gapper_600",
+      "start_frame": 600,
+      "end_frame": 600,
+      "importance": 1.0,
+      "summary": "Frame at 24.00s",
+      "features": {
+        "blur_variance": 1635.7787480829681,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 24000,
+      "gapper_id": "audio_gapper_24",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.32398214118493246,
+      "summary": "Audio segment at 24.00s (-41 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 24.0,
+        "rms": 0.009374,
+        "dbfs": -40.56
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 24000,
+      "gapper_id": "motion_600",
+      "start_frame": 600,
+      "end_frame": 600,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 25000,
+      "gapper_id": "frame_gapper_625",
+      "start_frame": 625,
+      "end_frame": 625,
+      "importance": 1.0,
+      "summary": "Frame at 25.00s",
+      "features": {
+        "blur_variance": 1628.9275210496687,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 25000,
+      "gapper_id": "motion_625",
+      "start_frame": 625,
+      "end_frame": 625,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 25000,
+      "gapper_id": "audio_gapper_25",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.23170476791274683,
+      "summary": "Audio segment at 25.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 25.0,
+        "rms": 0.004956,
+        "dbfs": -46.1
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 26000,
+      "gapper_id": "frame_gapper_650",
+      "start_frame": 650,
+      "end_frame": 650,
+      "importance": 1.0,
+      "summary": "Frame at 26.00s",
+      "features": {
+        "blur_variance": 1618.0932555058043,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 26000,
+      "gapper_id": "motion_650",
+      "start_frame": 650,
+      "end_frame": 650,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 26000,
+      "gapper_id": "audio_gapper_26",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2901877863718731,
+      "summary": "Audio segment at 26.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 26.0,
+        "rms": 0.007423,
+        "dbfs": -42.59
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 27000,
+      "gapper_id": "frame_gapper_675",
+      "start_frame": 675,
+      "end_frame": 675,
+      "importance": 1.0,
+      "summary": "Frame at 27.00s",
+      "features": {
+        "blur_variance": 1602.2909296422135,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 27000,
+      "gapper_id": "motion_675",
+      "start_frame": 675,
+      "end_frame": 675,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 27000,
+      "gapper_id": "audio_gapper_27",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.25740853708738715,
+      "summary": "Audio segment at 27.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 27.0,
+        "rms": 0.005919,
+        "dbfs": -44.56
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 28000,
+      "gapper_id": "frame_gapper_700",
+      "start_frame": 700,
+      "end_frame": 700,
+      "importance": 1.0,
+      "summary": "Frame at 28.00s",
+      "features": {
+        "blur_variance": 1615.397788877869,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 28000,
+      "gapper_id": "motion_700",
+      "start_frame": 700,
+      "end_frame": 700,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 28000,
+      "gapper_id": "audio_gapper_28",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2006167762975341,
+      "summary": "Audio segment at 28.00s (-48 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 28.0,
+        "rms": 0.003998,
+        "dbfs": -47.96
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 29000,
+      "gapper_id": "frame_gapper_725",
+      "start_frame": 725,
+      "end_frame": 725,
+      "importance": 1.0,
+      "summary": "Frame at 29.00s",
+      "features": {
+        "blur_variance": 1799.9855557886765,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 29000,
+      "gapper_id": "motion_725",
+      "start_frame": 725,
+      "end_frame": 725,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 29000,
+      "gapper_id": "audio_gapper_29",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.22693546008658577,
+      "summary": "Audio segment at 29.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 29.0,
+        "rms": 0.004795,
+        "dbfs": -46.38
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 30000,
+      "gapper_id": "frame_gapper_750",
+      "start_frame": 750,
+      "end_frame": 750,
+      "importance": 1.0,
+      "summary": "Frame at 30.00s",
+      "features": {
+        "blur_variance": 1785.2798636519065,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 30000,
+      "gapper_id": "audio_gapper_30",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.34446443179827696,
+      "summary": "Audio segment at 30.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 30.0,
+        "rms": 0.010799,
+        "dbfs": -39.33
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 30000,
+      "gapper_id": "motion_750",
+      "start_frame": 750,
+      "end_frame": 750,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 31000,
+      "gapper_id": "frame_gapper_775",
+      "start_frame": 775,
+      "end_frame": 775,
+      "importance": 1.0,
+      "summary": "Frame at 31.00s",
+      "features": {
+        "blur_variance": 1800.0615408527897,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 31000,
+      "gapper_id": "audio_gapper_31",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3028313148071445,
+      "summary": "Audio segment at 31.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 31.0,
+        "rms": 0.0081,
+        "dbfs": -41.83
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 31000,
+      "gapper_id": "motion_775",
+      "start_frame": 775,
+      "end_frame": 775,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 32000,
+      "gapper_id": "frame_gapper_800",
+      "start_frame": 800,
+      "end_frame": 800,
+      "importance": 1.0,
+      "summary": "Frame at 32.00s",
+      "features": {
+        "blur_variance": 1786.9364744194124,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 32000,
+      "gapper_id": "motion_800",
+      "start_frame": 800,
+      "end_frame": 800,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 32000,
+      "gapper_id": "audio_gapper_32",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.1531840000544527,
+      "summary": "Audio segment at 32.00s (-51 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 32.0,
+        "rms": 0.002881,
+        "dbfs": -50.81
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 33000,
+      "gapper_id": "frame_gapper_825",
+      "start_frame": 825,
+      "end_frame": 825,
+      "importance": 1.0,
+      "summary": "Frame at 33.00s",
+      "features": {
+        "blur_variance": 1822.2680465892458,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 33000,
+      "gapper_id": "audio_gapper_33",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.33329552163943105,
+      "summary": "Audio segment at 33.00s (-40 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 33.0,
+        "rms": 0.009997,
+        "dbfs": -40.0
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 33000,
+      "gapper_id": "motion_825",
+      "start_frame": 825,
+      "end_frame": 825,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 34000,
+      "gapper_id": "frame_gapper_850",
+      "start_frame": 850,
+      "end_frame": 850,
+      "importance": 1.0,
+      "summary": "Frame at 34.00s",
+      "features": {
+        "blur_variance": 1829.370563642639,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 34000,
+      "gapper_id": "motion_850",
+      "start_frame": 850,
+      "end_frame": 850,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 34000,
+      "gapper_id": "audio_gapper_34",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.28281125837613813,
+      "summary": "Audio segment at 34.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 34.0,
+        "rms": 0.007054,
+        "dbfs": -43.03
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 35000,
+      "gapper_id": "frame_gapper_875",
+      "start_frame": 875,
+      "end_frame": 875,
+      "importance": 1.0,
+      "summary": "Frame at 35.00s",
+      "features": {
+        "blur_variance": 1822.4904278338208,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 35000,
+      "gapper_id": "motion_875",
+      "start_frame": 875,
+      "end_frame": 875,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 35000,
+      "gapper_id": "audio_gapper_35",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2887337084066201,
+      "summary": "Audio segment at 35.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 35.0,
+        "rms": 0.007349,
+        "dbfs": -42.68
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 36000,
+      "gapper_id": "frame_gapper_900",
+      "start_frame": 900,
+      "end_frame": 900,
+      "importance": 1.0,
+      "summary": "Frame at 36.00s",
+      "features": {
+        "blur_variance": 1813.1321075122792,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 36000,
+      "gapper_id": "audio_gapper_36",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.38289528200616957,
+      "summary": "Audio segment at 36.00s (-37 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 36.0,
+        "rms": 0.014083,
+        "dbfs": -37.03
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 36000,
+      "gapper_id": "motion_900",
+      "start_frame": 900,
+      "end_frame": 900,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 37000,
+      "gapper_id": "frame_gapper_925",
+      "start_frame": 925,
+      "end_frame": 925,
+      "importance": 1.0,
+      "summary": "Frame at 37.00s",
+      "features": {
+        "blur_variance": 1447.3462207121486,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 37000,
+      "gapper_id": "motion_925",
+      "start_frame": 925,
+      "end_frame": 925,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 37000,
+      "gapper_id": "audio_gapper_37",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2842316659666823,
+      "summary": "Audio segment at 37.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 37.0,
+        "rms": 0.007124,
+        "dbfs": -42.95
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 38000,
+      "gapper_id": "frame_gapper_950",
+      "start_frame": 950,
+      "end_frame": 950,
+      "importance": 1.0,
+      "summary": "Frame at 38.00s",
+      "features": {
+        "blur_variance": 1361.2549169557171,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 38000,
+      "gapper_id": "audio_gapper_38",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.34701845408611737,
+      "summary": "Audio segment at 38.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 38.0,
+        "rms": 0.010991,
+        "dbfs": -39.18
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 38000,
+      "gapper_id": "motion_950",
+      "start_frame": 950,
+      "end_frame": 950,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 39000,
+      "gapper_id": "frame_gapper_975",
+      "start_frame": 975,
+      "end_frame": 975,
+      "importance": 1.0,
+      "summary": "Frame at 39.00s",
+      "features": {
+        "blur_variance": 1216.2558266095007,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 39000,
+      "gapper_id": "audio_gapper_39",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3173248880544026,
+      "summary": "Audio segment at 39.00s (-41 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 39.0,
+        "rms": 0.008953,
+        "dbfs": -40.96
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 39000,
+      "gapper_id": "motion_975",
+      "start_frame": 975,
+      "end_frame": 975,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 40000,
+      "gapper_id": "frame_gapper_1000",
+      "start_frame": 1000,
+      "end_frame": 1000,
+      "importance": 1.0,
+      "summary": "Frame at 40.00s",
+      "features": {
+        "blur_variance": 1555.6454121061913,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 40000,
+      "gapper_id": "motion_1000",
+      "start_frame": 1000,
+      "end_frame": 1000,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 40000,
+      "gapper_id": "audio_gapper_40",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.16989217200206616,
+      "summary": "Audio segment at 40.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 40.0,
+        "rms": 0.003234,
+        "dbfs": -49.81
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 41000,
+      "gapper_id": "frame_gapper_1025",
+      "start_frame": 1025,
+      "end_frame": 1025,
+      "importance": 1.0,
+      "summary": "Frame at 41.00s",
+      "features": {
+        "blur_variance": 1503.9509219721851,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 41000,
+      "gapper_id": "audio_gapper_41",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.37662957966341787,
+      "summary": "Audio segment at 41.00s (-37 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 41.0,
+        "rms": 0.013486,
+        "dbfs": -37.4
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 41000,
+      "gapper_id": "motion_1025",
+      "start_frame": 1025,
+      "end_frame": 1025,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 42000,
+      "gapper_id": "frame_gapper_1050",
+      "start_frame": 1050,
+      "end_frame": 1050,
+      "importance": 1.0,
+      "summary": "Frame at 42.00s",
+      "features": {
+        "blur_variance": 1395.066808281623,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 42000,
+      "gapper_id": "motion_1050",
+      "start_frame": 1050,
+      "end_frame": 1050,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 42000,
+      "gapper_id": "audio_gapper_42",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2930331709428998,
+      "summary": "Audio segment at 42.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 42.0,
+        "rms": 0.00757,
+        "dbfs": -42.42
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 43000,
+      "gapper_id": "frame_gapper_1075",
+      "start_frame": 1075,
+      "end_frame": 1075,
+      "importance": 1.0,
+      "summary": "Frame at 43.00s",
+      "features": {
+        "blur_variance": 1539.6168233708702,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 43000,
+      "gapper_id": "audio_gapper_43",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3704886753151648,
+      "summary": "Audio segment at 43.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 43.0,
+        "rms": 0.012926,
+        "dbfs": -37.77
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 43000,
+      "gapper_id": "motion_1075",
+      "start_frame": 1075,
+      "end_frame": 1075,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 44000,
+      "gapper_id": "frame_gapper_1100",
+      "start_frame": 1100,
+      "end_frame": 1100,
+      "importance": 1.0,
+      "summary": "Frame at 44.00s",
+      "features": {
+        "blur_variance": 1361.8919616581477,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 44000,
+      "gapper_id": "motion_1100",
+      "start_frame": 1100,
+      "end_frame": 1100,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 44000,
+      "gapper_id": "audio_gapper_44",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.27482972002856343,
+      "summary": "Audio segment at 44.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 44.0,
+        "rms": 0.006676,
+        "dbfs": -43.51
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 45000,
+      "gapper_id": "frame_gapper_1125",
+      "start_frame": 1125,
+      "end_frame": 1125,
+      "importance": 1.0,
+      "summary": "Frame at 45.00s",
+      "features": {
+        "blur_variance": 1431.6554297849864,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 45000,
+      "gapper_id": "motion_1125",
+      "start_frame": 1125,
+      "end_frame": 1125,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 45000,
+      "gapper_id": "audio_gapper_45",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2851232085617735,
+      "summary": "Audio segment at 45.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 45.0,
+        "rms": 0.007168,
+        "dbfs": -42.89
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 46000,
+      "gapper_id": "frame_gapper_1150",
+      "start_frame": 1150,
+      "end_frame": 1150,
+      "importance": 1.0,
+      "summary": "Frame at 46.00s",
+      "features": {
+        "blur_variance": 1714.3105283610023,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 46000,
+      "gapper_id": "audio_gapper_46",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3035712858986676,
+      "summary": "Audio segment at 46.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 46.0,
+        "rms": 0.008142,
+        "dbfs": -41.79
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 46000,
+      "gapper_id": "motion_1150",
+      "start_frame": 1150,
+      "end_frame": 1150,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 47000,
+      "gapper_id": "frame_gapper_1175",
+      "start_frame": 1175,
+      "end_frame": 1175,
+      "importance": 1.0,
+      "summary": "Frame at 47.00s",
+      "features": {
+        "blur_variance": 1373.36799893294,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 47000,
+      "gapper_id": "motion_1175",
+      "start_frame": 1175,
+      "end_frame": 1175,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 47000,
+      "gapper_id": "audio_gapper_47",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.1778288503591727,
+      "summary": "Audio segment at 47.00s (-49 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 47.0,
+        "rms": 0.003416,
+        "dbfs": -49.33
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 48000,
+      "gapper_id": "frame_gapper_1200",
+      "start_frame": 1200,
+      "end_frame": 1200,
+      "importance": 1.0,
+      "summary": "Frame at 48.00s",
+      "features": {
+        "blur_variance": 1400.0727570755382,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 48000,
+      "gapper_id": "motion_1200",
+      "start_frame": 1200,
+      "end_frame": 1200,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 48000,
+      "gapper_id": "audio_gapper_48",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.1613969697700052,
+      "summary": "Audio segment at 48.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 48.0,
+        "rms": 0.003049,
+        "dbfs": -50.32
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 49000,
+      "gapper_id": "frame_gapper_1225",
+      "start_frame": 1225,
+      "end_frame": 1225,
+      "importance": 1.0,
+      "summary": "Frame at 49.00s",
+      "features": {
+        "blur_variance": 1392.4371682433332,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 49000,
+      "gapper_id": "motion_1225",
+      "start_frame": 1225,
+      "end_frame": 1225,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 49000,
+      "gapper_id": "audio_gapper_49",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.23706974673241454,
+      "summary": "Audio segment at 49.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 49.0,
+        "rms": 0.005143,
+        "dbfs": -45.78
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 50000,
+      "gapper_id": "frame_gapper_1250",
+      "start_frame": 1250,
+      "end_frame": 1250,
+      "importance": 1.0,
+      "summary": "Frame at 50.00s",
+      "features": {
+        "blur_variance": 1486.4407527967662,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 50000,
+      "gapper_id": "audio_gapper_50",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3594674050266891,
+      "summary": "Audio segment at 50.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 50.0,
+        "rms": 0.011978,
+        "dbfs": -38.43
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 50000,
+      "gapper_id": "motion_1250",
+      "start_frame": 1250,
+      "end_frame": 1250,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 51000,
+      "gapper_id": "frame_gapper_1275",
+      "start_frame": 1275,
+      "end_frame": 1275,
+      "importance": 1.0,
+      "summary": "Frame at 51.00s",
+      "features": {
+        "blur_variance": 1452.7799428228684,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 51000,
+      "gapper_id": "motion_1275",
+      "start_frame": 1275,
+      "end_frame": 1275,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 51000,
+      "gapper_id": "audio_gapper_51",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.29306155843873705,
+      "summary": "Audio segment at 51.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 51.0,
+        "rms": 0.007572,
+        "dbfs": -42.42
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 52000,
+      "gapper_id": "frame_gapper_1300",
+      "start_frame": 1300,
+      "end_frame": 1300,
+      "importance": 1.0,
+      "summary": "Frame at 52.00s",
+      "features": {
+        "blur_variance": 1291.6691282994968,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 52000,
+      "gapper_id": "motion_1300",
+      "start_frame": 1300,
+      "end_frame": 1300,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 52000,
+      "gapper_id": "audio_gapper_52",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.20229315009221954,
+      "summary": "Audio segment at 52.00s (-48 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 52.0,
+        "rms": 0.004045,
+        "dbfs": -47.86
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 53000,
+      "gapper_id": "frame_gapper_1325",
+      "start_frame": 1325,
+      "end_frame": 1325,
+      "importance": 1.0,
+      "summary": "Frame at 53.00s",
+      "features": {
+        "blur_variance": 1548.162944737394,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 53000,
+      "gapper_id": "audio_gapper_53",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3512435029587716,
+      "summary": "Audio segment at 53.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 53.0,
+        "rms": 0.011317,
+        "dbfs": -38.93
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 53000,
+      "gapper_id": "motion_1325",
+      "start_frame": 1325,
+      "end_frame": 1325,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 54000,
+      "gapper_id": "frame_gapper_1350",
+      "start_frame": 1350,
+      "end_frame": 1350,
+      "importance": 1.0,
+      "summary": "Frame at 54.00s",
+      "features": {
+        "blur_variance": 1562.6684278693303,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 54000,
+      "gapper_id": "motion_1350",
+      "start_frame": 1350,
+      "end_frame": 1350,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 54000,
+      "gapper_id": "audio_gapper_54",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2870523650736715,
+      "summary": "Audio segment at 54.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 54.0,
+        "rms": 0.007264,
+        "dbfs": -42.78
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 55000,
+      "gapper_id": "frame_gapper_1375",
+      "start_frame": 1375,
+      "end_frame": 1375,
+      "importance": 1.0,
+      "summary": "Frame at 55.00s",
+      "features": {
+        "blur_variance": 1560.7229718243445,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 55000,
+      "gapper_id": "motion_1375",
+      "start_frame": 1375,
+      "end_frame": 1375,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 55000,
+      "gapper_id": "audio_gapper_55",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.12141358869266246,
+      "summary": "Audio segment at 55.00s (-53 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 55.0,
+        "rms": 0.002313,
+        "dbfs": -52.72
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 56000,
+      "gapper_id": "frame_gapper_1400",
+      "start_frame": 1400,
+      "end_frame": 1400,
+      "importance": 1.0,
+      "summary": "Frame at 56.00s",
+      "features": {
+        "blur_variance": 1550.8897876690712,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 56000,
+      "gapper_id": "audio_gapper_56",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.35410965847569337,
+      "summary": "Audio segment at 56.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 56.0,
+        "rms": 0.011543,
+        "dbfs": -38.75
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 56000,
+      "gapper_id": "motion_1400",
+      "start_frame": 1400,
+      "end_frame": 1400,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 57000,
+      "gapper_id": "frame_gapper_1425",
+      "start_frame": 1425,
+      "end_frame": 1425,
+      "importance": 1.0,
+      "summary": "Frame at 57.00s",
+      "features": {
+        "blur_variance": 1510.455229359266,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 57000,
+      "gapper_id": "motion_1425",
+      "start_frame": 1425,
+      "end_frame": 1425,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 57000,
+      "gapper_id": "audio_gapper_57",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.26720441700682707,
+      "summary": "Audio segment at 57.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 57.0,
+        "rms": 0.006333,
+        "dbfs": -43.97
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 58000,
+      "gapper_id": "frame_gapper_1450",
+      "start_frame": 1450,
+      "end_frame": 1450,
+      "importance": 1.0,
+      "summary": "Frame at 58.00s",
+      "features": {
+        "blur_variance": 1327.0901356304967,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 58000,
+      "gapper_id": "motion_1450",
+      "start_frame": 1450,
+      "end_frame": 1450,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 58000,
+      "gapper_id": "audio_gapper_58",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.1605239585956043,
+      "summary": "Audio segment at 58.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 58.0,
+        "rms": 0.003031,
+        "dbfs": -50.37
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 59000,
+      "gapper_id": "frame_gapper_1475",
+      "start_frame": 1475,
+      "end_frame": 1475,
+      "importance": 1.0,
+      "summary": "Frame at 59.00s",
+      "features": {
+        "blur_variance": 1307.9994099880453,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 59000,
+      "gapper_id": "audio_gapper_59",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3919722102694109,
+      "summary": "Audio segment at 59.00s (-36 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 59.0,
+        "rms": 0.014994,
+        "dbfs": -36.48
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 59000,
+      "gapper_id": "motion_1475",
+      "start_frame": 1475,
+      "end_frame": 1475,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 60000,
+      "gapper_id": "frame_gapper_1500",
+      "start_frame": 1500,
+      "end_frame": 1500,
+      "importance": 1.0,
+      "summary": "Frame at 60.00s",
+      "features": {
+        "blur_variance": 1570.696238538954,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 60000,
+      "gapper_id": "motion_1500",
+      "start_frame": 1500,
+      "end_frame": 1500,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 60000,
+      "gapper_id": "audio_gapper_60",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.25496138599302637,
+      "summary": "Audio segment at 60.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 60.0,
+        "rms": 0.005819,
+        "dbfs": -44.7
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 61000,
+      "gapper_id": "frame_gapper_1525",
+      "start_frame": 1525,
+      "end_frame": 1525,
+      "importance": 1.0,
+      "summary": "Frame at 61.00s",
+      "features": {
+        "blur_variance": 1601.6616595660746,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 61000,
+      "gapper_id": "audio_gapper_61",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3382378361931719,
+      "summary": "Audio segment at 61.00s (-40 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 61.0,
+        "rms": 0.010345,
+        "dbfs": -39.71
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 61000,
+      "gapper_id": "motion_1525",
+      "start_frame": 1525,
+      "end_frame": 1525,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 62000,
+      "gapper_id": "frame_gapper_1550",
+      "start_frame": 1550,
+      "end_frame": 1550,
+      "importance": 1.0,
+      "summary": "Frame at 62.00s",
+      "features": {
+        "blur_variance": 1569.7779809113495,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 62000,
+      "gapper_id": "motion_1550",
+      "start_frame": 1550,
+      "end_frame": 1550,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 62000,
+      "gapper_id": "audio_gapper_62",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.09758599308860856,
+      "summary": "Audio segment at 62.00s (-54 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 62.0,
+        "rms": 0.001962,
+        "dbfs": -54.14
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 63000,
+      "gapper_id": "frame_gapper_1575",
+      "start_frame": 1575,
+      "end_frame": 1575,
+      "importance": 1.0,
+      "summary": "Frame at 63.00s",
+      "features": {
+        "blur_variance": 1497.3315161165972,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 63000,
+      "gapper_id": "motion_1575",
+      "start_frame": 1575,
+      "end_frame": 1575,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 63000,
+      "gapper_id": "audio_gapper_63",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2591100243989726,
+      "summary": "Audio segment at 63.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 63.0,
+        "rms": 0.005989,
+        "dbfs": -44.45
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 64000,
+      "gapper_id": "frame_gapper_1600",
+      "start_frame": 1600,
+      "end_frame": 1600,
+      "importance": 1.0,
+      "summary": "Frame at 64.00s",
+      "features": {
+        "blur_variance": 1424.9556273145133,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 64000,
+      "gapper_id": "motion_1600",
+      "start_frame": 1600,
+      "end_frame": 1600,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 64000,
+      "gapper_id": "audio_gapper_64",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.10865229232951397,
+      "summary": "Audio segment at 64.00s (-53 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 64.0,
+        "rms": 0.002118,
+        "dbfs": -53.48
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 65000,
+      "gapper_id": "frame_gapper_1625",
+      "start_frame": 1625,
+      "end_frame": 1625,
+      "importance": 1.0,
+      "summary": "Frame at 65.00s",
+      "features": {
+        "blur_variance": 1349.865429940381,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 65000,
+      "gapper_id": "audio_gapper_65",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3625620688222677,
+      "summary": "Audio segment at 65.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 65.0,
+        "rms": 0.012237,
+        "dbfs": -38.25
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 65000,
+      "gapper_id": "motion_1625",
+      "start_frame": 1625,
+      "end_frame": 1625,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 66000,
+      "gapper_id": "frame_gapper_1650",
+      "start_frame": 1650,
+      "end_frame": 1650,
+      "importance": 1.0,
+      "summary": "Frame at 66.00s",
+      "features": {
+        "blur_variance": 1484.8944332500691,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 66000,
+      "gapper_id": "motion_1650",
+      "start_frame": 1650,
+      "end_frame": 1650,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 66000,
+      "gapper_id": "audio_gapper_66",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2707636857833702,
+      "summary": "Audio segment at 66.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 66.0,
+        "rms": 0.006491,
+        "dbfs": -43.75
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 67000,
+      "gapper_id": "frame_gapper_1675",
+      "start_frame": 1675,
+      "end_frame": 1675,
+      "importance": 1.0,
+      "summary": "Frame at 67.00s",
+      "features": {
+        "blur_variance": 1587.1839315470193,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 67000,
+      "gapper_id": "audio_gapper_67",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.35331366757674776,
+      "summary": "Audio segment at 67.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 67.0,
+        "rms": 0.01148,
+        "dbfs": -38.8
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 67000,
+      "gapper_id": "motion_1675",
+      "start_frame": 1675,
+      "end_frame": 1675,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 68000,
+      "gapper_id": "frame_gapper_1700",
+      "start_frame": 1700,
+      "end_frame": 1700,
+      "importance": 1.0,
+      "summary": "Frame at 68.00s",
+      "features": {
+        "blur_variance": 1532.9806341010012,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 68000,
+      "gapper_id": "motion_1700",
+      "start_frame": 1700,
+      "end_frame": 1700,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 68000,
+      "gapper_id": "audio_gapper_68",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.24407194655096756,
+      "summary": "Audio segment at 68.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 68.0,
+        "rms": 0.005398,
+        "dbfs": -45.36
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 69000,
+      "gapper_id": "frame_gapper_1725",
+      "start_frame": 1725,
+      "end_frame": 1725,
+      "importance": 1.0,
+      "summary": "Frame at 69.00s",
+      "features": {
+        "blur_variance": 1435.1377137541408,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 69000,
+      "gapper_id": "audio_gapper_69",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3477079621864686,
+      "summary": "Audio segment at 69.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 69.0,
+        "rms": 0.011044,
+        "dbfs": -39.14
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 69000,
+      "gapper_id": "motion_1725",
+      "start_frame": 1725,
+      "end_frame": 1725,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 70000,
+      "gapper_id": "frame_gapper_1750",
+      "start_frame": 1750,
+      "end_frame": 1750,
+      "importance": 1.0,
+      "summary": "Frame at 70.00s",
+      "features": {
+        "blur_variance": 1394.3521043395997,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 70000,
+      "gapper_id": "audio_gapper_70",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.31541010629113825,
+      "summary": "Audio segment at 70.00s (-41 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 70.0,
+        "rms": 0.008835,
+        "dbfs": -41.08
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 70000,
+      "gapper_id": "motion_1750",
+      "start_frame": 1750,
+      "end_frame": 1750,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 71000,
+      "gapper_id": "frame_gapper_1775",
+      "start_frame": 1775,
+      "end_frame": 1775,
+      "importance": 1.0,
+      "summary": "Frame at 71.00s",
+      "features": {
+        "blur_variance": 1510.0383504148695,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 71000,
+      "gapper_id": "audio_gapper_71",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3125412230283586,
+      "summary": "Audio segment at 71.00s (-41 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 71.0,
+        "rms": 0.008662,
+        "dbfs": -41.25
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 71000,
+      "gapper_id": "motion_1775",
+      "start_frame": 1775,
+      "end_frame": 1775,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 72000,
+      "gapper_id": "frame_gapper_1800",
+      "start_frame": 1800,
+      "end_frame": 1800,
+      "importance": 1.0,
+      "summary": "Frame at 72.00s",
+      "features": {
+        "blur_variance": 1521.7658216958885,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 72000,
+      "gapper_id": "motion_1800",
+      "start_frame": 1800,
+      "end_frame": 1800,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 72000,
+      "gapper_id": "audio_gapper_72",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.16066684765561956,
+      "summary": "Audio segment at 72.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 72.0,
+        "rms": 0.003034,
+        "dbfs": -50.36
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 73000,
+      "gapper_id": "frame_gapper_1825",
+      "start_frame": 1825,
+      "end_frame": 1825,
+      "importance": 1.0,
+      "summary": "Frame at 73.00s",
+      "features": {
+        "blur_variance": 1667.3048377271866,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 73000,
+      "gapper_id": "audio_gapper_73",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3374984088100169,
+      "summary": "Audio segment at 73.00s (-40 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 73.0,
+        "rms": 0.010292,
+        "dbfs": -39.75
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 73000,
+      "gapper_id": "motion_1825",
+      "start_frame": 1825,
+      "end_frame": 1825,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 74000,
+      "gapper_id": "frame_gapper_1850",
+      "start_frame": 1850,
+      "end_frame": 1850,
+      "importance": 1.0,
+      "summary": "Frame at 74.00s",
+      "features": {
+        "blur_variance": 1530.5019371466742,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 74000,
+      "gapper_id": "motion_1850",
+      "start_frame": 1850,
+      "end_frame": 1850,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 74000,
+      "gapper_id": "audio_gapper_74",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.24417931006027266,
+      "summary": "Audio segment at 74.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 74.0,
+        "rms": 0.005402,
+        "dbfs": -45.35
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 75000,
+      "gapper_id": "frame_gapper_1875",
+      "start_frame": 1875,
+      "end_frame": 1875,
+      "importance": 1.0,
+      "summary": "Frame at 75.00s",
+      "features": {
+        "blur_variance": 1357.7679644729428,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 75000,
+      "gapper_id": "motion_1875",
+      "start_frame": 1875,
+      "end_frame": 1875,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 75000,
+      "gapper_id": "audio_gapper_75",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.07810989113590808,
+      "summary": "Audio segment at 75.00s (-55 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 75.0,
+        "rms": 0.001715,
+        "dbfs": -55.31
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 76000,
+      "gapper_id": "frame_gapper_1900",
+      "start_frame": 1900,
+      "end_frame": 1900,
+      "importance": 1.0,
+      "summary": "Frame at 76.00s",
+      "features": {
+        "blur_variance": 1358.428669849236,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 76000,
+      "gapper_id": "audio_gapper_76",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.34274652503938796,
+      "summary": "Audio segment at 76.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 76.0,
+        "rms": 0.010672,
+        "dbfs": -39.44
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 76000,
+      "gapper_id": "motion_1900",
+      "start_frame": 1900,
+      "end_frame": 1900,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 77000,
+      "gapper_id": "frame_gapper_1925",
+      "start_frame": 1925,
+      "end_frame": 1925,
+      "importance": 1.0,
+      "summary": "Frame at 77.00s",
+      "features": {
+        "blur_variance": 1629.849809832462,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 77000,
+      "gapper_id": "motion_1925",
+      "start_frame": 1925,
+      "end_frame": 1925,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 77000,
+      "gapper_id": "audio_gapper_77",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.25167658026629525,
+      "summary": "Audio segment at 77.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 77.0,
+        "rms": 0.005689,
+        "dbfs": -44.9
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 78000,
+      "gapper_id": "frame_gapper_1950",
+      "start_frame": 1950,
+      "end_frame": 1950,
+      "importance": 1.0,
+      "summary": "Frame at 78.00s",
+      "features": {
+        "blur_variance": 1664.8942967755168,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 78000,
+      "gapper_id": "motion_1950",
+      "start_frame": 1950,
+      "end_frame": 1950,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 78000,
+      "gapper_id": "audio_gapper_78",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.08742638931073188,
+      "summary": "Audio segment at 78.00s (-55 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 78.0,
+        "rms": 0.001829,
+        "dbfs": -54.75
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 79000,
+      "gapper_id": "frame_gapper_1975",
+      "start_frame": 1975,
+      "end_frame": 1975,
+      "importance": 1.0,
+      "summary": "Frame at 79.00s",
+      "features": {
+        "blur_variance": 1652.135579700593,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 79000,
+      "gapper_id": "audio_gapper_79",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3407445035710282,
+      "summary": "Audio segment at 79.00s (-40 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 79.0,
+        "rms": 0.010525,
+        "dbfs": -39.56
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 79000,
+      "gapper_id": "motion_1975",
+      "start_frame": 1975,
+      "end_frame": 1975,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 80000,
+      "gapper_id": "frame_gapper_2000",
+      "start_frame": 2000,
+      "end_frame": 2000,
+      "importance": 1.0,
+      "summary": "Frame at 80.00s",
+      "features": {
+        "blur_variance": 1462.251869057719,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 80000,
+      "gapper_id": "motion_2000",
+      "start_frame": 2000,
+      "end_frame": 2000,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 80000,
+      "gapper_id": "audio_gapper_80",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.27122404870337863,
+      "summary": "Audio segment at 80.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 80.0,
+        "rms": 0.006511,
+        "dbfs": -43.73
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 81000,
+      "gapper_id": "frame_gapper_2025",
+      "start_frame": 2025,
+      "end_frame": 2025,
+      "importance": 1.0,
+      "summary": "Frame at 81.00s",
+      "features": {
+        "blur_variance": 1334.3106291788547,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 81000,
+      "gapper_id": "motion_2025",
+      "start_frame": 2025,
+      "end_frame": 2025,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 81000,
+      "gapper_id": "audio_gapper_81",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.24084525736698245,
+      "summary": "Audio segment at 81.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 81.0,
+        "rms": 0.005279,
+        "dbfs": -45.55
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 82000,
+      "gapper_id": "frame_gapper_2050",
+      "start_frame": 2050,
+      "end_frame": 2050,
+      "importance": 1.0,
+      "summary": "Frame at 82.00s",
+      "features": {
+        "blur_variance": 1476.0765612001583,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 82000,
+      "gapper_id": "motion_2050",
+      "start_frame": 2050,
+      "end_frame": 2050,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 82000,
+      "gapper_id": "audio_gapper_82",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.12718498627112187,
+      "summary": "Audio segment at 82.00s (-52 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 82.0,
+        "rms": 0.002407,
+        "dbfs": -52.37
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 83000,
+      "gapper_id": "frame_gapper_2075",
+      "start_frame": 2075,
+      "end_frame": 2075,
+      "importance": 1.0,
+      "summary": "Frame at 83.00s",
+      "features": {
+        "blur_variance": 1808.829872721053,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 83000,
+      "gapper_id": "motion_2075",
+      "start_frame": 2075,
+      "end_frame": 2075,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 83000,
+      "gapper_id": "audio_gapper_83",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.27497281378624006,
+      "summary": "Audio segment at 83.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 83.0,
+        "rms": 0.006682,
+        "dbfs": -43.5
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 84000,
+      "gapper_id": "frame_gapper_2100",
+      "start_frame": 2100,
+      "end_frame": 2100,
+      "importance": 1.0,
+      "summary": "Frame at 84.00s",
+      "features": {
+        "blur_variance": 1799.9320207843357,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 84000,
+      "gapper_id": "audio_gapper_84",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.36455787831900527,
+      "summary": "Audio segment at 84.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 84.0,
+        "rms": 0.012407,
+        "dbfs": -38.13
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 84000,
+      "gapper_id": "motion_2100",
+      "start_frame": 2100,
+      "end_frame": 2100,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 85000,
+      "gapper_id": "frame_gapper_2125",
+      "start_frame": 2125,
+      "end_frame": 2125,
+      "importance": 1.0,
+      "summary": "Frame at 85.00s",
+      "features": {
+        "blur_variance": 1648.5293938488428,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 85000,
+      "gapper_id": "motion_2125",
+      "start_frame": 2125,
+      "end_frame": 2125,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 85000,
+      "gapper_id": "audio_gapper_85",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2469600830814033,
+      "summary": "Audio segment at 85.00s (-45 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 85.0,
+        "rms": 0.005507,
+        "dbfs": -45.18
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 86000,
+      "gapper_id": "frame_gapper_2150",
+      "start_frame": 2150,
+      "end_frame": 2150,
+      "importance": 1.0,
+      "summary": "Frame at 86.00s",
+      "features": {
+        "blur_variance": 1510.8089481336049,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 86000,
+      "gapper_id": "audio_gapper_86",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3440347253266973,
+      "summary": "Audio segment at 86.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 86.0,
+        "rms": 0.010767,
+        "dbfs": -39.36
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 86000,
+      "gapper_id": "motion_2150",
+      "start_frame": 2150,
+      "end_frame": 2150,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 87000,
+      "gapper_id": "frame_gapper_2175",
+      "start_frame": 2175,
+      "end_frame": 2175,
+      "importance": 1.0,
+      "summary": "Frame at 87.00s",
+      "features": {
+        "blur_variance": 1763.896510635018,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 87000,
+      "gapper_id": "audio_gapper_87",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3505676658129328,
+      "summary": "Audio segment at 87.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 87.0,
+        "rms": 0.011264,
+        "dbfs": -38.97
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 87000,
+      "gapper_id": "motion_2175",
+      "start_frame": 2175,
+      "end_frame": 2175,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 88000,
+      "gapper_id": "frame_gapper_2200",
+      "start_frame": 2200,
+      "end_frame": 2200,
+      "importance": 1.0,
+      "summary": "Frame at 88.00s",
+      "features": {
+        "blur_variance": 1780.5322490097044,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 88000,
+      "gapper_id": "motion_2200",
+      "start_frame": 2200,
+      "end_frame": 2200,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 88000,
+      "gapper_id": "audio_gapper_88",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2777530696967692,
+      "summary": "Audio segment at 88.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 88.0,
+        "rms": 0.006812,
+        "dbfs": -43.33
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 89000,
+      "gapper_id": "frame_gapper_2225",
+      "start_frame": 2225,
+      "end_frame": 2225,
+      "importance": 1.0,
+      "summary": "Frame at 89.00s",
+      "features": {
+        "blur_variance": 1773.8261232963662,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 89000,
+      "gapper_id": "audio_gapper_89",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.34193137116367184,
+      "summary": "Audio segment at 89.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 89.0,
+        "rms": 0.010612,
+        "dbfs": -39.48
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 89000,
+      "gapper_id": "motion_2225",
+      "start_frame": 2225,
+      "end_frame": 2225,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 90000,
+      "gapper_id": "frame_gapper_2250",
+      "start_frame": 2250,
+      "end_frame": 2250,
+      "importance": 1.0,
+      "summary": "Frame at 90.00s",
+      "features": {
+        "blur_variance": 1759.1710654023912,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 90000,
+      "gapper_id": "motion_2250",
+      "start_frame": 2250,
+      "end_frame": 2250,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 90000,
+      "gapper_id": "audio_gapper_90",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.23327609683217182,
+      "summary": "Audio segment at 90.00s (-46 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 90.0,
+        "rms": 0.00501,
+        "dbfs": -46.0
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 91000,
+      "gapper_id": "frame_gapper_2275",
+      "start_frame": 2275,
+      "end_frame": 2275,
+      "importance": 1.0,
+      "summary": "Frame at 91.00s",
+      "features": {
+        "blur_variance": 1418.524827082128,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 91000,
+      "gapper_id": "audio_gapper_91",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3328457632996527,
+      "summary": "Audio segment at 91.00s (-40 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 91.0,
+        "rms": 0.009966,
+        "dbfs": -40.03
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 91000,
+      "gapper_id": "motion_2275",
+      "start_frame": 2275,
+      "end_frame": 2275,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 92000,
+      "gapper_id": "frame_gapper_2300",
+      "start_frame": 2300,
+      "end_frame": 2300,
+      "importance": 1.0,
+      "summary": "Frame at 92.00s",
+      "features": {
+        "blur_variance": 1403.5150472275725,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 92000,
+      "gapper_id": "audio_gapper_92",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3045083062514017,
+      "summary": "Audio segment at 92.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 92.0,
+        "rms": 0.008195,
+        "dbfs": -41.73
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 92000,
+      "gapper_id": "motion_2300",
+      "start_frame": 2300,
+      "end_frame": 2300,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 93000,
+      "gapper_id": "frame_gapper_2325",
+      "start_frame": 2325,
+      "end_frame": 2325,
+      "importance": 1.0,
+      "summary": "Frame at 93.00s",
+      "features": {
+        "blur_variance": 1562.452837212381,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 93000,
+      "gapper_id": "motion_2325",
+      "start_frame": 2325,
+      "end_frame": 2325,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 93000,
+      "gapper_id": "audio_gapper_93",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.266380826897876,
+      "summary": "Audio segment at 93.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 93.0,
+        "rms": 0.006297,
+        "dbfs": -44.02
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 94000,
+      "gapper_id": "frame_gapper_2350",
+      "start_frame": 2350,
+      "end_frame": 2350,
+      "importance": 1.0,
+      "summary": "Frame at 94.00s",
+      "features": {
+        "blur_variance": 1498.3467079427085,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 94000,
+      "gapper_id": "audio_gapper_94",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.38050359093444686,
+      "summary": "Audio segment at 94.00s (-37 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 94.0,
+        "rms": 0.013852,
+        "dbfs": -37.17
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 94000,
+      "gapper_id": "motion_2350",
+      "start_frame": 2350,
+      "end_frame": 2350,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 95000,
+      "gapper_id": "frame_gapper_2375",
+      "start_frame": 2375,
+      "end_frame": 2375,
+      "importance": 1.0,
+      "summary": "Frame at 95.00s",
+      "features": {
+        "blur_variance": 1432.8585889679898,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 95000,
+      "gapper_id": "motion_2375",
+      "start_frame": 2375,
+      "end_frame": 2375,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 95000,
+      "gapper_id": "audio_gapper_95",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.15789246158619222,
+      "summary": "Audio segment at 95.00s (-51 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 95.0,
+        "rms": 0.002976,
+        "dbfs": -50.53
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 96000,
+      "gapper_id": "frame_gapper_2400",
+      "start_frame": 2400,
+      "end_frame": 2400,
+      "importance": 1.0,
+      "summary": "Frame at 96.00s",
+      "features": {
+        "blur_variance": 1515.149025496419,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 96000,
+      "gapper_id": "audio_gapper_96",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.363265968326013,
+      "summary": "Audio segment at 96.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 96.0,
+        "rms": 0.012297,
+        "dbfs": -38.2
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 96000,
+      "gapper_id": "motion_2400",
+      "start_frame": 2400,
+      "end_frame": 2400,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 97000,
+      "gapper_id": "frame_gapper_2425",
+      "start_frame": 2425,
+      "end_frame": 2425,
+      "importance": 1.0,
+      "summary": "Frame at 97.00s",
+      "features": {
+        "blur_variance": 1493.142551387005,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 97000,
+      "gapper_id": "audio_gapper_97",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.38704649918444917,
+      "summary": "Audio segment at 97.00s (-37 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 97.0,
+        "rms": 0.014492,
+        "dbfs": -36.78
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 97000,
+      "gapper_id": "motion_2425",
+      "start_frame": 2425,
+      "end_frame": 2425,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 98000,
+      "gapper_id": "frame_gapper_2450",
+      "start_frame": 2450,
+      "end_frame": 2450,
+      "importance": 1.0,
+      "summary": "Frame at 98.00s",
+      "features": {
+        "blur_variance": 1540.667208801251,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 98000,
+      "gapper_id": "audio_gapper_98",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.30592540496742976,
+      "summary": "Audio segment at 98.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 98.0,
+        "rms": 0.008275,
+        "dbfs": -41.64
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 98000,
+      "gapper_id": "motion_2450",
+      "start_frame": 2450,
+      "end_frame": 2450,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 99000,
+      "gapper_id": "frame_gapper_2475",
+      "start_frame": 2475,
+      "end_frame": 2475,
+      "importance": 1.0,
+      "summary": "Frame at 99.00s",
+      "features": {
+        "blur_variance": 1558.1259214406707,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 99000,
+      "gapper_id": "audio_gapper_99",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3619640760510832,
+      "summary": "Audio segment at 99.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 99.0,
+        "rms": 0.012187,
+        "dbfs": -38.28
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 99000,
+      "gapper_id": "motion_2475",
+      "start_frame": 2475,
+      "end_frame": 2475,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 100000,
+      "gapper_id": "frame_gapper_2500",
+      "start_frame": 2500,
+      "end_frame": 2500,
+      "importance": 1.0,
+      "summary": "Frame at 100.00s",
+      "features": {
+        "blur_variance": 1586.4998388626473,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 100000,
+      "gapper_id": "audio_gapper_100",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3004871346568071,
+      "summary": "Audio segment at 100.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 100.0,
+        "rms": 0.00797,
+        "dbfs": -41.97
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 100000,
+      "gapper_id": "motion_2500",
+      "start_frame": 2500,
+      "end_frame": 2500,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 101000,
+      "gapper_id": "frame_gapper_2525",
+      "start_frame": 2525,
+      "end_frame": 2525,
+      "importance": 1.0,
+      "summary": "Frame at 101.00s",
+      "features": {
+        "blur_variance": 1561.222489555736,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 101000,
+      "gapper_id": "motion_2525",
+      "start_frame": 2525,
+      "end_frame": 2525,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 101000,
+      "gapper_id": "audio_gapper_101",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2728484642130965,
+      "summary": "Audio segment at 101.00s (-44 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 101.0,
+        "rms": 0.006585,
+        "dbfs": -43.63
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 102000,
+      "gapper_id": "frame_gapper_2550",
+      "start_frame": 2550,
+      "end_frame": 2550,
+      "importance": 1.0,
+      "summary": "Frame at 102.00s",
+      "features": {
+        "blur_variance": 1575.5116299094684,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 102000,
+      "gapper_id": "audio_gapper_102",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.37037227987606536,
+      "summary": "Audio segment at 102.00s (-38 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 102.0,
+        "rms": 0.012916,
+        "dbfs": -37.78
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 102000,
+      "gapper_id": "motion_2550",
+      "start_frame": 2550,
+      "end_frame": 2550,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 103000,
+      "gapper_id": "frame_gapper_2575",
+      "start_frame": 2575,
+      "end_frame": 2575,
+      "importance": 1.0,
+      "summary": "Frame at 103.00s",
+      "features": {
+        "blur_variance": 1588.063950586371,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 103000,
+      "gapper_id": "motion_2575",
+      "start_frame": 2575,
+      "end_frame": 2575,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 103000,
+      "gapper_id": "audio_gapper_103",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2928403320778762,
+      "summary": "Audio segment at 103.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 103.0,
+        "rms": 0.00756,
+        "dbfs": -42.43
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 104000,
+      "gapper_id": "frame_gapper_2600",
+      "start_frame": 2600,
+      "end_frame": 2600,
+      "importance": 1.0,
+      "summary": "Frame at 104.00s",
+      "features": {
+        "blur_variance": 1388.8337841386967,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 104000,
+      "gapper_id": "motion_2600",
+      "start_frame": 2600,
+      "end_frame": 2600,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 104000,
+      "gapper_id": "audio_gapper_104",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.16075633720412566,
+      "summary": "Audio segment at 104.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 104.0,
+        "rms": 0.003036,
+        "dbfs": -50.35
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 105000,
+      "gapper_id": "frame_gapper_2625",
+      "start_frame": 2625,
+      "end_frame": 2625,
+      "importance": 1.0,
+      "summary": "Frame at 105.00s",
+      "features": {
+        "blur_variance": 1403.9585715229553,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 105000,
+      "gapper_id": "audio_gapper_105",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3759996908617308,
+      "summary": "Audio segment at 105.00s (-37 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 105.0,
+        "rms": 0.013428,
+        "dbfs": -37.44
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 105000,
+      "gapper_id": "motion_2625",
+      "start_frame": 2625,
+      "end_frame": 2625,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 106000,
+      "gapper_id": "frame_gapper_2650",
+      "start_frame": 2650,
+      "end_frame": 2650,
+      "importance": 1.0,
+      "summary": "Frame at 106.00s",
+      "features": {
+        "blur_variance": 1333.9278923562888,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 106000,
+      "gapper_id": "motion_2650",
+      "start_frame": 2650,
+      "end_frame": 2650,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 106000,
+      "gapper_id": "audio_gapper_106",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.28636671380437734,
+      "summary": "Audio segment at 106.00s (-43 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 106.0,
+        "rms": 0.007229,
+        "dbfs": -42.82
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 107000,
+      "gapper_id": "frame_gapper_2675",
+      "start_frame": 2675,
+      "end_frame": 2675,
+      "importance": 1.0,
+      "summary": "Frame at 107.00s",
+      "features": {
+        "blur_variance": 1578.0226731422522,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 107000,
+      "gapper_id": "motion_2675",
+      "start_frame": 2675,
+      "end_frame": 2675,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 107000,
+      "gapper_id": "audio_gapper_107",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.2947569271958358,
+      "summary": "Audio segment at 107.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 107.0,
+        "rms": 0.007661,
+        "dbfs": -42.31
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 108000,
+      "gapper_id": "frame_gapper_2700",
+      "start_frame": 2700,
+      "end_frame": 2700,
+      "importance": 1.0,
+      "summary": "Frame at 108.00s",
+      "features": {
+        "blur_variance": 1591.998909320577,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 108000,
+      "gapper_id": "motion_2700",
+      "start_frame": 2700,
+      "end_frame": 2700,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 108000,
+      "gapper_id": "audio_gapper_108",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.18727011014784017,
+      "summary": "Audio segment at 108.00s (-49 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 108.0,
+        "rms": 0.003646,
+        "dbfs": -48.76
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 109000,
+      "gapper_id": "frame_gapper_2725",
+      "start_frame": 2725,
+      "end_frame": 2725,
+      "importance": 1.0,
+      "summary": "Frame at 109.00s",
+      "features": {
+        "blur_variance": 1354.3482261645656,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 109000,
+      "gapper_id": "audio_gapper_109",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3028515613203455,
+      "summary": "Audio segment at 109.00s (-42 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 109.0,
+        "rms": 0.008101,
+        "dbfs": -41.83
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 109000,
+      "gapper_id": "motion_2725",
+      "start_frame": 2725,
+      "end_frame": 2725,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 110000,
+      "gapper_id": "frame_gapper_2750",
+      "start_frame": 2750,
+      "end_frame": 2750,
+      "importance": 1.0,
+      "summary": "Frame at 110.00s",
+      "features": {
+        "blur_variance": 1364.8949808259001,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 110000,
+      "gapper_id": "audio_gapper_110",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3752835127237289,
+      "summary": "Audio segment at 110.00s (-37 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 110.0,
+        "rms": 0.013361,
+        "dbfs": -37.48
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 110000,
+      "gapper_id": "motion_2750",
+      "start_frame": 2750,
+      "end_frame": 2750,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 111000,
+      "gapper_id": "frame_gapper_2775",
+      "start_frame": 2775,
+      "end_frame": 2775,
+      "importance": 1.0,
+      "summary": "Frame at 111.00s",
+      "features": {
+        "blur_variance": 1386.7751629746992,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 111000,
+      "gapper_id": "audio_gapper_111",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.3207017269463635,
+      "summary": "Audio segment at 111.00s (-41 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 111.0,
+        "rms": 0.009164,
+        "dbfs": -40.76
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 111000,
+      "gapper_id": "motion_2775",
+      "start_frame": 2775,
+      "end_frame": 2775,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 112000,
+      "gapper_id": "frame_gapper_2800",
+      "start_frame": 2800,
+      "end_frame": 2800,
+      "importance": 1.0,
+      "summary": "Frame at 112.00s",
+      "features": {
+        "blur_variance": 1489.9012451340661,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 112000,
+      "gapper_id": "audio_gapper_112",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.34782679043674564,
+      "summary": "Audio segment at 112.00s (-39 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 112.0,
+        "rms": 0.011053,
+        "dbfs": -39.13
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 112000,
+      "gapper_id": "motion_2800",
+      "start_frame": 2800,
+      "end_frame": 2800,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 113000,
+      "gapper_id": "frame_gapper_2825",
+      "start_frame": 2825,
+      "end_frame": 2825,
+      "importance": 1.0,
+      "summary": "Frame at 113.00s",
+      "features": {
+        "blur_variance": 1531.0767550922913,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 113000,
+      "gapper_id": "audio_gapper_113",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.4257493408307891,
+      "summary": "Audio segment at 113.00s (-34 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 113.0,
+        "rms": 0.018934,
+        "dbfs": -34.46
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 113000,
+      "gapper_id": "motion_2825",
+      "start_frame": 2825,
+      "end_frame": 2825,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 114000,
+      "gapper_id": "frame_gapper_2850",
+      "start_frame": 2850,
+      "end_frame": 2850,
+      "importance": 1.0,
+      "summary": "Frame at 114.00s",
+      "features": {
+        "blur_variance": 1194.9059629863968,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 114000,
+      "gapper_id": "audio_gapper_114",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.46365465341638307,
+      "summary": "Audio segment at 114.00s (-32 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 114.0,
+        "rms": 0.024602,
+        "dbfs": -32.18
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 114000,
+      "gapper_id": "motion_2850",
+      "start_frame": 2850,
+      "end_frame": 2850,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 115000,
+      "gapper_id": "frame_gapper_2875",
+      "start_frame": 2875,
+      "end_frame": 2875,
+      "importance": 1.0,
+      "summary": "Frame at 115.00s",
+      "features": {
+        "blur_variance": 1255.2089290091617,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 115000,
+      "gapper_id": "audio_gapper_115",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.5451495852570342,
+      "summary": "Audio segment at 115.00s (-27 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 115.0,
+        "rms": 0.043197,
+        "dbfs": -27.29
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 115000,
+      "gapper_id": "motion_2875",
+      "start_frame": 2875,
+      "end_frame": 2875,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 116000,
+      "gapper_id": "frame_gapper_2900",
+      "start_frame": 2900,
+      "end_frame": 2900,
+      "importance": 1.0,
+      "summary": "Frame at 116.00s",
+      "features": {
+        "blur_variance": 1474.2508979926217,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 116000,
+      "gapper_id": "audio_gapper_116",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.5204121883765598,
+      "summary": "Audio segment at 116.00s (-29 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 116.0,
+        "rms": 0.036411,
+        "dbfs": -28.78
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 116000,
+      "gapper_id": "motion_2900",
+      "start_frame": 2900,
+      "end_frame": 2900,
+      "importance": 0.3,
+      "summary": "No person detected",
+      "features": {
+        "has_pose": false,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 117000,
+      "gapper_id": "audio_gapper_117",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.5198017829809202,
+      "summary": "Audio segment at 117.00s (-29 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 117.0,
+        "rms": 0.036258,
+        "dbfs": -28.81
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 117000,
+      "gapper_id": "frame_gapper_2925",
+      "start_frame": 2925,
+      "end_frame": 2925,
+      "importance": 0.38036188508344104,
+      "summary": "Frame at 117.00s",
+      "features": {
+        "blur_variance": 380.36188508344105,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 117000,
+      "gapper_id": "motion_2925",
+      "start_frame": 2925,
+      "end_frame": 2925,
+      "importance": 0.3,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": false
+        }
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 118000,
+      "gapper_id": "frame_gapper_2950",
+      "start_frame": 2950,
+      "end_frame": 2950,
+      "importance": 0.623536086431037,
+      "summary": "Frame at 118.00s",
+      "features": {
+        "blur_variance": 623.536086431037,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 118000,
+      "gapper_id": "audio_gapper_118",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.5111463675232931,
+      "summary": "Audio segment at 118.00s (-29 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 118.0,
+        "rms": 0.034154,
+        "dbfs": -29.33
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 118000,
+      "gapper_id": "motion_2950",
+      "start_frame": 2950,
+      "end_frame": 2950,
+      "importance": 0.4988002569948124,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.1988002569948124,
+          "raw_total_movement": 6.5604084808288095,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "motion",
+      "timestamp": 119000,
+      "gapper_id": "motion_2975",
+      "start_frame": 2975,
+      "end_frame": 2975,
+      "importance": 0.5376689190013323,
+      "summary": "Person detected",
+      "features": {
+        "has_pose": true,
+        "motion_features": {
+          "motion_detected": true,
+          "total_movement": 0.2376689190013323,
+          "raw_total_movement": 7.843074327043966,
+          "action_hints": []
+        }
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 119000,
+      "gapper_id": "audio_gapper_119",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.5101254236158106,
+      "summary": "Audio segment at 119.00s (-29 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 119.0,
+        "rms": 0.033914,
+        "dbfs": -29.39
+      }
+    },
+    {
+      "gapper_type": "frame",
+      "timestamp": 119000,
+      "gapper_id": "frame_gapper_2975",
+      "start_frame": 2975,
+      "end_frame": 2975,
+      "importance": 0.44441522184960625,
+      "summary": "Frame at 119.00s",
+      "features": {
+        "blur_variance": 444.41522184960627,
+        "has_content": true
+      }
+    },
+    {
+      "gapper_type": "audio",
+      "timestamp": 120000,
+      "gapper_id": "audio_gapper_120",
+      "start_frame": 0,
+      "end_frame": 0,
+      "importance": 0.17248760234385,
+      "summary": "Audio segment at 120.00s (-50 dBFS)",
+      "features": {
+        "segment_duration": 1.0,
+        "has_audio": true,
+        "timestamp": 120.0,
+        "rms": 0.003292,
+        "dbfs": -49.65
+      }
+    }
+  ]
+}
