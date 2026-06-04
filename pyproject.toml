@@ -18,6 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 gate0 = ["torch"]
+gate1 = ["torch"]
 
 [project.scripts]
 mnemo = "mnemo.cli:app"

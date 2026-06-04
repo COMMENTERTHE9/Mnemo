@@ -645,6 +645,9 @@ dependencies = [
 gate0 = [
     { name = "torch" },
 ]
+gate1 = [
+    { name = "torch" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -664,11 +667,12 @@ requires-dist = [
     { name = "pydantic", specifier = ">=2.9" },
     { name = "pydantic-settings", specifier = ">=2.6" },
     { name = "torch", marker = "extra == 'gate0'" },
+    { name = "torch", marker = "extra == 'gate1'" },
     { name = "typer", specifier = ">=0.13" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.32" },
     { name = "yt-dlp", specifier = ">=2024.10.0" },
 ]
-provides-extras = ["gate0"]
+provides-extras = ["gate0", "gate1"]
 
 [package.metadata.requires-dev]
 dev = [
