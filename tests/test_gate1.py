@@ -71,3 +71,117 @@ def test_rmatrix_bookkeeping():
     expected_bwt = np.mean([0.20 - 0.90, 0.30 - 0.90, 0.40 - 0.90, 0.50 - 0.90])
     assert abs(m["bwt"] - expected_bwt) < 1e-9
     assert m["bwt"] < 0  # forgetting is negative
+
+
+# ── Gate 1a' commitment mechanism ────────────────────────────────────────────
+def _toy_tasks(n_tasks=5, n=256):
+    from mnemo.gate1.data import Task
+    rng = np.random.default_rng(0)
+    tasks = []
+    for _ in range(n_tasks):
+        x = rng.random((n, 784)).astype(np.float32)
+        y = rng.integers(0, 10, size=n).astype(np.int64)
+        tasks.append(Task(train_x=x, train_y=y, test_x=x[:64], test_y=y[:64]))
+    return tasks
+
+
+def test_commitment_budget_and_cap_respected():
+    from mnemo.gate1.commitment import train_arm, HARDEN_FRAC, COMMIT_CAP
+    _, st = train_arm(_toy_tasks(), seed=0, penalty=True, gating=True,
+                      harden_mode="topk", lam=100.0)
+    # need a model to know layer sizes -> reconstruct from c buffers
+    for boundary in st.harden_history:
+        for nm, cnt in boundary.items():
+            size = st.c[nm].numel()
+            assert cnt <= int(HARDEN_FRAC * size)   # per-boundary 5% budget
+    for nm, frac in st.per_layer_committed().items():
+        assert frac <= COMMIT_CAP + 1e-9            # 40% cap
+
+
+def test_harden_only_touches_uncommitted_and_c_monotonic():
+    import torch
+    from mnemo.gate1.commitment import CommitmentState
+    from mnemo.gate1.methods import MLP
+    torch.manual_seed(0)
+    model = MLP()
+    st = CommitmentState(model, lam=1.0)
+    nm0 = next(iter(st.c))
+    # pre-commit index 0 with a sentinel anchor
+    st.c[nm0].view(-1)[0] = 1.0
+    st.a[nm0].view(-1)[0] = 5.0
+    omega = {nm: torch.rand_like(p) for nm, p in model.named_parameters()}
+    vol = {nm: torch.rand_like(p) for nm, p in model.named_parameters()}
+    counts = st.harden_topk(model, omega, vol)
+    # committed weight was NOT rescored/re-anchored (score never on committed)
+    assert st.c[nm0].view(-1)[0] == 1.0
+    assert st.a[nm0].view(-1)[0] == 5.0
+    # c is binary and never decreased
+    for c in st.c.values():
+        uniq = set(torch.unique(c).tolist())
+        assert uniq <= {0.0, 1.0}
+    # budget honored
+    for nm, p in model.named_parameters():
+        assert counts[nm] <= int(0.05 * p.numel())
+
+
+def test_shuffled_matches_learned_counts():
+    from mnemo.gate1.commitment import train_arm
+    _, learned = train_arm(_toy_tasks(), seed=1, penalty=True, gating=True,
+                           harden_mode="topk", lam=100.0)
+    _, shuffled = train_arm(_toy_tasks(), seed=1, penalty=True, gating=True,
+                            harden_mode="random", lam=100.0)
+    assert len(learned.harden_history) == len(shuffled.harden_history)
+    for hl, hs in zip(learned.harden_history, shuffled.harden_history):
+        assert hl == hs  # identical per-layer counts per boundary
+
+
+def test_c0_step_bit_identical_to_naive():
+    import torch
+    import torch.nn.functional as F
+    from mnemo.gate1.commitment import CommitmentState, MOMENTUM
+    from mnemo.gate1.methods import MLP, BASE_LR
+    x = torch.rand(8, 784)
+    y = torch.randint(0, 10, (8,))
+    torch.manual_seed(0)
+    m1 = MLP()
+    torch.manual_seed(0)
+    m2 = MLP()
+    # naive step
+    o1 = torch.optim.SGD(m1.parameters(), lr=BASE_LR, momentum=MOMENTUM)
+    o1.zero_grad()
+    F.cross_entropy(m1(x), y).backward()
+    o1.step()
+    # c=0 mechanism step (penalty + gating, but c==0 -> no-op)
+    st = CommitmentState(m2, lam=100.0)
+    o2 = torch.optim.SGD(m2.parameters(), lr=BASE_LR, momentum=MOMENTUM)
+    o2.zero_grad()
+    loss = F.cross_entropy(m2(x), y) + st.penalty(m2)
+    loss.backward()
+    st.gate_grads(m2)
+    o2.step()
+    for p1, p2 in zip(m1.parameters(), m2.parameters()):
+        assert torch.equal(p1, p2)
+
+
+def test_committed_weight_frozen_under_gating():
+    import torch
+    import torch.nn.functional as F
+    from mnemo.gate1.commitment import CommitmentState, MOMENTUM
+    from mnemo.gate1.methods import MLP, BASE_LR
+    torch.manual_seed(0)
+    model = MLP()
+    st = CommitmentState(model, lam=100.0)
+    nm0 = next(iter(st.c))
+    params = dict(model.named_parameters())
+    val = float(params[nm0].view(-1)[0].item())
+    st.c[nm0].view(-1)[0] = 1.0
+    st.a[nm0].view(-1)[0] = val  # anchor = current value
+    opt = torch.optim.SGD(model.parameters(), lr=BASE_LR, momentum=MOMENTUM)
+    x = torch.rand(8, 784)
+    y = torch.randint(0, 10, (8,))
+    opt.zero_grad()
+    loss = F.cross_entropy(model(x), y) + st.penalty(model)
+    loss.backward()
+    st.gate_grads(model)
+    opt.step()
+    assert params[nm0].view(-1)[0].item() == val  # frozen (grad gated to 0)

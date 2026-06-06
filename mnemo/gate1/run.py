@@ -117,5 +117,110 @@ def print_report(res: dict) -> None:
           f"new-task learning alive? {'Y' if alive else 'N'}")
 
 
+# ── Gate 1a': learned per-weight commitment + attribution lattice ────────────
+def _agg(runs_by_arm: dict) -> dict:
+    out = {}
+    for arm, Rs in runs_by_arm.items():
+        ms = [metrics(R) for R in Rs]
+        out[arm] = {k: (float(np.mean([m[k] for m in ms])),
+                        float(np.std([m[k] for m in ms])))
+                    for k in ("final_acc", "bwt", "newtask")}
+    return out
+
+
+def run_gate1aprime() -> dict:
+    from mnemo.gate1.commitment import train_arm, train_ewc, train_joint
+
+    # TUNE lambda via the prot+rec (.2) arm's final ACC, 1 seed, TUNE ordering.
+    tune_tasks = build_tasks("tune")
+    grid = []
+    for lam in GRID_LAMBDA:
+        R, _ = train_arm(tune_tasks, TUNE_SEED, penalty=True, gating=True,
+                         harden_mode="topk", lam=lam)
+        grid.append((lam, metrics(R)["final_acc"]))
+    lam_star = max(grid, key=lambda kv: kv[1])[0]
+
+    eval_tasks = build_tasks("eval")
+    # committed fraction f + per-layer health from a .2 run (deterministic counts)
+    _, st = train_arm(eval_tasks, EVAL_SEEDS[0], penalty=True, gating=True,
+                      harden_mode="topk", lam=lam_star)
+    f = st.committed_fraction()
+
+    runs = {a: [] for a in ("naive", "ewc", "prot1", "prot2",
+                            "shuffled", "uniform", "c0")}
+    joint_finals = []
+    for seed in EVAL_SEEDS:
+        joint_finals.append(train_joint(eval_tasks, seed))
+        runs["naive"].append(train_arm(eval_tasks, seed, penalty=False,
+                             gating=False, harden_mode=None)[0])
+        runs["ewc"].append(train_ewc(eval_tasks, seed, lam_star))
+        runs["prot1"].append(train_arm(eval_tasks, seed, penalty=True,
+                             gating=False, harden_mode="topk", lam=lam_star)[0])
+        runs["prot2"].append(train_arm(eval_tasks, seed, penalty=True,
+                             gating=True, harden_mode="topk", lam=lam_star)[0])
+        runs["shuffled"].append(train_arm(eval_tasks, seed, penalty=True,
+                                gating=True, harden_mode="random", lam=lam_star)[0])
+        runs["uniform"].append(train_arm(eval_tasks, seed, penalty=True,
+                               gating=True, harden_mode=None, uniform_c=f,
+                               lam=lam_star)[0])
+        runs["c0"].append(train_arm(eval_tasks, seed, penalty=True, gating=True,
+                          harden_mode=None, lam=lam_star)[0])
+
+    agg = _agg(runs)
+    jm, js = float(np.mean(joint_finals)), float(np.std(joint_finals))
+    return {"lam": lam_star, "agg": agg, "joint": (jm, js),
+            "committed_fraction": f, "health": st.per_layer_committed(),
+            "harden_history": st.harden_history}
+
+
+def print_aprime_report(res: dict) -> None:
+    agg = res["agg"]
+    jm, js = res["joint"]
+    print(f"GATE 1a' — Permuted-MNIST T=5, single-head, SGD+momentum, 3 seeds, lambda={res['lam']:g}")
+
+    def fa(a):
+        m, s = agg[a]["final_acc"]
+        return f"{m:.3f}±{s:.3f}"
+
+    def bw(a):
+        m, s = agg[a]["bwt"]
+        return f"{m:+.3f}±{s:.3f}"
+    print("FINAL ACC : naive=%s joint=%.3f±%.3f ewc=%s prot(.1)=%s prot+rec(.2)=%s"
+          % (fa("naive"), jm, js, fa("ewc"), fa("prot1"), fa("prot2")))
+    print("            shuffled=%s uniform=%s c0=%s"
+          % (fa("shuffled"), fa("uniform"), fa("c0")))
+    print("BWT       : naive=%s ewc=%s prot(.1)=%s prot+rec(.2)=%s"
+          % (bw("naive"), bw("ewc"), bw("prot1"), bw("prot2")))
+    print("            shuffled=%s uniform=%s c0=%s"
+          % (bw("shuffled"), bw("uniform"), bw("c0")))
+    print("NEW-TASK R[i,i]: naive=%.3f .1=%.3f .2=%.3f"
+          % (agg["naive"]["newtask"][0], agg["prot1"]["newtask"][0],
+             agg["prot2"]["newtask"][0]))
+    d_shuf = agg["prot2"]["final_acc"][0] - agg["shuffled"]["final_acc"][0]
+    d_prot = agg["prot2"]["final_acc"][0] - agg["prot1"]["final_acc"][0]
+    print(f"ATTRIBUTION: learned(.2) vs shuffled delta = {d_shuf:+.3f}   .2 vs .1 delta = {d_prot:+.3f}")
+    print("HEALTH (final committed frac/layer; plastic=1-committed; middle=0 by binary spec):")
+    for nm, frac in res["health"].items():
+        print(f"  {nm}: committed={frac:.3f} plastic={1 - frac:.3f}")
+    print(f"  committed_fraction(global)={res['committed_fraction']:.3f}")
+    # sanity
+    accs = {a: agg[a]["final_acc"][0] for a in agg}
+    joint_top = jm >= max(accs.values()) - 1e-9
+    naive_forgets = agg["naive"]["bwt"][0] < -0.05
+    c0_eq_naive = abs(accs["c0"] - accs["naive"]) < 1e-6
+    print(f"SANITY: joint on top? {'Y' if joint_top else 'N'}   "
+          f"naive forgets? {'Y' if naive_forgets else 'N'}   "
+          f"c0 == naive? {'Y' if c0_eq_naive else 'N'}")
+    # verdict (all four)
+    forgetting_reduced = agg["prot2"]["bwt"][0] > agg["naive"]["bwt"][0] + 0.01
+    new_task_alive = agg["prot2"]["newtask"][0] > 0.80
+    beats_shuffled = d_shuf > 0.01
+    budgeted = all(frac <= 0.40 + 1e-9 for frac in res["health"].values())
+    print(f"VERDICT: forgetting reduced vs naive? {'Y' if forgetting_reduced else 'N'}  "
+          f"new-task alive? {'Y' if new_task_alive else 'N'}  "
+          f"learned beats shuffled? {'Y' if beats_shuffled else 'N'}  "
+          f"commitment healthy/budgeted? {'Y' if budgeted else 'N'}")
+
+
 if __name__ == "__main__":
     print_report(run_gate1a())
