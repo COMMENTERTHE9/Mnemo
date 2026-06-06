@@ -23,7 +23,9 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from mnemo.gate1.methods import MLP, EWC, SI, accuracy, BASE_LR, EPOCHS, BATCH
+from mnemo.gate1.methods import (
+    MLP, EWC, SI, ReplayBuffer, accuracy, BASE_LR, EPOCHS, BATCH,
+)
 
 MOMENTUM = 0.9
 HARDEN_FRAC = 0.05   # of layer, per boundary
@@ -138,9 +140,13 @@ def _zero_committed_momentum(opt, model: MLP, state: CommitmentState) -> None:
 
 def train_arm(tasks, seed: int, *, penalty: bool, gating: bool,
               harden_mode: str | None, uniform_c: float | None = None,
-              lam: float = 100.0):
+              lam: float = 100.0, replay: bool = False):
     """Train the T tasks sequentially under one commitment configuration.
-    Returns (R matrix, CommitmentState)."""
+    Returns (R matrix, CommitmentState).
+
+    replay=True adds a 200/task ring buffer with 50/50 current/replay mixing.
+    Replay batches flow through the gate like any batch — a c=1 weight stays
+    frozen on replay gradients too (no special-casing)."""
     torch.manual_seed(seed)
     np.random.seed(seed)
     model = MLP()
@@ -148,6 +154,9 @@ def train_arm(tasks, seed: int, *, penalty: bool, gating: bool,
     opt = torch.optim.SGD(model.parameters(), lr=BASE_LR, momentum=MOMENTUM)
     shuffle_gen = torch.Generator().manual_seed(seed)
     rng = np.random.default_rng(seed + 7)
+    replay_buf = ReplayBuffer() if replay else None
+    replay_rng = np.random.default_rng(seed + 11)
+    buf_rng = np.random.default_rng(seed + 13)
     si = SI(0.0, lambda m: list(m.parameters())) if harden_mode == "topk" else None
     if si is not None:
         si.init(model)
@@ -168,6 +177,11 @@ def train_arm(tasks, seed: int, *, penalty: bool, gating: bool,
                 bi = perm[s:s + BATCH]
                 xb = torch.tensor(x[bi])
                 yb = torch.tensor(y[bi])
+                if replay_buf is not None and replay_buf.total() > 0:
+                    rs = replay_buf.sample(len(bi), replay_rng)  # 50/50 mix
+                    if rs is not None:
+                        xb = torch.cat([xb, torch.tensor(rs[0])])
+                        yb = torch.cat([yb, torch.tensor(rs[1])])
                 opt.zero_grad()
                 loss = F.cross_entropy(model(xb), yb)
                 if penalty:
@@ -201,6 +215,8 @@ def train_arm(tasks, seed: int, *, penalty: bool, gating: bool,
             _zero_committed_momentum(opt, model, state)
         elif boundary and uniform_c is not None:
             state.reanchor(model)
+        if replay_buf is not None:
+            replay_buf.add_task(x, y, buf_rng)
         for j, tj in enumerate(tasks):
             R[i, j] = accuracy(model, tj.test_x, tj.test_y)
     return R, state

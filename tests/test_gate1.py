@@ -185,3 +185,42 @@ def test_committed_weight_frozen_under_gating():
     st.gate_grads(model)
     opt.step()
     assert params[nm0].view(-1)[0].item() == val  # frozen (grad gated to 0)
+
+
+def test_commit_replay_budget_and_freeze_on_replay_batch():
+    import torch
+    import torch.nn.functional as F
+    from mnemo.gate1.methods import MLP, ReplayBuffer, BASE_LR
+    from mnemo.gate1.commitment import (
+        CommitmentState, MOMENTUM, _zero_committed_momentum,
+    )
+    # 1) ring buffer budget holds (<= 200/task)
+    buf = ReplayBuffer(per_task=200)
+    rng = np.random.default_rng(0)
+    x = np.zeros((5000, 784), dtype=np.float32)
+    y = np.zeros(5000, dtype=np.int64)
+    for _ in range(5):
+        buf.add_task(x, y, rng)
+    assert buf.total() <= 200 * 5
+    assert all(len(a) <= 200 for a in buf.xs)
+
+    # 2) a c=1 weight does not move on a replay-mixed batch
+    torch.manual_seed(0)
+    model = MLP()
+    st = CommitmentState(model, lam=100.0)
+    nm0 = next(iter(st.c))
+    params = dict(model.named_parameters())
+    val = float(params[nm0].view(-1)[0].item())
+    st.c[nm0].view(-1)[0] = 1.0
+    st.a[nm0].view(-1)[0] = val
+    opt = torch.optim.SGD(model.parameters(), lr=BASE_LR, momentum=MOMENTUM)
+    _zero_committed_momentum(opt, model, st)
+    # current + replay samples concatenated, exactly as train_arm mixes them
+    xb = torch.cat([torch.rand(8, 784), torch.rand(8, 784)])
+    yb = torch.randint(0, 10, (16,))
+    opt.zero_grad()
+    loss = F.cross_entropy(model(xb), yb) + st.penalty(model)
+    loss.backward()
+    st.gate_grads(model)
+    opt.step()
+    assert params[nm0].view(-1)[0].item() == val  # frozen on the replay batch

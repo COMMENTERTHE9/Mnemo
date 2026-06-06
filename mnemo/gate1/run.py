@@ -222,5 +222,55 @@ def print_aprime_report(res: dict) -> None:
           f"commitment healthy/budgeted? {'Y' if budgeted else 'N'}")
 
 
+# ── Gate 1a'-R: commitment x replay completion cell (lambda frozen at 10) ─────
+def run_gate1aprime_replay() -> dict:
+    from mnemo.gate1.commitment import train_arm
+    lam = 10.0  # FROZEN (tuned for the no-replay arm; not re-tuned)
+    eval_tasks = build_tasks("eval")
+    runs = {a: [] for a in ("replay", "prot2_replay", "shuffled_replay")}
+    for seed in EVAL_SEEDS:
+        runs["replay"].append(train_arm(eval_tasks, seed, penalty=False,
+                              gating=False, harden_mode=None, replay=True)[0])
+        runs["prot2_replay"].append(train_arm(eval_tasks, seed, penalty=True,
+                                    gating=True, harden_mode="topk",
+                                    replay=True, lam=lam)[0])
+        runs["shuffled_replay"].append(train_arm(eval_tasks, seed, penalty=True,
+                                       gating=True, harden_mode="random",
+                                       replay=True, lam=lam)[0])
+    return {"lam": lam, "agg": _agg(runs)}
+
+
+def print_aprime_replay_report(res: dict) -> None:
+    agg = res["agg"]
+    print(f"GATE 1a'-R — Permuted-MNIST T=5, SGD, 3 seeds, lambda={res['lam']:g} (frozen)")
+
+    def fa(a):
+        m, s = agg[a]["final_acc"]
+        return f"{m:.3f}±{s:.3f}"
+
+    def bw(a):
+        m, s = agg[a]["bwt"]
+        return f"{m:+.3f}±{s:.3f}"
+    print("FINAL ACC : replay=%s .2+replay=%s shuffled+replay=%s   (refs: naive=0.626 joint=0.946)"
+          % (fa("replay"), fa("prot2_replay"), fa("shuffled_replay")))
+    print("BWT       : replay=%s .2+replay=%s shuffled+replay=%s"
+          % (bw("replay"), bw("prot2_replay"), bw("shuffled_replay")))
+    print(f"NEW-TASK R[i,i]: .2+replay={agg['prot2_replay']['newtask'][0]:.3f}  (statue check)")
+    r_mean, r_std = agg["replay"]["final_acc"]
+    p_mean, p_std = agg["prot2_replay"]["final_acc"]
+    s_mean, _ = agg["shuffled_replay"]["final_acc"]
+    d_replay = p_mean - r_mean
+    d_shuf = p_mean - s_mean
+    print(f"DELTAS: (.2+replay - replay) = {d_replay:+.3f}   (.2+replay - shuffled+replay) = {d_shuf:+.3f}")
+    noise = max(r_std, p_std)
+    adds = (d_replay > noise) and (d_replay > 0.0) and (d_shuf > 0.0)
+    alive = agg["prot2_replay"]["newtask"][0] > 0.80
+    verdict = "ADDS" if (adds and alive) else "RETIRED"
+    print(f"PRE-REGISTERED VERDICT: {verdict}  "
+          f"(beats replay outside noise [{d_replay:+.3f} vs std {noise:.3f}]? "
+          f"{'Y' if d_replay > noise else 'N'}; beats shuffled+replay? {'Y' if d_shuf > 0 else 'N'}; "
+          f"new-task alive? {'Y' if alive else 'N'})")
+
+
 if __name__ == "__main__":
     print_report(run_gate1a())
