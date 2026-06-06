@@ -21,10 +21,16 @@ log = logging.getLogger(__name__)
 
 
 def _find_parent(child: GapperNode, candidates: list[GapperNode]) -> str | None:
-    """Return the node_id of the candidate whose time range contains
-    child.start_time. None if none match."""
+    """Return the node_id of the candidate whose half-open time range
+    [start, end) contains child.start_time. None if none match.
+
+    The range is strictly half-open: a child whose start_time equals a
+    candidate's end_time (a level boundary, e.g. a segment at 30.0s where a
+    scene ends) belongs to the NEXT candidate, not the one ending there.
+    (A `+epsilon` on end_time here previously mis-parented every boundary node
+    to the earlier scene/chapter.)"""
     for c in candidates:
-        if c.start_time <= child.start_time < c.end_time + 1e-6:
+        if c.start_time <= child.start_time < c.end_time:
             return c.node_id
     return None
 

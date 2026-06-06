@@ -133,7 +133,7 @@
     {
       "node_id": "video_1780259782040042000_segment_0030",
       "node_level": 1,
-      "parent_id": "video_1780259782040042000_scene_0000",
+      "parent_id": "video_1780259782040042000_scene_0030",
       "start_time": 30.0,
       "end_time": 35.0,
       "importance": 0.42721863215964007,
@@ -208,7 +208,7 @@
     {
       "node_id": "video_1780259782040042000_segment_0060",
       "node_level": 1,
-      "parent_id": "video_1780259782040042000_scene_0030",
+      "parent_id": "video_1780259782040042000_scene_0060",
       "start_time": 60.0,
       "end_time": 61.0,
       "importance": 0.32267816232031366,

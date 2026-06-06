@@ -167,7 +167,7 @@
     {
       "node_id": "video_1780260175239482800_segment_0030",
       "node_level": 1,
-      "parent_id": "video_1780260175239482800_scene_0000",
+      "parent_id": "video_1780260175239482800_scene_0030",
       "start_time": 30.0,
       "end_time": 35.0,
       "importance": 0.3351663979464042,
@@ -240,7 +240,7 @@
     {
       "node_id": "video_1780260175239482800_segment_0060",
       "node_level": 1,
-      "parent_id": "video_1780260175239482800_scene_0030",
+      "parent_id": "video_1780260175239482800_scene_0060",
       "start_time": 60.0,
       "end_time": 65.0,
       "importance": 0.41796341267261905,
@@ -318,7 +318,7 @@
     {
       "node_id": "video_1780260175239482800_segment_0090",
       "node_level": 1,
-      "parent_id": "video_1780260175239482800_scene_0060",
+      "parent_id": "video_1780260175239482800_scene_0090",
       "start_time": 90.0,
       "end_time": 95.0,
       "importance": 0.31998986869405294,

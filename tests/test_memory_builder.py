@@ -108,6 +108,29 @@ def test_build_tree_long_video_correct_counts(settings):
     assert count == 101
 
 
+def test_build_tree_segment_at_scene_boundary_parents_to_containing_scene(settings):
+    """Regression: a segment starting exactly at a scene boundary (e.g. 30.0s,
+    where the first scene ends) must be parented to the scene that contains
+    [30, ...), not the scene that ends at 30. (Guards the half-open _find_parent.)"""
+    conn = init_for_settings(settings)
+    vid = enqueue_video(conn, "test://x")
+    _seed_per_second_frame_data(conn, vid, seconds=35)  # 7 segments -> 2 scenes
+    build_memory_tree(conn, vid, video_duration=35.0)
+
+    seg = conn.execute(
+        "SELECT node_id, parent_id FROM memory_nodes "
+        "WHERE node_level=1 AND video_id=? AND start_time=30.0",
+        (vid,),
+    ).fetchone()
+    assert seg is not None
+    parent = conn.execute(
+        "SELECT start_time, end_time FROM memory_nodes WHERE node_id=? AND video_id=?",
+        (seg["parent_id"], vid),
+    ).fetchone()
+    # The parent scene must actually contain the boundary start_time.
+    assert parent["start_time"] <= 30.0 < parent["end_time"]
+
+
 def test_build_tree_actions_propagate(settings):
     conn = init_for_settings(settings)
     vid = enqueue_video(conn, "test://x")
