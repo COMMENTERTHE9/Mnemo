@@ -96,7 +96,6 @@ desktop.ini
 
 # Docker
 docker-compose.override.yml
-.dockerignore
 
 # Database
 *.db
@@ -166,3 +165,25 @@ monitoring/jaeger/data/
 extracted_frames/
 extracted_audio/
 sample_frame.jpg
+
+# Stray ffmpeg WAV artifact: a 16kHz mono pcm_s16le WAV occasionally lands at
+# the repo-root path "r" during audio runs. No code in mnemo/ constructs this
+# output path (grep-verified: all ffmpeg/wave writers target proper *.wav
+# paths), so it is most likely an external/transient artifact. Stopgap-ignored
+# until reproduced. Candidate sources: extract_audio ffmpeg calls in
+# mnemo/pipeline/audio.py and legacy worker/video_processor.py.
+/r
+
+# Python rebuild
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+/data/
+*.db
+*.db-journal
+.env
+dist/
+build/
+*.egg-info/
