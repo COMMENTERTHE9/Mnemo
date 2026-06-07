@@ -19,9 +19,11 @@ dependencies = [
 [project.optional-dependencies]
 gate0 = ["torch"]
 gate1 = ["torch"]
+sidecar = ["torch"]
 
 [project.scripts]
 mnemo = "mnemo.cli:app"
+mnemo-sidecar = "mnemo.sidecar.__main__:main"
 
 [dependency-groups]
 dev = [

@@ -122,8 +122,11 @@ def slots_from_row_quantile(row, loud_edges: list[float],
 AUDIO_IDX, MOTION_IDX, START_IDX = _AUDIO, _MOTION, _START
 
 
-def sentence_tokens(slots: dict) -> list[str]:
-    return (["a", slots["loudness"], ",", slots["motion"], "segment",
+def sentence_tokens(slots: dict, noun: str = "segment") -> list[str]:
+    """Granularity noun defaults to "segment" (gate-2 training target, the only
+    form in the model vocab). The sidecar passes noun="scene" for deterministic
+    gauge summaries — that text never goes through the model vocab."""
+    return (["a", slots["loudness"], ",", slots["motion"], noun,
              slots["position"], "in", "the", "video"]
             + _action_clause(slots["action"]) + ["."])
 

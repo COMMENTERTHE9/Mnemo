@@ -174,6 +174,9 @@ sample_frame.jpg
 # mnemo/pipeline/audio.py and legacy worker/video_processor.py.
 /r
 
+# Sidecar production reader weights (trained locally, never committed)
+weights/
+
 # Python rebuild
 .venv/
 __pycache__/
