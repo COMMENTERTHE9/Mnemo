@@ -237,3 +237,38 @@ def test_spearman_instrument():
     a = torch.rand(5000, generator=g)
     b = torch.rand(5000, generator=g)
     assert abs(spearman(a, b)) < 0.05                  # independent -> ~0
+
+
+def test_oracle_harden_lowest_selects_lowest_and_budgeted():
+    import torch
+    from mnemo.gate1.commitment import CommitmentState, HARDEN_FRAC
+    from mnemo.gate1.methods import MLP
+    torch.manual_seed(0)
+    model = MLP()
+    st = CommitmentState(model, lam=10.0)
+    # scores = 0,1,2,... per layer -> the n lowest are indices 0..n-1
+    scores = {nm: torch.arange(p.numel(), dtype=torch.float64).reshape(p.shape)
+              for nm, p in model.named_parameters()}
+    counts = st.harden_lowest(model, scores)
+    for nm, p in model.named_parameters():
+        n = counts[nm]
+        assert n <= int(HARDEN_FRAC * p.numel())          # 5% budget
+        c = st.c[nm].view(-1)
+        assert int((c > 0).sum()) == n                    # exactly n committed
+        if n > 0:
+            assert bool((c[:n] == 1.0).all())             # the lowest-score ones
+            assert bool((c[n:] == 0.0).all())
+
+
+def test_naive_snapshots_deterministic_and_no_oracle_input():
+    from mnemo.gate1.commitment import naive_snapshots
+    tasks = _toy_tasks()
+    R1, fm1 = naive_snapshots(tasks, seed=0)
+    R2, fm2 = naive_snapshots(tasks, seed=0)
+    # depends only on (tasks, seed): identical across calls (no external leakage)
+    assert (R1 == R2).all()
+    assert len(fm1) == len(tasks) - 1                     # one per boundary
+    for d1, d2 in zip(fm1, fm2):
+        for nm in d1:
+            assert bool((d1[nm] == d2[nm]).all())
+            assert bool((d1[nm] >= 0).all())              # |movements| non-negative

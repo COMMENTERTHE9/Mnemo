@@ -128,6 +128,26 @@ class CommitmentState:
         self.harden_history.append(counts)
         return counts
 
+    def harden_lowest(self, model: MLP, scores: dict[str, torch.Tensor]) -> dict[str, int]:
+        """Oracle selection: among uncommitted, harden the n with the LOWEST
+        scores (e.g. lowest future movement). Same budget/cap as the others."""
+        counts: dict[str, int] = {}
+        for nm, p in model.named_parameters():
+            n, unc = self._budget(nm)
+            counts[nm] = n
+            if n == 0:
+                continue
+            c = self.c[nm].view(-1)
+            a = self.a[nm].view(-1)
+            w = p.detach().view(-1)
+            unc_idx = unc.nonzero().view(-1)
+            sc = scores[nm].view(-1)[unc_idx]
+            low = unc_idx[torch.topk(sc, n, largest=False).indices]
+            c[low] = 1.0
+            a[low] = w[low]
+        self.harden_history.append(counts)
+        return counts
+
 
 def _zero_committed_momentum(opt, model: MLP, state: CommitmentState) -> None:
     """Make c=1 an exact freeze under momentum: zero velocity for committed
@@ -140,13 +160,17 @@ def _zero_committed_momentum(opt, model: MLP, state: CommitmentState) -> None:
 
 def train_arm(tasks, seed: int, *, penalty: bool, gating: bool,
               harden_mode: str | None, uniform_c: float | None = None,
-              lam: float = 100.0, replay: bool = False):
+              lam: float = 100.0, replay: bool = False, oracle_moves=None):
     """Train the T tasks sequentially under one commitment configuration.
     Returns (R matrix, CommitmentState).
 
     replay=True adds a 200/task ring buffer with 50/50 current/replay mixing.
     Replay batches flow through the gate like any batch — a c=1 weight stays
-    frozen on replay gradients too (no special-casing)."""
+    frozen on replay gradients too (no special-casing).
+
+    harden_mode='oracle' selects, at boundary i, the lowest-future-movement
+    uncommitted weights from oracle_moves[i] (precomputed from a seed-matched
+    naive run — perfect foresight). Byte-identical .2 mechanics otherwise."""
     torch.manual_seed(seed)
     np.random.seed(seed)
     model = MLP()
@@ -213,6 +237,9 @@ def train_arm(tasks, seed: int, *, penalty: bool, gating: bool,
         elif boundary and harden_mode == "random":
             state.harden_random(model, rng)
             _zero_committed_momentum(opt, model, state)
+        elif boundary and harden_mode == "oracle":
+            state.harden_lowest(model, oracle_moves[i])
+            _zero_committed_momentum(opt, model, state)
         elif boundary and uniform_c is not None:
             state.reanchor(model)
         if replay_buf is not None:
@@ -247,6 +274,39 @@ def train_ewc(tasks, seed: int, lam: float) -> np.ndarray:
         for j, tj in enumerate(tasks):
             R[i, j] = accuracy(model, tj.test_x, tj.test_y)
     return R
+
+
+def naive_snapshots(tasks, seed: int):
+    """Plain naive training (SGD+momentum), byte-matching train_arm's naive
+    trajectory, snapshotting weights after each task. Returns (R, future_moves)
+    where future_moves[k][name] = |w_end - w_after_task_k| for k in 0..T-2
+    (the oracle's perfect-foresight signal). Reads nothing but tasks+seed."""
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+    model = MLP()
+    opt = torch.optim.SGD(model.parameters(), lr=BASE_LR, momentum=MOMENTUM)
+    gen = torch.Generator().manual_seed(seed)
+    T = len(tasks)
+    R = np.zeros((T, T))
+    snaps = []
+    for i, task in enumerate(tasks):
+        x, y = task.train_x, task.train_y
+        n = len(x)
+        for _ in range(EPOCHS):
+            perm = torch.randperm(n, generator=gen).numpy()
+            for s in range(0, n, BATCH):
+                bi = perm[s:s + BATCH]
+                opt.zero_grad()
+                loss = F.cross_entropy(model(torch.tensor(x[bi])), torch.tensor(y[bi]))
+                loss.backward()
+                opt.step()
+        snaps.append({nm: p.detach().clone() for nm, p in model.named_parameters()})
+        for j, tj in enumerate(tasks):
+            R[i, j] = accuracy(model, tj.test_x, tj.test_y)
+    w_end = snaps[-1]
+    future_moves = [{nm: (w_end[nm] - snaps[k][nm]).abs() for nm in w_end}
+                    for k in range(T - 1)]
+    return R, future_moves
 
 
 def train_joint(tasks, seed: int) -> float:

@@ -272,5 +272,44 @@ def print_aprime_replay_report(res: dict) -> None:
           f"new-task alive? {'Y' if alive else 'N'})")
 
 
+# ── Gate 1a' oracle-freeze kill-shot (perfect-foresight selection) ───────────
+def run_oracle_killshot() -> dict:
+    """Oracle arm = .2 mechanics but freezing the lowest-future-movement
+    uncommitted weights, where future movement is read from a seed-matched
+    naive run (perfect foresight). If oracle <= shuffled, value-pinning during
+    drift is dead even with foresight."""
+    from mnemo.gate1.commitment import train_arm, naive_snapshots
+    eval_tasks = build_tasks("eval")
+    runs = {"naive": [], "oracle": []}
+    for seed in EVAL_SEEDS:
+        nR, fmoves = naive_snapshots(eval_tasks, seed)
+        oR, _ = train_arm(eval_tasks, seed, penalty=True, gating=True,
+                          harden_mode="oracle", oracle_moves=fmoves, lam=10.0)
+        runs["naive"].append(nR)
+        runs["oracle"].append(oR)
+    return {"agg": _agg(runs)}
+
+
+def print_oracle_report(res: dict) -> None:
+    agg = res["agg"]
+
+    def fmt(a):
+        fa = agg[a]["final_acc"]
+        bw = agg[a]["bwt"]
+        nt = agg[a]["newtask"]
+        return f"ACC={fa[0]:.3f}±{fa[1]:.3f} BWT={bw[0]:+.3f} R[i,i]={nt[0]:.3f}"
+    print("GATE 1 — oracle-freeze kill-shot (1a' harness, EVAL ordering, 3 seeds)")
+    print(f"  oracle      : {fmt('oracle')}")
+    print(f"  naive(in-run): {fmt('naive')}")
+    print("  committed refs: naive=0.626  shuffled=0.641  learned(.2)=0.596")
+    o = agg["oracle"]["final_acc"][0]
+    o_std = agg["oracle"]["final_acc"][1]
+    closed = o <= 0.641 + max(o_std, 0.005)  # oracle <= shuffled (within noise)
+    verdict = ("CLOSED (oracle <= shuffled — value-pinning during drift dead even "
+               "with perfect foresight)" if closed else
+               "ORACLE-ONLY-LIFE (oracle > shuffled & naive; no real signal has foresight)")
+    print(f"VERDICT (pre-registered): {verdict}")
+
+
 if __name__ == "__main__":
     print_report(run_gate1a())
