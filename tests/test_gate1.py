@@ -224,3 +224,16 @@ def test_commit_replay_budget_and_freeze_on_replay_batch():
     st.gate_grads(model)
     opt.step()
     assert params[nm0].view(-1)[0].item() == val  # frozen on the replay batch
+
+
+def test_spearman_instrument():
+    import torch
+    from mnemo.gate1.diagnostic import spearman
+    x = torch.arange(100, dtype=torch.float64)
+    assert abs(spearman(x, x) - 1.0) < 1e-9            # perfect rank agreement
+    assert abs(spearman(x, -x) + 1.0) < 1e-9           # perfect anti-agreement
+    assert abs(spearman(x, x ** 3) - 1.0) < 1e-9       # monotone -> rho 1
+    g = torch.Generator().manual_seed(0)
+    a = torch.rand(5000, generator=g)
+    b = torch.rand(5000, generator=g)
+    assert abs(spearman(a, b)) < 0.05                  # independent -> ~0
