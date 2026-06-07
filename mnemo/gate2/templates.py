@@ -77,7 +77,8 @@ def _action_clause(value: str) -> list[str]:
 
 
 def slots_from_row(row) -> dict:
-    """Slot dict from a raw (un-standardized) 19-dim feature row."""
+    """Slot dict from a raw (un-standardized) 19-dim feature row (rung-1
+    hand-picked dBFS/motion edges)."""
     return {
         "loudness": loudness_word(float(row[_AUDIO])),
         "motion": motion_word(float(row[_MOTION])),
@@ -85,6 +86,40 @@ def slots_from_row(row) -> dict:
         "action": action_value(float(row[_JUMP]), float(row[_WALK]),
                                float(row[_LARM]), float(row[_RARM])),
     }
+
+
+# ── Quantile binning (rung 1.5: edges fitted on TRAIN videos only) ───────────
+def fit_quantile_edges(values, n_bins: int = 4) -> list[float]:
+    """Internal edges at the (n_bins-1) inner quantiles of `values`."""
+    import numpy as np
+    qs = [i / n_bins for i in range(1, n_bins)]
+    return [float(np.quantile(np.asarray(values, dtype=float), q)) for q in qs]
+
+
+def _bin_word(value: float, edges: list[float], words) -> str:
+    i = 0
+    for e in edges:
+        if value < e:
+            break
+        i += 1
+    return words[min(i, len(words) - 1)]
+
+
+def slots_from_row_quantile(row, loud_edges: list[float],
+                            motion_edges: list[float]) -> dict:
+    """Slot dict using TRAIN-fitted quantile edges for loudness & motion;
+    position (thirds) and action (priority flags) unchanged."""
+    return {
+        "loudness": _bin_word(float(row[_AUDIO]), loud_edges, LOUDNESS_WORDS),
+        "motion": _bin_word(float(row[_MOTION]), motion_edges, MOTION_WORDS),
+        "position": position_word(float(row[_START])),
+        "action": action_value(float(row[_JUMP]), float(row[_WALK]),
+                               float(row[_LARM]), float(row[_RARM])),
+    }
+
+
+# raw-feature column indices (for masking / quantile fitting in masked.py)
+AUDIO_IDX, MOTION_IDX, START_IDX = _AUDIO, _MOTION, _START
 
 
 def sentence_tokens(slots: dict) -> list[str]:

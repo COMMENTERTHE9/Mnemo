@@ -106,9 +106,9 @@ def _val_loss(model, examples) -> float:
     return total / max(1, n_tok)
 
 
-def train_arm(train, val, seed, conditioned) -> TreeToText:
+def train_arm(train, val, seed, conditioned, in_dim=19) -> TreeToText:
     torch.manual_seed(seed)
-    model = TreeToText(len(VOCAB), conditioned=conditioned)
+    model = TreeToText(len(VOCAB), in_dim=in_dim, conditioned=conditioned)
     opt = torch.optim.Adam(model.parameters(), lr=LR)
     loss_fn = nn.CrossEntropyLoss(ignore_index=PAD)
     order = list(range(len(train)))
