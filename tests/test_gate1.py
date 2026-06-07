@@ -272,3 +272,50 @@ def test_naive_snapshots_deterministic_and_no_oracle_input():
         for nm in d1:
             assert bool((d1[nm] == d2[nm]).all())
             assert bool((d1[nm] >= 0).all())              # |movements| non-negative
+
+
+# ── consolidation screen (entry exam) ────────────────────────────────────────
+def test_screen_c_computed_on_A_only():
+    # train_core takes only task A -> c depends on A, not B
+    import torch
+    from mnemo.gate1.screen import train_core, _gate_c
+    a = _toy_tasks(n_tasks=1)[0]
+    core1, score1 = train_core(a, seed=0)
+    core2, score2 = train_core(a, seed=0)
+    c1 = _gate_c(core1, score1)
+    c2 = _gate_c(core2, score2)
+    for nm in c1:
+        assert torch.equal(c1[nm], c2[nm])  # deterministic, A-only
+
+
+def test_screen_shuffle_mass_parity():
+    import numpy as np
+    from mnemo.gate1.screen import _gate_c, _shuffle_c, train_core
+    a = _toy_tasks(n_tasks=1)[0]
+    core, score = train_core(a, seed=0)
+    c = _gate_c(core, score)
+    sh = _shuffle_c(c, np.random.default_rng(0))
+    for nm in c:
+        assert int(c[nm].sum()) == int(sh[nm].sum())  # same per-layer mass
+
+
+def test_screen_frozen_floor_student_equals_core():
+    import torch
+    from mnemo.gate1.screen import (
+        train_core, train_teacher, consolidate, _one_c,
+    )
+    tasks = _toy_tasks(n_tasks=2)
+    a, b = tasks[0], tasks[1]
+    core, _ = train_core(a, seed=0)
+    teacher, buf = train_teacher(core, a, b, seed=0)
+    student = consolidate(core, teacher, _one_c(core), b, buf, seed=0)
+    for (n1, p1), (n2, p2) in zip(core.named_parameters(), student.named_parameters()):
+        assert torch.equal(p1, p2)  # c=1 everywhere -> frozen, student == core
+
+
+def test_screen_replay_budget_respected():
+    from mnemo.gate1.screen import train_core, train_teacher, REPLAY_N
+    tasks = _toy_tasks(n_tasks=2)
+    core, _ = train_core(tasks[0], seed=0)
+    _, buf = train_teacher(core, tasks[0], tasks[1], seed=0)
+    assert buf.total() <= REPLAY_N  # only A is buffered, <= 200
