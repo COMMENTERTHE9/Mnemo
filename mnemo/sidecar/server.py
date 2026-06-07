@@ -16,8 +16,8 @@ Handshake (emitted once, before any request is read):
 Request line:
   {"id":<any>,"method":"list|summary|describe|peaks","params":{...}}
 
-Success response line:
-  {"id":<echo>,"ok":true,"method":"<m>", ...result...}
+Success response line (NOTHING else top-level — result is nested):
+  {"id":<echo>,"ok":true,"result":{...}}
 
 Error response line:
   {"id":<echo|null>,"ok":false,"kind":"unknown-video|bad-params|internal",
@@ -25,22 +25,22 @@ Error response line:
 A malformed JSON line yields kind "bad-params" with id:null. The loop never
 crashes on a bad request.
 
-Methods
--------
-list      params: {}                       -> {"videos":[{id,duration,n_scenes,
-                                                          n_segments}],"n_videos"}
-summary   params: {"video"}                -> {"video","source":"gauge",
-                                              "lines"[<=16],"truncated"}
-describe  params: {"video", t0?, t1?}      -> {"video","source":"model",
-                                              "window","lines"[<=12],
-                                              "truncated","hint"}
-peaks     params: {"video","metric",k?}    -> {"video","metric","k"(<=10),
-                                              "lines"}
-metric in {loudness, motion, importance}.
+Methods (result shapes, verbatim)
+---------------------------------
+list      params {}               result {"videos":[{id,duration_s,scenes,
+                                                     segments}]}
+summary   params {video}          result {video_id, duration_s,
+                                          lines[<=16], truncated}
+describe  params {video, t0?, t1?} result {video_id, lines[<=12], truncated}
+                                          + "hint" ONLY when truncated is true
+peaks     params {video, slot, k?} result {video_id, slot,
+                                          peaks:[{t0,t1,value,text}]}  (k<=10)
+slot in {loudness, motion, importance}.
 
-Receipt (on EVERY narration line): loud_db, mot, t0, t1 (floats), act (string or
-null when no action). describe lines are learned-reader text; summary/peaks lines
-are deterministic gauge-template text.
+Line shape (summary + describe): {t0, t1, text, source, loud_db, mot, act}.
+"source" is PER LINE: "gauge" (deterministic template) or "model" (learned
+reader). act is a string or null when no action. peaks items are the smaller
+{t0,t1,value,text} shape.
 """
 from __future__ import annotations
 
@@ -80,8 +80,8 @@ def _opt_num(params: dict, key: str):
     return float(val)
 
 
-def _dispatch(engine: Engine, req: dict) -> tuple[str, dict]:
-    """Return (method, result-without-id/ok). Raises BadParams/UnknownVideo."""
+def _dispatch(engine: Engine, req: dict) -> dict:
+    """Return the method `result` dict. Raises BadParams/UnknownVideo."""
     if not isinstance(req, dict):
         raise BadParams("request must be a JSON object")
     method = req.get("method")
@@ -90,17 +90,20 @@ def _dispatch(engine: Engine, req: dict) -> tuple[str, dict]:
         raise BadParams("params must be an object")
 
     if method == "list":
-        return method, engine.list_videos()
+        return engine.list_videos()
     if method == "summary":
-        return method, engine.summary(_need_str(params, "video"))
+        return engine.summary(_need_str(params, "video"))
     if method == "describe":
-        return method, engine.describe(
+        return engine.describe(
             _need_str(params, "video"),
             _opt_num(params, "t0"), _opt_num(params, "t1"))
     if method == "peaks":
-        return method, engine.peaks(
-            _need_str(params, "video"), _need_str(params, "metric"),
-            params.get("k", 5))
+        # accept "slot" (contract) or "metric" (legacy) for the request key
+        slot = params.get("slot", params.get("metric"))
+        if not isinstance(slot, str) or not slot:
+            raise BadParams("missing/invalid string param 'slot'")
+        return engine.peaks(_need_str(params, "video"), slot,
+                            params.get("k", 5))
     raise BadParams(f"unknown method: {method!r}")
 
 
@@ -133,8 +136,8 @@ def serve(corpus_dir: str, weights_path: str) -> int:
             continue
         rid = req.get("id") if isinstance(req, dict) else None
         try:
-            method, result = _dispatch(engine, req)
-            _emit({"id": rid, "ok": True, "method": method, **result}, out_bytes)
+            result = _dispatch(engine, req)
+            _emit({"id": rid, "ok": True, "result": result}, out_bytes)
         except BadParams as e:
             _err(rid, "bad-params", str(e), out_bytes)
         except UnknownVideo as e:
@@ -154,25 +157,26 @@ _HELP = """commands:
   help | quit"""
 
 
-def _fmt_receipt(ln: dict) -> str:
-    act = ln["act"] if ln["act"] is not None else "-"
-    extra = f" {ln['value']:.3f}" if "value" in ln else ""
-    return (f"[{ln['t0']:>7.1f}-{ln['t1']:<7.1f}s  loud={ln['loud_db']:>6.1f}dB  "
-            f"mot={ln['mot']:.3f}  act={act}]{extra}")
-
-
 def _print_lines(result: dict) -> None:
     lines = result.get("lines", [])
-    src = result.get("source")
-    if src:
-        print(f"  (source: {src})")
     for ln in lines:
-        print(f"  {ln['text']}")
-        print(f"      {_fmt_receipt(ln)}")
+        act = ln["act"] if ln["act"] is not None else "-"
+        print(f"  {ln['text']}  [{ln['source']}]")
+        print(f"      [{ln['t0']:>7.1f}-{ln['t1']:<7.1f}s  "
+              f"loud={ln['loud_db']:>6.1f}dB  mot={ln['mot']:.3f}  act={act}]")
     if result.get("truncated"):
         print(f"  ... {result.get('hint') or 'output truncated'}")
     if not lines:
         print("  (no lines)")
+
+
+def _print_peaks(result: dict) -> None:
+    peaks = result.get("peaks", [])
+    for p in peaks:
+        print(f"  {p['value']:>8.3f}  [{p['t0']:>7.1f}-{p['t1']:<7.1f}s]  "
+              f"{p['text']}")
+    if not peaks:
+        print("  (no peaks)")
 
 
 def repl(corpus_dir: str, weights_path: str) -> int:
@@ -200,8 +204,8 @@ def repl(corpus_dir: str, weights_path: str) -> int:
             elif cmd == "list":
                 res = engine.list_videos()
                 for v in res["videos"]:
-                    print(f"  {v['id']}  dur={v['duration']:.1f}s  "
-                          f"scenes={v['n_scenes']}  segments={v['n_segments']}")
+                    print(f"  {v['id']}  dur={v['duration_s']:.1f}s  "
+                          f"scenes={v['scenes']}  segments={v['segments']}")
             elif cmd == "summary" and len(parts) >= 2:
                 _print_lines(engine.summary(parts[1]))
             elif cmd == "describe" and len(parts) >= 2:
@@ -210,7 +214,7 @@ def repl(corpus_dir: str, weights_path: str) -> int:
                 _print_lines(engine.describe(parts[1], t0, t1))
             elif cmd == "peaks" and len(parts) >= 3:
                 k = int(parts[3]) if len(parts) >= 4 else 5
-                _print_lines(engine.peaks(parts[1], parts[2], k))
+                _print_peaks(engine.peaks(parts[1], parts[2], k))
             else:
                 print("  ? unrecognized — type 'help'")
         except (UnknownVideo, BadParams) as e:

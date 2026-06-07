@@ -230,22 +230,24 @@ class Engine:
             raise UnknownVideo(f"no such video: {vid!r}")
         return self.videos[vid]
 
-    def _receipt(self, v: Video, i: int) -> dict:
+    def _gauge_text(self, v: Video, i: int, noun: str) -> str:
+        slots = slots_from_row_quantile(v.ft.X[i], self.loud_edges, self.motion_edges)
+        return " ".join(sentence_tokens(slots, noun=noun))
+
+    def _line(self, v: Video, i: int, text: str, source: str) -> dict:
+        """Contract line shape: t0, t1, text, source, loud_db, mot, act."""
         row = v.ft.X[i]
         act = action_value(float(row[JUMP]), float(row[WALK]),
                            float(row[LARM]), float(row[RARM]))
         return {
+            "t0": round(float(v.starts[i]), 2),
+            "t1": round(float(v.ends[i]), 2),
+            "text": text,
+            "source": source,
             "loud_db": round(float(row[AUDIO_IDX]), 2),
             "mot": round(float(row[MOTION_IDX]), 4),
             "act": None if act == "none" else act,
-            "t0": round(float(v.starts[i]), 2),
-            "t1": round(float(v.ends[i]), 2),
         }
-
-    def _gauge_line(self, v: Video, i: int, noun: str) -> dict:
-        slots = slots_from_row_quantile(v.ft.X[i], self.loud_edges, self.motion_edges)
-        text = " ".join(sentence_tokens(slots, noun=noun))
-        return {"text": text, **self._receipt(v, i)}
 
     def _model_lines(self, v: Video, idxs: list[int]) -> list[dict]:
         if not idxs:
@@ -256,11 +258,8 @@ class Engine:
         qidx = torch.tensor(idxs, dtype=torch.long)
         pad = torch.zeros(len(idxs), n, dtype=torch.bool)
         seqs = self.model.generate(tokens, qidx, pad, self.bos, self.eos)
-        lines = []
-        for j, i in enumerate(idxs):
-            text = " ".join(self.vocab[t] for t in seqs[j])
-            lines.append({"text": text, **self._receipt(v, i)})
-        return lines
+        return [self._line(v, i, " ".join(self.vocab[t] for t in seqs[j]), "model")
+                for j, i in enumerate(idxs)]
 
     def _level_idxs(self, v: Video, level: int) -> list[int]:
         idxs = [i for i, lv in enumerate(v.ft.levels) if lv == level]
@@ -274,19 +273,20 @@ class Engine:
             v = self.videos[vid]
             out.append({
                 "id": vid,
-                "duration": round(v.duration, 2),
-                "n_scenes": sum(1 for lv in v.ft.levels if lv == LEVEL_SCENE),
-                "n_segments": sum(1 for lv in v.ft.levels if lv == LEVEL_SEGMENT),
+                "duration_s": round(v.duration, 2),
+                "scenes": sum(1 for lv in v.ft.levels if lv == LEVEL_SCENE),
+                "segments": sum(1 for lv in v.ft.levels if lv == LEVEL_SEGMENT),
             })
-        return {"videos": out, "n_videos": len(out)}
+        return {"videos": out}
 
     def summary(self, vid) -> dict:
         v = self._video(vid)
         idxs = self._level_idxs(v, LEVEL_SCENE)
         truncated = len(idxs) > SUMMARY_CAP
-        lines = [self._gauge_line(v, i, noun="scene") for i in idxs[:SUMMARY_CAP]]
-        return {"video": vid, "source": "gauge", "lines": lines,
-                "truncated": truncated}
+        lines = [self._line(v, i, self._gauge_text(v, i, "scene"), "gauge")
+                 for i in idxs[:SUMMARY_CAP]]
+        return {"video_id": vid, "duration_s": round(v.duration, 2),
+                "lines": lines, "truncated": truncated}
 
     def describe(self, vid, t0=None, t1=None) -> dict:
         v = self._video(vid)
@@ -297,34 +297,32 @@ class Engine:
             hi = float("inf") if t1 is None else float(t1)
             idxs = [i for i in idxs if v.starts[i] < hi and v.ends[i] > lo]
         total = len(idxs)
-        shown = idxs[:DESCRIBE_CAP]
         truncated = total > DESCRIBE_CAP
-        lines = self._model_lines(v, shown)
-        hint = None
-        if truncated:
+        result = {"video_id": vid,
+                  "lines": self._model_lines(v, idxs[:DESCRIBE_CAP]),
+                  "truncated": truncated}
+        if truncated:  # "hint" present ONLY when truncated
             where = " in window" if windowed else ""
-            hint = (f"{total} segments{where}; showing first {DESCRIBE_CAP}. "
-                    f"Pass a t0 t1 window to narrow.")
-        return {"video": vid, "source": "model",
-                "window": [t0, t1] if windowed else None,
-                "lines": lines, "truncated": truncated, "hint": hint}
+            result["hint"] = (f"{total} segments{where}; showing first "
+                              f"{DESCRIBE_CAP}. Pass a t0 t1 window to narrow.")
+        return result
 
-    def peaks(self, vid, metric, k=5) -> dict:
+    def peaks(self, vid, slot, k=5) -> dict:
         v = self._video(vid)
-        if metric not in PEAK_METRICS:
+        if slot not in PEAK_METRICS:
             raise BadParams(
-                f"unknown metric {metric!r}; one of {sorted(PEAK_METRICS)}")
+                f"unknown slot {slot!r}; one of {sorted(PEAK_METRICS)}")
         try:
             k = int(k)
         except (TypeError, ValueError):
             raise BadParams(f"k must be an integer, got {k!r}")
         k = max(1, min(k, PEAKS_CAP))
-        col = PEAK_METRICS[metric]
+        col = PEAK_METRICS[slot]
         idxs = [i for i, lv in enumerate(v.ft.levels) if lv == LEVEL_SEGMENT]
         idxs.sort(key=lambda i: float(v.ft.X[i, col]), reverse=True)
-        lines = []
-        for i in idxs[:k]:
-            ln = self._gauge_line(v, i, noun="segment")
-            ln["value"] = round(float(v.ft.X[i, col]), 4)
-            lines.append(ln)
-        return {"video": vid, "metric": metric, "k": k, "lines": lines}
+        peaks = [{"t0": round(float(v.starts[i]), 2),
+                  "t1": round(float(v.ends[i]), 2),
+                  "value": round(float(v.ft.X[i, col]), 4),
+                  "text": self._gauge_text(v, i, "segment")}
+                 for i in idxs[:k]]
+        return {"video_id": vid, "slot": slot, "peaks": peaks}
